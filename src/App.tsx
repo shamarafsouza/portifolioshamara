@@ -2,7 +2,7 @@ import { useState } from 'react'
 import DinoGame from './components/DinoGame'
 
 const projects = [
-  { code: '01', name: 'ParkFácil', type: 'Sistema público', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
+  { code: '01', name: 'ParkFácil', type: 'Protótipo de Site', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
   { code: '02', name: 'Credenciais de Estacionamento', type: 'Produto em uso', text: 'Sistema que eliminou o fluxo manual de emissão de credenciais na secretaria, incluindo numeração automática, assinatura digital e PDF com QR Code.', tags: ['PHP', 'SQLite', 'FPDF'], repo: 'https://github.com/shamarafsouza/credenciais-estacionamento' },
   { code: '03', name: 'Painel Meteorológico', type: 'API em tempo real', text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.', tags: ['JavaScript', 'REST API', 'Dados'], live: '/previsao-tempo.html'}
 ]
