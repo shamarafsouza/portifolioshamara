@@ -1,1 +1,633 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Meteorológico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --asphalt: #15171b;
+    --asphalt-light: #202329;
+    --asphalt-lighter: #2b2f36;
+    --lane-yellow: #f4c430;
+    --led-amber: #ffb300;
+    --sign-green: #3aa863;
+    --sign-green-dim: #1f5c37;
+    --sky-cyan: #57c7f0;
+    --text-primary: #f2f0e6;
+    --text-muted: #8b9096;
+    --danger: #e0554f;
+    --radius: 10px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--asphalt);
+    background-image:
+      radial-gradient(ellipse at top, rgba(255,255,255,0.03), transparent 60%);
+    color: var(--text-primary);
+    font-family: 'IBM Plex Sans', sans-serif;
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  .wrap{
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ---- header / control panel ---- */
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .eyebrow .dot{
+    width:7px; height:7px; border-radius:50%;
+    background: var(--sign-green);
+    box-shadow: 0 0 6px var(--sign-green);
+    animation: blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:.35} }
+
+  h1{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size: clamp(22px, 5vw, 30px);
+    letter-spacing: 0.5px;
+    margin: 0 0 18px;
+  }
+
+  .search-panel{
+    display:flex;
+    gap:8px;
+    background: var(--asphalt-light);
+    border: 1px solid var(--asphalt-lighter);
+    border-radius: var(--radius);
+    padding: 8px;
+    position: relative;
+  }
+  .search-panel input{
+    flex:1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    padding: 10px 12px;
+  }
+  .search-panel input::placeholder{ color: var(--text-muted); }
+  .search-panel button{
+    background: var(--sign-green);
+    color: #0c130e;
+    border: none;
+    border-radius: 6px;
+    padding: 0 18px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5px;
+    transition: filter .15s ease;
+  }
+  .search-panel button:hover{ filter: brightness(1.12); }
+  .search-panel button:active{ filter: brightness(0.92); }
+
+  .suggestions{
+    position:absolute;
+    top: calc(100% + 6px);
+    left:0; right:0;
+    background: var(--asphalt-light);
+    border: 1px solid var(--asphalt-lighter);
+    border-radius: var(--radius);
+    overflow:hidden;
+    z-index: 20;
+    display:none;
+  }
+  .suggestions.open{ display:block; }
+  .suggestions button{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:transparent;
+    border:none;
+    color: var(--text-primary);
+    padding: 11px 14px;
+    font-size: 14px;
+    cursor:pointer;
+    border-bottom: 1px dashed #363b42;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .suggestions button:last-child{ border-bottom:none; }
+  .suggestions button:hover{ background: var(--asphalt-lighter); }
+  .suggestions button span{ color: var(--text-muted); font-size: 12px; display:block; margin-top:2px; }
+
+  /* ---- status line ---- */
+  .status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 12px;
+    min-height: 16px;
+  }
+  .status.error{ color: var(--danger); }
+
+  /* ---- main sign board ---- */
+  .board{
+    margin-top: 22px;
+    background: linear-gradient(180deg, var(--asphalt-light), var(--asphalt));
+    border: 1px solid var(--asphalt-lighter);
+    border-radius: 14px;
+    padding: 26px 24px;
+    position: relative;
+    overflow:hidden;
+    display:none;
+  }
+  .board.show{ display:block; }
+  .board::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+
+  .board-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    position:relative;
+  }
+
+  .place{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--sky-cyan);
+    text-transform: uppercase;
+  }
+  .place .sub{
+    display:block;
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  .updated{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align:right;
+  }
+
+  .readout{
+    display:flex;
+    align-items:center;
+    gap: 22px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+  }
+
+  .temp-led{
+    font-family: 'Share Tech Mono', monospace;
+    font-size: clamp(64px, 16vw, 96px);
+    line-height: 1;
+    color: var(--led-amber);
+    text-shadow: 0 0 18px rgba(255,179,0,0.45);
+    letter-spacing: -2px;
+    animation: flicker-in .6s ease-out;
+  }
+  @keyframes flicker-in{
+    0%{ opacity:0; }
+    30%{ opacity:.7; }
+    45%{ opacity:.15; }
+    60%{ opacity:1; }
+    100%{ opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .temp-led{ animation:none; }
+    .eyebrow .dot{ animation:none; }
+  }
+  .temp-led .unit{ font-size: 0.4em; color: var(--text-muted); }
+
+  .cond-block{ display:flex; align-items:center; gap: 12px; }
+  .cond-icon svg{ width:56px; height:56px; display:block; }
+  .cond-text{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size: 16px;
+  }
+  .cond-text .feels{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:400;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  .stat-row{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 22px;
+    position:relative;
+  }
+  .stat{
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--asphalt-lighter);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .stat .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .stat .value{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 18px;
+    color: var(--sign-green);
+    margin-top: 4px;
+  }
+
+  /* ---- lane divider ---- */
+  .lane-divider{
+    height: 2px;
+    margin: 28px 0 18px;
+    background-image: repeating-linear-gradient(90deg, var(--lane-yellow) 0px, var(--lane-yellow) 16px, transparent 16px, transparent 30px);
+    opacity: 0.55;
+  }
+
+  .forecast-title{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .forecast-row{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  @media (max-width: 640px){
+    .forecast-row{ grid-template-columns: repeat(4, 1fr); }
+    .day-card:nth-child(n+5){ display:none; }
+    .forecast-row.expanded{ grid-template-columns: repeat(4, 1fr); }
+    .forecast-row.expanded .day-card:nth-child(n+5){ display:flex; }
+  }
+
+  .day-card{
+    background: rgba(0,0,0,0.22);
+    border: 1px solid var(--asphalt-lighter);
+    border-radius: 8px;
+    padding: 10px 6px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+  }
+  .day-card .dname{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .day-card svg{ width:28px; height:28px; }
+  .day-card .dmax{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 15px;
+    color: var(--led-amber);
+  }
+  .day-card .dmin{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .day-card .drain{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--sky-cyan);
+  }
+
+  .show-more{
+    display:none;
+    width:100%;
+    margin-top: 12px;
+    background: transparent;
+    border: 1px dashed var(--asphalt-lighter);
+    color: var(--text-muted);
+    border-radius: 8px;
+    padding: 8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  @media (max-width: 640px){
+    .show-more{ display:block; }
+  }
+
+  footer{
+    max-width: 720px;
+    margin: 26px auto 0;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align:center;
+    letter-spacing: 0.5px;
+  }
+  footer a{ color: var(--sky-cyan); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="eyebrow"><span class="dot"></span> PAINEL ATIVO · DADOS EM TEMPO REAL</div>
+  <h1>Previsão do Tempo</h1>
+
+  <div class="search-panel">
+    <input id="cityInput" type="text" placeholder="Digite o nome da cidade..." autocomplete="off">
+    <button id="searchBtn">BUSCAR</button>
+    <div class="suggestions" id="suggestions"></div>
+  </div>
+  <div class="status" id="status">Carregando painel padrão: Baixo Guandu, ES...</div>
+
+  <div class="board" id="board">
+    <div class="board-top">
+      <div class="place">
+        <span id="placeName">—</span>
+        <span class="sub" id="placeSub">—</span>
+      </div>
+      <div class="updated" id="updated">—</div>
+    </div>
+
+    <div class="readout">
+      <div class="temp-led" id="tempLed">--<span class="unit">°C</span></div>
+      <div class="cond-block">
+        <div class="cond-icon" id="condIcon"></div>
+        <div class="cond-text">
+          <span id="condText">—</span>
+          <span class="feels" id="feelsText">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="label">Umidade</div>
+        <div class="value" id="humidity">--%</div>
+      </div>
+      <div class="stat">
+        <div class="label">Vento</div>
+        <div class="value" id="wind">-- km/h</div>
+      </div>
+      <div class="stat">
+        <div class="label">Chuva hoje</div>
+        <div class="value" id="rainProb">--%</div>
+      </div>
+    </div>
+
+    <div class="lane-divider"></div>
+
+    <div class="forecast-title">Próximos 7 dias</div>
+    <div class="forecast-row" id="forecastRow"></div>
+    <button class="show-more" id="showMoreBtn">MOSTRAR TODOS OS DIAS ▾</button>
+  </div>
+</div>
+
+<footer>
+  Dados fornecidos por <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>
+</footer>
+
+<script>
+  const cityInput = document.getElementById('cityInput');
+  const searchBtn = document.getElementById('searchBtn');
+  const suggestionsBox = document.getElementById('suggestions');
+  const statusEl = document.getElementById('status');
+  const board = document.getElementById('board');
+  const forecastRow = document.getElementById('forecastRow');
+  const showMoreBtn = document.getElementById('showMoreBtn');
+
+  showMoreBtn.addEventListener('click', () => {
+    forecastRow.classList.toggle('expanded');
+    showMoreBtn.textContent = forecastRow.classList.contains('expanded')
+      ? 'MOSTRAR MENOS ▴' : 'MOSTRAR TODOS OS DIAS ▾';
+  });
+
+  // ---- WMO weather code -> {label, icon key} ----
+  function describeCode(code){
+    const map = {
+      0:  ['Céu limpo', 'sun'],
+      1:  ['Poucas nuvens', 'sun-cloud'],
+      2:  ['Parcialmente nublado', 'sun-cloud'],
+      3:  ['Nublado', 'cloud'],
+      45: ['Nevoeiro', 'fog'],
+      48: ['Nevoeiro com geada', 'fog'],
+      51: ['Garoa leve', 'drizzle'],
+      53: ['Garoa moderada', 'drizzle'],
+      55: ['Garoa densa', 'drizzle'],
+      56: ['Garoa congelante', 'drizzle'],
+      57: ['Garoa congelante forte', 'drizzle'],
+      61: ['Chuva leve', 'rain'],
+      63: ['Chuva moderada', 'rain'],
+      65: ['Chuva forte', 'rain'],
+      66: ['Chuva congelante', 'rain'],
+      67: ['Chuva congelante forte', 'rain'],
+      71: ['Neve leve', 'snow'],
+      73: ['Neve moderada', 'snow'],
+      75: ['Neve forte', 'snow'],
+      77: ['Grãos de neve', 'snow'],
+      80: ['Pancadas leves', 'rain'],
+      81: ['Pancadas moderadas', 'rain'],
+      82: ['Pancadas violentas', 'rain'],
+      85: ['Pancadas de neve leve', 'snow'],
+      86: ['Pancadas de neve forte', 'snow'],
+      95: ['Trovoada', 'storm'],
+      96: ['Trovoada com granizo', 'storm'],
+      99: ['Trovoada forte com granizo', 'storm'],
+    };
+    return map[code] || ['Condição desconhecida', 'cloud'];
+  }
+
+  // ---- simple line-style SVG icons ----
+  const ICONS = {
+    sun: `<svg viewBox="0 0 48 48" fill="none" stroke="#ffb300" stroke-width="2" stroke-linecap="round"><circle cx="24" cy="24" r="9"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.5 9.5l4.2 4.2M34.3 34.3l4.2 4.2M9.5 38.5l4.2-4.2M34.3 13.7l4.2-4.2"/></svg>`,
+    'sun-cloud': `<svg viewBox="0 0 48 48" fill="none" stroke="#ffb300" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="16" r="7"/><path d="M18 4v3M9 8l2 2M27 8l-2 2" stroke="#ffb300"/><path d="M14 34a8 8 0 0 1-1-15.9A9 9 0 0 1 30 21a6.5 6.5 0 0 1-1 13H14z" stroke="#8b9096"/></svg>`,
+    cloud: `<svg viewBox="0 0 48 48" fill="none" stroke="#8b9096" stroke-width="2" stroke-linecap="round"><path d="M14 34a8 8 0 0 1-1-15.9A9 9 0 0 1 30 21a6.5 6.5 0 0 1-1 13H14z"/></svg>`,
+    fog: `<svg viewBox="0 0 48 48" fill="none" stroke="#8b9096" stroke-width="2" stroke-linecap="round"><path d="M14 20a8 8 0 0 1 15-3 6.5 6.5 0 0 1 6 6.4" opacity=".6"/><path d="M6 30h36M6 36h36M10 24h28"/></svg>`,
+    drizzle: `<svg viewBox="0 0 48 48" fill="none" stroke="#57c7f0" stroke-width="2" stroke-linecap="round"><path d="M14 26a8 8 0 0 1-1-15.9A9 9 0 0 1 30 13a6.5 6.5 0 0 1-1 13H14z" stroke="#8b9096"/><path d="M16 34v4M24 34v4M32 34v4"/></svg>`,
+    rain: `<svg viewBox="0 0 48 48" fill="none" stroke="#57c7f0" stroke-width="2" stroke-linecap="round"><path d="M14 24a8 8 0 0 1-1-15.9A9 9 0 0 1 30 11a6.5 6.5 0 0 1-1 13H14z" stroke="#8b9096"/><path d="M14 32v6M22 32v6M30 32v6"/></svg>`,
+    snow: `<svg viewBox="0 0 48 48" fill="none" stroke="#f2f0e6" stroke-width="2" stroke-linecap="round"><path d="M14 22a8 8 0 0 1-1-15.9A9 9 0 0 1 30 9a6.5 6.5 0 0 1-1 13H14z" stroke="#8b9096"/><path d="M16 32v8M12 36h8M22 34v8M18.5 38h7M30 32v8M26 36h8"/></svg>`,
+    storm: `<svg viewBox="0 0 48 48" fill="none" stroke="#ffb300" stroke-width="2" stroke-linecap="round"><path d="M14 22a8 8 0 0 1-1-15.9A9 9 0 0 1 30 9a6.5 6.5 0 0 1-1 13H14z" stroke="#8b9096"/><path d="M22 30l-5 9h6l-4 7 10-11h-6l4-5z" fill="#ffb300" stroke="none"/></svg>`,
+  };
+
+  function windDirLabel(deg){
+    const dirs = ['N','NE','L','SE','S','SO','O','NO'];
+    return dirs[Math.round(deg/45) % 8];
+  }
+
+  async function geocode(name){
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=5&language=pt&format=json`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('Falha na busca de cidade');
+    const data = await res.json();
+    return data.results || [];
+  }
+
+  async function fetchForecast(lat, lon){
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+      `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m` +
+      `&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max` +
+      `&timezone=auto&forecast_days=7`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error('Falha ao obter previsão');
+    return res.json();
+  }
+
+  function renderPlace(place){
+    document.getElementById('placeName').textContent = place.name;
+    const parts = [place.admin1, place.country].filter(Boolean);
+    document.getElementById('placeSub').textContent = parts.join(' · ');
+  }
+
+  function renderCurrent(data){
+    const cur = data.current;
+    const [label, key] = describeCode(cur.weather_code);
+    document.getElementById('tempLed').innerHTML = `${Math.round(cur.temperature_2m)}<span class="unit">°C</span>`;
+    document.getElementById('condIcon').innerHTML = ICONS[key] || ICONS.cloud;
+    document.getElementById('condText').textContent = label;
+    document.getElementById('feelsText').textContent = `Sensação: ${Math.round(cur.apparent_temperature)}°C`;
+    document.getElementById('humidity').textContent = `${cur.relative_humidity_2m}%`;
+    document.getElementById('wind').textContent = `${Math.round(cur.wind_speed_10m)} km/h ${windDirLabel(cur.wind_direction_10m)}`;
+    document.getElementById('rainProb').textContent = `${data.daily.precipitation_probability_max[0] ?? 0}%`;
+    const now = new Date();
+    document.getElementById('updated').textContent = `ATUALIZADO ${now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`;
+  }
+
+  function renderForecast(data){
+    forecastRow.innerHTML = '';
+    forecastRow.classList.remove('expanded');
+    showMoreBtn.textContent = 'MOSTRAR TODOS OS DIAS ▾';
+    const days = data.daily.time;
+    days.forEach((d, i) => {
+      const date = new Date(d + 'T00:00:00');
+      const dname = i === 0 ? 'HOJE' : date.toLocaleDateString('pt-BR', { weekday: 'short' }).replace('.', '').toUpperCase();
+      const [, key] = describeCode(data.daily.weather_code[i]);
+      const max = Math.round(data.daily.temperature_2m_max[i]);
+      const min = Math.round(data.daily.temperature_2m_min[i]);
+      const rain = data.daily.precipitation_probability_max[i] ?? 0;
+      const card = document.createElement('div');
+      card.className = 'day-card';
+      card.innerHTML = `
+        <div class="dname">${dname}</div>
+        ${ICONS[key] || ICONS.cloud}
+        <div class="dmax">${max}°</div>
+        <div class="dmin">${min}°</div>
+        <div class="drain">${rain}%</div>
+      `;
+      forecastRow.appendChild(card);
+    });
+  }
+
+  async function loadWeatherForPlace(place){
+    statusEl.classList.remove('error');
+    statusEl.textContent = `Sintonizando painel para ${place.name}...`;
+    try{
+      const data = await fetchForecast(place.latitude, place.longitude);
+      renderPlace(place);
+      renderCurrent(data);
+      renderForecast(data);
+      board.classList.add('show');
+      statusEl.textContent = '';
+    }catch(err){
+      statusEl.classList.add('error');
+      statusEl.textContent = 'SINAL PERDIDO — não foi possível carregar a previsão. Tente novamente.';
+    }
+  }
+
+  async function handleSearch(){
+    const query = cityInput.value.trim();
+    suggestionsBox.classList.remove('open');
+    if(!query){ return; }
+    statusEl.classList.remove('error');
+    statusEl.textContent = 'Buscando cidade...';
+    try{
+      const results = await geocode(query);
+      if(results.length === 0){
+        statusEl.classList.add('error');
+        statusEl.textContent = 'Cidade não encontrada. Verifique o nome digitado.';
+        return;
+      }
+      if(results.length === 1){
+        await loadWeatherForPlace(results[0]);
+        return;
+      }
+      suggestionsBox.innerHTML = '';
+      results.forEach(r => {
+        const btn = document.createElement('button');
+        const parts = [r.admin1, r.country].filter(Boolean).join(' · ');
+        btn.innerHTML = `${r.name}<span>${parts}</span>`;
+        btn.addEventListener('click', () => {
+          cityInput.value = r.name;
+          suggestionsBox.classList.remove('open');
+          loadWeatherForPlace(r);
+        });
+        suggestionsBox.appendChild(btn);
+      });
+      suggestionsBox.classList.add('open');
+      statusEl.textContent = `${results.length} cidades encontradas — selecione uma.`;
+    }catch(err){
+      console.error('Erro na busca de cidade:', err);
+      statusEl.classList.add('error');
+      statusEl.textContent = `SINAL PERDIDO — falha na busca (${err.message || 'erro de rede'}). Veja o console (F12) para detalhes.`;
+    }
+  }
+
+  searchBtn.addEventListener('click', handleSearch);
+  cityInput.addEventListener('keydown', e => { if(e.key === 'Enter') handleSearch(); });
+  document.addEventListener('click', e => {
+    if(!suggestionsBox.contains(e.target) && e.target !== cityInput){
+      suggestionsBox.classList.remove('open');
+    }
+  });
+
+  // ---- default load: Baixo Guandu, ES ----
+  (async function init(){
+    try{
+      const results = await geocode('Baixo Guandu');
+      const place = results.find(r => r.admin1 && r.admin1.includes('Esp')) || results[0];
+      if(place){
+        await loadWeatherForPlace(place);
+      }else{
+        statusEl.textContent = 'Digite uma cidade para começar.';
+      }
+    }catch(e){
+      statusEl.textContent = 'Digite uma cidade para começar.';
+    }
+  })();
+</script>
+
+</body>
+</html>
 
