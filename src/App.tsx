@@ -1,6 +1,8 @@
 import {
     useState
 }
+import { useState } from 'react'
+import IntroBoot from './components/IntroBoot'
 
 from 'react'
 import DinoGame from './components/DinoGame'
