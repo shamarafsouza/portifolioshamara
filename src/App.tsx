@@ -3,6 +3,7 @@ import {
 }
 
 from 'react'
+import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
 
 const projects=[ {
