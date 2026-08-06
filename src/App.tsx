@@ -21,9 +21,10 @@ code: '03', name: 'Painel Meteorológico', type: 'API em tempo real', text: 'Apl
 }
 
 ] export default function App() {
-
-    const [gameOpen,
-    setGameOpen]=useState(false) return <><div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i />SISTEMA ONLINE,
+    const [introDone, setIntroDone] = useState(false)
+    const [gameOpen, setGameOpen]=useState(false) 
+        return <>
+            <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i />SISTEMA ONLINE,
     BAIXO GUANDU,
     ES</p><nav><a href="#projetos">Projetos</a><a href="#sobre">Perfil</a><a href="#contato">Contato</a></nav></header><main id="inicio"><section className="hero"><div className="hero-copy"><p className="eyebrow">ARQUIVO 0027,
     DESENVOLVEDORA</p><h1>UMA MENTE,
