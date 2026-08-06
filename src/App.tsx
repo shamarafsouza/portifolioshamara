@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
+
 
 const projects = [
   { code: '01', name: 'ParkFácil', type: 'Protótipo de Site', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
