@@ -12,6 +12,19 @@ const projects = [
 export default function App() {
   const [introDone, setIntroDone] = useState(false)
   const [gameOpen, setGameOpen] = useState(false)
+  useEffect(() => {
+  const els = document.querySelectorAll('.reveal')
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in')
+        io.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.15 })
+  els.forEach(el => io.observe(el))
+  return () => io.disconnect()
+}, [])
   return <>
     {!introDone && <IntroBoot onDone={() => setIntroDone(true)} />}
     <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i /> SISTEMA ONLINE, BAIXO GUANDU, ES</p><nav><a href="#projetos">Projetos</a><a href="#sobre">Perfil</a><a href="#contato">Contato</a></nav></header>
