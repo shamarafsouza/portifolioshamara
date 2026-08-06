@@ -298,12 +298,6 @@ main {
 @keyframes ticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
 
-.ticker span:after {
-    content: '✦';
-    margin-left: 30px;
-    color: var(--pink)
-}
-
 .projects {
     padding: 115px clamp(20px, 10vw, 150px)
 }
@@ -620,20 +614,16 @@ footer {
     }
 }
 
+@media(max-width:720px) {
+    header {
+        height: auto;
+        min-height: 65px;
+        padding: 15px 20px
+    }
+
     .system-status,
     nav {
         display: none
-    }
-
-    .ticker {
-        flex-wrap: wrap;
-        overflow: visible;
-        white-space: normal;
-        justify-content: center
-    }
-
-    .ticker span {
-        padding: 10px 16px
     }
 
     .hero {
