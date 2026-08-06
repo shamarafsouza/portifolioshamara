@@ -1,109 +1,24 @@
-import {
-    useState
-}
-
-from 'react'
+import { useState } from 'react'
 import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
 
-const projects=[ {
-    code: '01', name: 'ParkFácil', type: 'Protótipo de Site', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil'
-}
+const projects = [
+  { code: '01', name: 'ParkFácil', type: 'Protótipo de Site', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
+  { code: '02', name: 'Credenciais de Estacionamento', type: 'Produto em uso', text: 'Sistema que eliminou o fluxo manual de emissão de credenciais na secretaria, incluindo numeração automática, assinatura digital e PDF com QR Code.', tags: ['PHP', 'SQLite', 'FPDF'], repo: 'https://github.com/shamarafsouza/credenciais-estacionamento' },
+  { code: '03', name: 'Painel Meteorológico', type: 'API em tempo real', text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.', tags: ['JavaScript', 'REST API', 'Dados'], live: '/previsao-tempo.html' }
+]
 
-,
-{
-code: '02', name: 'Credenciais de Estacionamento', type: 'Produto em uso', text: 'Sistema que eliminou o fluxo manual de emissão de credenciais na secretaria, incluindo numeração automática, assinatura digital e PDF com QR Code.', tags: ['PHP', 'SQLite', 'FPDF'], repo: 'https://github.com/shamarafsouza/credenciais-estacionamento'
-}
-
-,
-{
-code: '03', name: 'Painel Meteorológico', type: 'API em tempo real', text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.', tags: ['JavaScript', 'REST API', 'Dados'], live: '/previsao-tempo.html'
-}
-
-] export default function App() {
-    const [introDone, setIntroDone] = useState(false)
-    const [gameOpen, setGameOpen]=useState(false) 
-        return <>
-            <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i />SISTEMA ONLINE,
-    BAIXO GUANDU,
-    ES</p><nav><a href="#projetos">Projetos</a><a href="#sobre">Perfil</a><a href="#contato">Contato</a></nav></header><main id="inicio"><section className="hero"><div className="hero-copy"><p className="eyebrow">ARQUIVO 0027,
-    DESENVOLVEDORA</p><h1>UMA MENTE,
-    <br /><em>MÚLTIPLAS</em><br />SOLUÇÕES.</h1><p className="hero-text">Sou Shamara Ferreira de Souza,
-    desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React,
-    Node.js,
-    TypeScript,
-    Python,
-    PHP e C#,
-    e gosto de resolver o problema de ponta a ponta,
-    do design da interface à lógica por trás dela.</p><div className="hero-actions"><a className="button primary" href="#projetos">EXPLORAR PROJETOS <b>↘</b></a><a className="button" href="https://github.com/shamarafsouza" target="_blank" rel="noreferrer">GITHUB <b>↗</b></a></div></div><div className="identity-card"><div className="scan" /><p>IDENTIDADE VERIFICADA</p><div className="portrait"><span>SS</span></div><h2>SHAMARA<br />F. DE SOUZA</h2><dl><div><dt>ÁREA</dt><dd>FULLSTACK</dd></div><div><dt>FOCO</dt><dd>DESENVOLVIMENTO WEB</dd></div><div><dt>STATUS</dt><dd>DISPONÍVEL</dd></div></dl><div className="barcode">||| || |||| | ||| || ||||</div></div></section><section className="ticker" aria-label="Tecnologias"><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span></section><section id="projetos" className="projects"><div className="section-label"><p className="eyebrow">SELEÇÃO DE PROJETOS</p><p>03 REGISTROS ATIVOS</p></div><h2>TESTADO<br /><em>APROVADO.</em></h2><div className="project-list"> {
-        projects.map((project)=> <article className="project" key= {
-                project.name
-            }
-
-            ><div className="project-code" > {
-                project.code
-            }
-
-            </div><div><p className="project-type" > {
-                project.type
-            }
-
-            </p><h3> {
-                project.name
-            }
-
-            </h3></div><div className="project-info" ><p> {
-                project.text
-            }
-
-            </p><div className="tags" > {
-                project.tags.map(tag=> <span key= {
-                        tag
-                    }
-
-                    > {
-                        tag
-                    }
-
-                    </span>)
-            }
-
-            </div><div className="project-links" > {
-                project.live && <a href= {
-                    project.live
-                }
-
-                target="_blank" rel="noreferrer" >ABRIR PROJETO ↗</a>
-            }
-
-                {
-                project.repo && <a href= {
-                    project.repo
-                }
-
-                target="_blank" rel="noreferrer" >VER CÓDIGO ↗</a>
-            }
-
-            </div></div></article>)
-    }
-
-    </div></section><section id="sobre" className="about"><div><p className="eyebrow">O QUE HÁ POR TRÁS DO CÓDIGO</p><h2>PROJETO PARA QUEM<br />PRECISA <em>USAR.</em></h2></div><div className="about-copy"><p>Minha experiência em engenharia de trânsito e gestão pública me ensinou a começar pelo problema,
-    ouvir quem executa o processo e desenhar soluções que simplificam a rotina.</p><p>Hoje levo essa visão para o desenvolvimento,
-    combinando React,
-    TypeScript,
-    Node.js e Python para construir ferramentas úteis,
-    acessíveis e consistentes.</p><button className="game-trigger" onClick= {
-        ()=>setGameOpen(true)
-    }
-
-    ><span>◉</span>ACESSAR SIMULAÇÃO SECRETA,
-    JOGO DO DINOSSAURO</button></div></section><section id="contato" className="contact"><p className="eyebrow">CANAL DE CONTATO ABERTO</p><h2>VAMOS CRIAR<br /><em>ALGO NOVO?</em></h2><div className="contact-links"><a href="mailto:ferreiradesouzashamara@gmail.com">ferreiradesouzashamara@gmail.com <b>↗</b></a><a href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/" target="_blank" rel="noreferrer">LinkedIn <b>↗</b></a></div></section></main><footer><span>© 2026 SHAMARA FERREIRA DE SOUZA</span><span>DESENVOLVIDO EM REACT+TYPESCRIPT</span></footer> {
-        gameOpen && <DinoGame onClose= {
-            ()=>setGameOpen(false)
-        }
-
-        />
-    }
-
-    </>
+export default function App() {
+  const [introDone, setIntroDone] = useState(false)
+  const [gameOpen, setGameOpen] = useState(false)
+  return <>
+    {!introDone && <IntroBoot onDone={() => setIntroDone(true)} />}
+    <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i /> SISTEMA ONLINE, BAIXO GUANDU, ES</p><nav><a href="#projetos">Projetos</a><a href="#sobre">Perfil</a><a href="#contato">Contato</a></nav></header>
+    <main id="inicio">
+      <section className="hero"><div className="hero-copy"><p className="eyebrow">ARQUIVO 0027, DESENVOLVEDORA</p><h1>UMA MENTE,<br /><em>MÚLTIPLAS</em><br />SOLUÇÕES.</h1><p className="hero-text">Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta — do design da interface à lógica por trás dela.</p><div className="hero-actions"><a className="button primary" href="#projetos">EXPLORAR PROJETOS <b>↘</b></a><a className="button" href="https://github.com/shamarafsouza" target="_blank" rel="noreferrer">GITHUB <b>↗</b></a></div></div><div className="identity-card"><div className="scan" /><p>IDENTIDADE VERIFICADA</p><div className="portrait"><span>SS</span></div><h2>SHAMARA<br />F. DE SOUZA</h2><dl><div><dt>ÁREA</dt><dd>FULLSTACK</dd></div><div><dt>FOCO</dt><dd>DESENVOLVIMENTO WEB</dd></div><div><dt>STATUS</dt><dd>DISPONÍVEL</dd></div></dl><div className="barcode">||| || |||| | ||| || ||||</div></div></section>
+      <section className="ticker" aria-label="Tecnologias"><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span></section>
+      <section id="projetos" className="projects"><div className="section-label"><p className="eyebrow">SELEÇÃO DE PROJETOS</p><p>03 REGISTROS ATIVOS</p></div><h2>TESTADO<br /><em>APROVADO.</em></h2><div className="project-list">{projects.map((project) => <article className="project" key={project.name}><div className="project-code">{project.code}</div><div><p className="project-type">{project.type}</p><h3>{project.name}</h3></div><div className="project-info"><p>{project.text}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="project-links">{project.live && <a href={project.live} target="_blank" rel="noreferrer">ABRIR PROJETO ↗</a>}{project.repo && <a href={project.repo} target="_blank" rel="noreferrer">VER CÓDIGO ↗</a>}</div></div></article>)}</div></section>
+      <section id="sobre" className="about"><div><p className="eyebrow">O QUE HÁ POR TRÁS DO CÓDIGO</p><h2>PROJETO PARA QUEM<br />PRECISA <em>USAR.</em></h2></div><div className="about-copy"><p>Minha experiência em engenharia de trânsito e gestão pública me ensinou a começar pelo problema, ouvir quem executa o processo e desenhar soluções que simplificam a rotina.</p><p>Hoje levo essa visão para o desenvolvimento, combinando React, TypeScript, Node.js e Python para construir ferramentas úteis, acessíveis e consistentes.</p><button className="game-trigger" onClick={() => setGameOpen(true)}><span>◉</span> ACESSAR SIMULAÇÃO SECRETA, JOGO DO DINOSSAURO</button></div></section>
+      <section id="contato" className="contact"><p className="eyebrow">CANAL DE CONTATO ABERTO</p><h2>VAMOS CRIAR<br /><em>ALGO NOVO?</em></h2><div className="contact-links"><a href="mailto:ferreiradesouzashamara@gmail.com">ferreiradesouzashamara@gmail.com <b>↗</b></a><a href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/" target="_blank" rel="noreferrer">LinkedIn <b>↗</b></a></div></section>
+    </main><footer><span>© 2026 SHAMARA FERREIRA DE SOUZA</span><span>DESENVOLVIDO EM REACT + TYPESCRIPT</span></footer>{gameOpen && <DinoGame onClose={() => setGameOpen(false)} />}</>
 }
