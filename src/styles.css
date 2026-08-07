@@ -699,4 +699,23 @@ footer {
     .game-panel canvas {
         margin-top: 26px
     }
+
+    .dna-helix{
+        position:absolute;
+        right:clamp(10px,4vw,60px);
+        top:0;height:100%;
+        width:60px;
+        opacity:.5;
+        pointer-events:none
+    }
+.sheep-mark{
+    position:absolute;
+    left:-40px;
+    bottom:-40px;
+    width:220px;
+    height:220px;
+    pointer-events:none;
+    z-index:0
 }
+}
+
