@@ -17,7 +17,7 @@ export const translations = {
       'COMPARANDO PADRÃO COM BASE DE DADOS...',
       'CORRESPONDÊNCIA ENCONTRADA: 99.98%',
       'DESIGNAÇÃO: SHAMARA FERREIRA DE SOUZA',
-      'STATUS: ORIGINAL. NÃO É CÓPIA.',
+      'STATUS: VERIFICANDO ACESSO.',
       'ACESSO CONCEDIDO.'
     ],
     introSkip: 'TOQUE PARA PULAR',
