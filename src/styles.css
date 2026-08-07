@@ -712,4 +712,15 @@ footer {
     .dna-helix {
         display: none
     }
+    .lang-toggle{
+        background:transparent;border:1px solid var(--line);
+        color:var(--mint);
+        font:10px 'DM Mono',monospace;
+        letter-spacing:.1em;
+        padding:6px 10px;cursor:pointer;
+        margin-left:6px
+    }
+    .lang-toggle:hover{
+        border-color:var(--mint)
+    }
 }
