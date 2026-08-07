@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
+import DnaHelix from './components/DnaHelix'
+import BlackSheepMark from './components/BlackSheepMark'
 
 
 const projects = [
