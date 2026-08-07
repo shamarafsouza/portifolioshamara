@@ -3,37 +3,36 @@ import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
 import DnaHelix from './components/DnaHelix'
 import BlackSheepMark from './components/BlackSheepMark'
-
-
-const projects = [
-  { code: '01', name: 'ParkFácil', type: 'Protótipo de Site', text: 'Experiência digital para solicitar e acompanhar credenciais de estacionamento para idosos e PCD, com foco em clareza, acessibilidade e processos reais.', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
-  { code: '02', name: 'Credenciais de Estacionamento', type: 'Produto em uso', text: 'Sistema que eliminou o fluxo manual de emissão de credenciais na secretaria, incluindo numeração automática, assinatura digital e PDF com QR Code.', tags: ['PHP', 'SQLite', 'FPDF'], repo: 'https://github.com/shamarafsouza/credenciais-estacionamento' },
-  { code: '03', name: 'Painel Meteorológico', type: 'API em tempo real', text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.', tags: ['JavaScript', 'REST API', 'Dados'], live: '/previsao-tempo.html' }
-]
+import { translations, projectMeta, type Lang } from './translations'
 
 export default function App() {
+  const [lang, setLang] = useState<Lang>('pt')
   const [introDone, setIntroDone] = useState(false)
   const [gameOpen, setGameOpen] = useState(false)
+  const t = translations[lang]
+
   useEffect(() => {
-  const els = document.querySelectorAll('.reveal')
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in')
-        io.unobserve(entry.target)
-      }
-    })
-  }, { threshold: 0.15 })
-  els.forEach(el => io.observe(el))
-  return () => io.disconnect()
-}, [])
+    const els = document.querySelectorAll('.reveal')
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in')
+          io.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.15 })
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
+  }, [lang])
+
   return <>
-    {!introDone && <IntroBoot onDone={() => setIntroDone(true)} />}
-    <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i /> SISTEMA ONLINE, BAIXO GUANDU, ES</p><nav><a href="#projetos">Projetos</a><a href="#sobre">Perfil</a><a href="#contato">Contato</a></nav></header>
+    {!introDone && <IntroBoot lines={t.intro} skipLabel={t.introSkip} onDone={() => setIntroDone(true)} />}
+    <div className="noise" /><header><a className="brand" href="#inicio">S<span>_</span>S</a><p className="system-status"><i /> {t.systemStatus}</p><nav><a href="#projetos">{t.nav.projects}</a><a href="#sobre">{t.nav.profile}</a><a href="#contato">{t.nav.contact}</a><button className="lang-toggle" onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')} aria-label="Toggle language">{t.langToggle}</button></nav></header>
     <main id="inicio">
-      <section className="hero"><div className="hero-copy"><p className="eyebrow">ARQUIVO 0027, DESENVOLVEDORA</p><h1>UMA MENTE,<br /><em>MÚLTIPLAS</em><br />SOLUÇÕES.</h1><p className="hero-text">Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta — do design da interface à lógica por trás dela.</p><div className="hero-actions"><a className="button primary" href="#projetos">EXPLORAR PROJETOS <b>↘</b></a><a className="button" href="https://github.com/shamarafsouza" target="_blank" rel="noreferrer">GITHUB <b>↗</b></a></div></div><div className="identity-card"><div className="scan" /><p>IDENTIDADE VERIFICADA</p><div className="portrait"><span>SS</span></div><h2>SHAMARA<br />F. DE SOUZA</h2><dl><div><dt>ÁREA</dt><dd>FULLSTACK</dd></div><div><dt>FOCO</dt><dd>DESENVOLVIMENTO WEB</dd></div><div><dt>STATUS</dt><dd>DISPONÍVEL</dd></div></dl><div className="barcode">||| || |||| | ||| || ||||</div></div><DnaHelix/></section>
-      <section className="ticker" aria-label="Tecnologias"><div className="ticker-track"><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span></div></section>      <section id="projetos" className="projects"><div className="section-label"><p className="eyebrow reveal">SELEÇÃO DE PROJETOS</p><p>03 REGISTROS ATIVOS</p></div><h2>TESTADO<br /><em>APROVADO.</em></h2><div className="project-list reveal">{projects.map((project) => <article className="project reveal" key={project.name}><div className="project-code">{project.code}</div><div><p className="project-type">{project.type}</p><h3>{project.name}</h3></div><div className="project-info"><p>{project.text}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="project-links">{project.live && <a href={project.live} target="_blank" rel="noreferrer">ABRIR PROJETO ↗</a>}{project.repo && <a href={project.repo} target="_blank" rel="noreferrer">VER CÓDIGO ↗</a>}</div></div></article>)}</div></section>
-      <section id="sobre" className="about reveal"><BlackSheepMark /><div><p className="eyebrow">O QUE HÁ POR TRÁS DO CÓDIGO</p><h2>PROJETO PARA QUEM<br />PRECISA <em>USAR.</em></h2></div><div className="about-copy"><p>Minha experiência em engenharia de trânsito e gestão pública me ensinou a começar pelo problema, ouvir quem executa o processo e desenhar soluções que simplificam a rotina.</p><p>Hoje levo essa visão para o desenvolvimento, combinando React, TypeScript, Node.js e Python para construir ferramentas úteis, acessíveis e consistentes.</p><button className="game-trigger" onClick={() => setGameOpen(true)}><span>◉</span> ACESSAR SIMULAÇÃO SECRETA, JOGO DO DINOSSAURO</button></div></section>
-      <section id="contato" className="contact"><p className="eyebrow">CANAL DE CONTATO ABERTO</p><h2>VAMOS CRIAR<br /><em>ALGO NOVO?</em></h2><div className="contact-links"><a href="mailto:ferreiradesouzashamara@gmail.com">ferreiradesouzashamara@gmail.com <b>↗</b></a><a href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/" target="_blank" rel="noreferrer">LinkedIn <b>↗</b></a></div></section>
-    </main><footer><span>© 2026 SHAMARA FERREIRA DE SOUZA</span><span>DESENVOLVIDO EM REACT + TYPESCRIPT</span></footer>{gameOpen && <DinoGame onClose={() => setGameOpen(false)} />}</>
+      <section className="hero"><div className="hero-copy"><p className="eyebrow">{t.hero.eyebrow}</p><h1>{t.hero.title1}<br /><em>{t.hero.titleEm}</em><br />{t.hero.title2}</h1><p className="hero-text">{t.hero.text}</p><div className="hero-actions"><a className="button primary" href="#projetos">{t.hero.exploreBtn} <b>↘</b></a><a className="button" href="https://github.com/shamarafsouza" target="_blank" rel="noreferrer">{t.hero.githubBtn} <b>↗</b></a></div></div><div className="identity-card"><div className="scan" /><p>{t.identity.verified}</p><div className="portrait"><span>SS</span></div><h2>{t.identity.name1}<br />{t.identity.name2}</h2><dl><div><dt>{t.identity.area}</dt><dd>{t.identity.areaVal}</dd></div><div><dt>{t.identity.focus}</dt><dd>{t.identity.focusVal}</dd></div><div><dt>{t.identity.status}</dt><dd>{t.identity.statusVal}</dd></div></dl><div className="barcode">||| || |||| | ||| || ||||</div></div><DnaHelix /></section>
+      <section className="ticker" aria-label="Tecnologias"><div className="ticker-track"><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>PYTHON</span><span>HTML</span><span>CSS</span><span>MYSQL</span><span>PHP</span></div></section>
+      <section id="projetos" className="projects"><div className="section-label"><p className="eyebrow">{t.projectsSection.label}</p><p>{t.projectsSection.count}</p></div><h2>{t.projectsSection.title1}<br /><em>{t.projectsSection.titleEm}</em></h2><div className="project-list">{projectMeta.map((project, i) => <article className="project reveal" key={project.name}><div className="project-code">{project.code}</div><div><p className="project-type">{t.projects[i].type}</p><h3>{project.name}</h3></div><div className="project-info"><p>{t.projects[i].text}</p><div className="tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="project-links">{project.live && <a href={project.live} target="_blank" rel="noreferrer">{t.projectsSection.open} ↗</a>}{project.repo && <a href={project.repo} target="_blank" rel="noreferrer">{t.projectsSection.code} ↗</a>}</div></div></article>)}</div></section>
+      <section id="sobre" className="about reveal"><BlackSheepMark /><div><p className="eyebrow">{t.about.eyebrow}</p><h2>{t.about.title1}<br /><em>{t.about.titleEm}</em></h2></div><div className="about-copy"><p>{t.about.p1}</p><p>{t.about.p2}</p><button className="game-trigger" onClick={() => setGameOpen(true)}><span>◉</span> {t.about.game}</button></div></section>
+      <section id="contato" className="contact"><p className="eyebrow">{t.contact.eyebrow}</p><h2>{t.contact.title1}<br /><em>{t.contact.titleEm}</em></h2><div className="contact-links"><a href="mailto:ferreiradesouzashamara@gmail.com">ferreiradesouzashamara@gmail.com <b>↗</b></a><a href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/" target="_blank" rel="noreferrer">{t.contact.linkedin} <b>↗</b></a></div></section>
+    </main><footer><span>{t.footer.name}</span><span>{t.footer.stack}</span></footer>{gameOpen && <DinoGame onClose={() => setGameOpen(false)} />}</>
 }
