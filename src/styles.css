@@ -708,7 +708,7 @@ footer {
         opacity:.5;
         pointer-events:none
     }
-.sheep-mark{
+    .sheep-mark{
     position:absolute;
     left:-40px;
     bottom:-40px;
