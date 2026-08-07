@@ -53,10 +53,10 @@ export const translations = {
     ],
     about: {
       eyebrow: 'ARQUIVO PESSOAL, DESIGNAÇÃO ÚNICA',
-      title1: 'NÃO SOU',
-      titleEm: 'CÓPIA.',
-      p1: 'Sou Shamara Ferreira de Souza, formada em Sistemas de Informação. Minha trajetória não começou no código — começou na gestão pública. Hoje sou Chefe de Departamento de Engenharia de Trânsito em Baixo Guandu (ES), onde projetei e implementei sozinha um sistema de emissão automatizada de credenciais de estacionamento para idosos e PCD, hoje em uso real, que eliminou por completo o processo manual em papel e reduziu em 20% o tempo do fluxo antigo.',
-      p2: 'Foi ali que aprendi que resolver problemas de verdade importa mais do que seguir modelo pronto. Hoje aplico essa mesma lógica ao desenvolvimento: React, TypeScript, Node.js, Python, PHP e C# são as ferramentas — mas o objetivo continua o mesmo, construir o que funciona, não o que só parece funcionar.',
+      title1: 'QUEM SOU',
+      titleEm: 'EU.',
+      p1: 'Sou Shamara Ferreira de Souza, formada em Sistemas de Informação. Minha trajetória não começou no código, começou na gestão pública. Hoje sou Chefe de Departamento de Engenharia de Trânsito em Baixo Guandu (ES), onde projetei e implementei sozinha um sistema de emissão automatizada de credenciais de estacionamento para idosos e PCD, hoje em uso real, que eliminou por completo o processo manual em papel e reduziu em 20% o tempo do fluxo antigo.',
+      p2: 'Foi ali que aprendi que resolver problemas de verdade importa mais do que seguir modelo pronto. Hoje aplico essa mesma lógica ao desenvolvimento: React, TypeScript, Node.js, Python, PHP e C# são as ferramentas, mas o objetivo continua o mesmo, construir o que funciona, não o que só parece funcionar.',
       game: 'ACESSAR SIMULAÇÃO SECRETA, JOGO DO DINOSSAURO'
     },
     contact: {
