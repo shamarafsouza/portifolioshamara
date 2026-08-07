@@ -1,16 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const LINES = [
-  'INICIANDO PROTOCOLO DE IDENTIDADE...',
-  'LENDO ARQUIVO 0027...',
-  'COMPARANDO PADRÃO COM BASE DE DADOS...',
-  'CORRESPONDÊNCIA ENCONTRADA: 99.98%',
-  'DESIGNAÇÃO: SHAMARA FERREIRA DE SOUZA',
-  'STATUS: ORIGINAL. NÃO É CÓPIA.',
-  'ACESSO CONCEDIDO.'
-]
-
-export default function IntroBoot({ onDone }: { onDone: () => void }) {
+export default function IntroBoot({ lines, skipLabel, onDone }: { lines: string[]; skipLabel: string; onDone: () => void }) {
   const [visibleLines, setVisibleLines] = useState<string[]>([])
   const [typed, setTyped] = useState('')
   const [leaving, setLeaving] = useState(false)
@@ -29,7 +19,7 @@ export default function IntroBoot({ onDone }: { onDone: () => void }) {
 
     function typeNextChar() {
       if (cancelled) return
-      const currentLine = LINES[lineIndex]
+      const currentLine = lines[lineIndex]
       if (charIndex <= currentLine.length) {
         setTyped(currentLine.slice(0, charIndex))
         charIndex++
@@ -39,7 +29,7 @@ export default function IntroBoot({ onDone }: { onDone: () => void }) {
         setTyped('')
         lineIndex++
         charIndex = 0
-        if (lineIndex < LINES.length) {
+        if (lineIndex < lines.length) {
           setTimeout(typeNextChar, 260)
         } else {
           setTimeout(() => {
@@ -55,7 +45,7 @@ export default function IntroBoot({ onDone }: { onDone: () => void }) {
       cancelled = true
       clearTimeout(startTimer)
     }
-  }, [onDone])
+  }, [onDone, lines])
 
   function handleSkip() {
     if (skip) return
@@ -65,7 +55,7 @@ export default function IntroBoot({ onDone }: { onDone: () => void }) {
   }
 
   return (
-    <div className={`intro-boot${leaving ? ' leaving' : ''}`} onClick={handleSkip} role="button" tabIndex={0} aria-label="Pular introdução">
+    <div className={`intro-boot${leaving ? ' leaving' : ''}`} onClick={handleSkip} role="button" tabIndex={0} aria-label={skipLabel}>
       <div className="intro-boot-inner">
         {visibleLines.map((line, i) => (
           <p key={i} className="intro-line">
@@ -78,7 +68,7 @@ export default function IntroBoot({ onDone }: { onDone: () => void }) {
           </p>
         )}
       </div>
-      <p className="intro-skip">TOQUE PARA PULAR</p>
+      <p className="intro-skip">{skipLabel}</p>
     </div>
   )
 }
