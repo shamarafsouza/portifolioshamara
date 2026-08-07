@@ -116,8 +116,8 @@ export const translations = {
     ],
     about: {
       eyebrow: 'PERSONAL FILE, UNIQUE DESIGNATION',
-      title1: 'NOT A',
-      titleEm: 'COPY.',
+      title1: 'WHO',
+      titleEm: 'I AM.',
       p1: 'I\'m Shamara Ferreira de Souza, with a degree in Information Systems. My path didn\'t start in code — it started in public administration. I currently lead the Traffic Engineering Department in Baixo Guandu (ES), where I designed and built, on my own, an automated parking-credential system for elderly and disabled citizens, now in real use, which fully eliminated the paper-based process and cut processing time by 20%.',
       p2: 'That\'s where I learned that solving real problems matters more than following a template. I bring the same mindset to development today: React, TypeScript, Node.js, Python, PHP and C# are the tools — but the goal stays the same, building what works, not what just looks like it works.',
       game: 'ACCESS SECRET SIMULATION, DINOSAUR GAME'
