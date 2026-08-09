@@ -26,7 +26,7 @@ export const translations = {
       title1: 'UMA MENTE,',
       titleEm: 'MÚLTIPLAS',
       title2: 'SOLUÇÕES.',
-      text: 'Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta — do design da interface à lógica por trás dela.',
+      text: 'Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta, do design da interface à lógica por trás dela.',
       exploreBtn: 'EXPLORAR PROJETOS',
       githubBtn: 'GITHUB'
     },
@@ -80,7 +80,7 @@ export const translations = {
       'COMPARING PATTERN WITH DATABASE...',
       'MATCH FOUND: 99.98%',
       'DESIGNATION: SHAMARA FERREIRA DE SOUZA',
-      'STATUS: ORIGINAL. NOT A COPY.',
+      'STATUS: VERIFICANDO ACESSO. NOT A COPY.',
       'ACCESS GRANTED.'
     ],
     introSkip: 'TAP TO SKIP',
