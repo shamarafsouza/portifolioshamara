@@ -713,14 +713,6 @@ footer {
         display: none
     }
 
-    .lang-toggle{background:transparent;border:1px solid var(--mint);
-                 color:var(--mint);
-                 font:10px 'DM Mono',monospace;letter-spacing:.1em;
-                 padding:6px 12px;cursor:pointer;
-                 margin-left:14px;
-                 transition:.2s}
-    .lang-toggle:hover{
-        background:var(--mint);
-        color:var(--ink)
-    }
+    .lang-toggle{background:transparent;border:1px solid var(--mint);color:var(--mint);font:10px 'DM Mono',monospace;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:14px;transition:.2s}
+    .lang-toggle:hover{background:var(--mint);color:var(--ink)}
 }
