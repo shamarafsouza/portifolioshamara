@@ -622,6 +622,8 @@ footer {
 
 .dna-helix{position:absolute;right:clamp(10px,4vw,60px);top:0;height:100%;width:60px;opacity:.5;pointer-events:none;z-index:1}
 .sheep-mark{position:absolute;left:-40px;bottom:-40px;width:220px;height:220px;pointer-events:none;z-index:0}
+.lang-toggle{background:transparent;border:1px solid var(--mint);color:var(--mint);font:10px 'DM Mono',monospace;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:14px;transition:.2s}
+.lang-toggle:hover{background:var(--mint);color:var(--ink)}
 
 @media(max-width:720px) {
     header {
@@ -712,7 +714,4 @@ footer {
     .dna-helix {
         display: none
     }
-
-    .lang-toggle{background:transparent;border:1px solid var(--mint);color:var(--mint);font:10px 'DM Mono',monospace;letter-spacing:.1em;padding:6px 12px;cursor:pointer;margin-left:14px;transition:.2s}
-    .lang-toggle:hover{background:var(--mint);color:var(--ink)}
 }
