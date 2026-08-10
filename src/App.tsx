@@ -4,6 +4,7 @@ import DinoGame from './components/DinoGame'
 import DnaHelix from './components/DnaHelix'
 import BlackSheepMark from './components/BlackSheepMark'
 import { translations, projectMeta, type Lang } from './translations'
+import GlitchText from './components/GlitchText'
 
 export default function App() {
   const [lang, setLang] = useState<Lang>('pt')
