@@ -3,7 +3,6 @@ import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
 import DnaHelix from './components/DnaHelix'
 import BlackSheepMark from './components/BlackSheepMark'
-import GlitchText from './components/GlitchText'
 import { translations, projectMeta, type Lang } from './translations'
 
 export default function App() {
@@ -57,12 +56,14 @@ export default function App() {
 
       <main id="inicio">
         <section className="hero">
+          <div className="fog" />
+
           <div className="hero-copy">
             <p className="eyebrow">{t.hero.eyebrow}</p>
             <h1>
               {t.hero.title1}
               <br />
-              <em><GlitchText text={t.hero.titleEm} /></em>
+              <em>{t.hero.titleEm}</em>
               <br />
               {t.hero.title2}
             </h1>
@@ -155,7 +156,7 @@ export default function App() {
             <h2>
               {t.about.title1}
               <br />
-              <em><GlitchText text={t.about.titleEm} /></em>
+              <em>{t.about.titleEm}</em>
             </h2>
           </div>
           <div className="about-copy">
