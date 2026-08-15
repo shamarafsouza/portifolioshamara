@@ -13,32 +13,29 @@ export default function App() {
   const t = translations[lang]
 
   useEffect(() => {
-    const elements = document.querySelectorAll('.reveal')
+    const els = document.querySelectorAll('.reveal')
 
-    const observer = new IntersectionObserver(
+    const io = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in')
-            observer.unobserve(entry.target)
+            io.unobserve(entry.target)
           }
         })
       },
       {
-        threshold: 0.12,
+        threshold: 0.15
       }
     )
 
-    elements.forEach(element => observer.observe(element))
+    els.forEach(el => io.observe(el))
 
-    return () => observer.disconnect()
+    return () => io.disconnect()
   }, [lang])
 
   return (
     <>
-      {/* =========================================================
-          INTRO
-      ========================================================= */}
       {!introDone && (
         <IntroBoot
           lines={t.intro}
@@ -47,12 +44,9 @@ export default function App() {
         />
       )}
 
-      <div className="noise" aria-hidden="true" />
+      <div className="noise" />
 
-      {/* =========================================================
-          HEADER
-      ========================================================= */}
-      <header className="site-header">
+      <header>
         <a
           className="brand"
           href="#inicio"
@@ -61,12 +55,12 @@ export default function App() {
           S<span>_</span>S
         </a>
 
-        <div className="header-status" aria-label="Status do sistema">
-          <span className="status-dot" />
-          <span>{t.systemStatus}</span>
-        </div>
+        <p className="system-status">
+          <i />
+          {t.systemStatus}
+        </p>
 
-        <nav className="main-nav" aria-label="Navegação principal">
+        <nav>
           <a href="#projetos">
             {t.nav.projects}
           </a>
@@ -92,21 +86,13 @@ export default function App() {
 
       <main id="inicio">
 
-        {/* =========================================================
-            HERO
-        ========================================================= */}
         <section className="hero">
+          <div className="fog" />
 
-          <div className="fog" aria-hidden="true" />
-
-          <div className="hero-grid" aria-hidden="true" />
-
-          <div className="hero-copy reveal">
-
-            <div className="hero-kicker">
-              <span className="hero-kicker-line" />
-              <span>{t.hero.eyebrow}</span>
-            </div>
+          <div className="hero-copy">
+            <p className="eyebrow">
+              {t.hero.eyebrow}
+            </p>
 
             <h1>
               {t.hero.title1}
@@ -121,13 +107,11 @@ export default function App() {
             </p>
 
             <div className="hero-actions">
-
               <a
                 className="button primary"
                 href="#projetos"
               >
-                <span>{t.hero.exploreBtn}</span>
-                <b>↘</b>
+                {t.hero.exploreBtn} <b>↘</b>
               </a>
 
               <a
@@ -136,56 +120,29 @@ export default function App() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span>{t.hero.githubBtn}</span>
-                <b>↗</b>
+                {t.hero.githubBtn} <b>↗</b>
               </a>
-
             </div>
-
-            <div className="hero-meta">
-              <span>FULL STACK</span>
-              <span>•</span>
-              <span>WEB DEVELOPMENT</span>
-              <span>•</span>
-              <span>SOFTWARE</span>
-            </div>
-
           </div>
 
-          {/* =====================================================
-              IDENTITY CARD
-          ===================================================== */}
-          <aside className="identity-card reveal">
+          <div className="identity-card">
+            <div className="scan" />
 
-            <div className="identity-top">
-              <span>{t.identity.verified}</span>
-
-              <span className="identity-id">
-                SS / 001
-              </span>
-            </div>
-
-            <div className="scan" aria-hidden="true" />
+            <p>
+              {t.identity.verified}
+            </p>
 
             <div className="portrait">
               <span>SS</span>
-              <div className="portrait-overlay" />
             </div>
 
-            <div className="identity-heading">
-              <span className="identity-label">
-                DEVELOPER PROFILE
-              </span>
+            <h2>
+              {t.identity.name1}
+              <br />
+              {t.identity.name2}
+            </h2>
 
-              <h2>
-                {t.identity.name1}
-                <br />
-                {t.identity.name2}
-              </h2>
-            </div>
-
-            <dl className="identity-data">
-
+            <dl>
               <div>
                 <dt>{t.identity.area}</dt>
                 <dd>{t.identity.areaVal}</dd>
@@ -198,269 +155,153 @@ export default function App() {
 
               <div>
                 <dt>{t.identity.status}</dt>
-                <dd>
-                  <span className="availability-dot" />
-                  {t.identity.statusVal}
-                </dd>
+                <dd>{t.identity.statusVal}</dd>
               </div>
-
             </dl>
 
-            <div className="identity-footer">
-
-              <div className="barcode" aria-hidden="true">
-                ||| || |||| | ||| || ||||
-              </div>
-
-              <span>
-                2026 / SS
-              </span>
-
+            <div className="barcode">
+              ||| || |||| | ||| || ||||
             </div>
-
-          </aside>
-
-          <div className="hero-dna">
-            <DnaHelix />
           </div>
 
+          <DnaHelix />
         </section>
 
-        {/* =========================================================
-            STACK TICKER
-        ========================================================= */}
         <section
           className="ticker"
-          aria-label="Tecnologias utilizadas"
+          aria-label="Tecnologias"
         >
-          <div className="ticker-label">
-            STACK
-          </div>
-
           <div className="ticker-track">
-
             <span>REACT</span>
-            <span>•</span>
             <span>TYPESCRIPT</span>
-            <span>•</span>
             <span>NODE.JS</span>
-            <span>•</span>
             <span>PYTHON</span>
-            <span>•</span>
             <span>C#</span>
-            <span>•</span>
             <span>.NET</span>
-            <span>•</span>
+            <span>HTML</span>
+            <span>CSS</span>
             <span>MYSQL</span>
-            <span>•</span>
-            <span>PHP</span>
-            <span>•</span>
-
-            {/* duplicação para o loop infinito */}
-            <span>REACT</span>
-            <span>•</span>
-            <span>TYPESCRIPT</span>
-            <span>•</span>
-            <span>NODE.JS</span>
-            <span>•</span>
-            <span>PYTHON</span>
-            <span>•</span>
-            <span>C#</span>
-            <span>•</span>
-            <span>.NET</span>
-            <span>•</span>
-            <span>MYSQL</span>
-            <span>•</span>
             <span>PHP</span>
 
+            <span>REACT</span>
+            <span>TYPESCRIPT</span>
+            <span>NODE.JS</span>
+            <span>PYTHON</span>
+            <span>C#</span>
+            <span>.NET</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>MYSQL</span>
+            <span>PHP</span>
           </div>
         </section>
 
-        {/* =========================================================
-            PROJECTS
-        ========================================================= */}
         <section
           id="projetos"
           className="projects"
         >
+          <div className="section-label">
+            <p className="eyebrow">
+              {t.projectsSection.label}
+            </p>
 
-          <div className="section-intro reveal">
-
-            <div className="section-label">
-              <p className="eyebrow">
-                {t.projectsSection.label}
-              </p>
-
-              <p className="section-index">
-                {t.projectsSection.count}
-              </p>
-            </div>
-
-            <div className="section-heading">
-
-              <div>
-                <span className="section-number">
-                  01
-                </span>
-
-                <h2>
-                  {t.projectsSection.title1}
-                  <br />
-                  <em>{t.projectsSection.titleEm}</em>
-                </h2>
-              </div>
-
-              <p className="section-description">
-                Sistemas e aplicações desenvolvidos para transformar
-                problemas reais em soluções digitais.
-              </p>
-
-            </div>
-
+            <p>
+              {t.projectsSection.count}
+            </p>
           </div>
 
-          <div className="project-list">
+          <h2>
+            {t.projectsSection.title1}
+            <br />
+            <em>{t.projectsSection.titleEm}</em>
+          </h2>
 
-            {projectMeta.map((project, index) => (
+          <div className="project-list">
+            {projectMeta.map((project, i) => (
               <article
                 className="project reveal"
                 key={project.name}
               >
-
-                <div className="project-number">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
-
                 <div className="project-code">
                   {project.code}
                 </div>
 
-                <div className="project-main">
+                <div>
+                  <p className="project-type">
+                    {t.projects[i].type}
+                  </p>
 
-                  <div className="project-heading">
-
-                    <p className="project-type">
-                      {t.projects[index].type}
-                    </p>
-
-                    <h3>
-                      {project.name}
-                    </h3>
-
-                  </div>
-
-                  <div className="project-info">
-
-                    <p>
-                      {t.projects[index].text}
-                    </p>
-
-                    <div className="tags">
-                      {project.tags.map(tag => (
-                        <span key={tag}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="project-links">
-
-                      {project.live && (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <span>
-                            {t.projectsSection.open}
-                          </span>
-                          <b>↗</b>
-                        </a>
-                      )}
-
-                      {project.repo && (
-                        <a
-                          href={project.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <span>
-                            {t.projectsSection.code}
-                          </span>
-                          <b>↗</b>
-                        </a>
-                      )}
-
-                    </div>
-
-                  </div>
-
+                  <h3>
+                    {project.name}
+                  </h3>
                 </div>
 
-                <div
-                  className="project-arrow"
-                  aria-hidden="true"
-                >
-                  ↗
-                </div>
+                <div className="project-info">
+                  <p>
+                    {t.projects[i].text}
+                  </p>
 
+                  <div className="tags">
+                    {project.tags.map(tag => (
+                      <span key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t.projectsSection.open} ↗
+                      </a>
+                    )}
+
+                    {project.repo && (
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t.projectsSection.code} ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
               </article>
             ))}
-
           </div>
-
         </section>
 
-        {/* =========================================================
-            ABOUT
-        ========================================================= */}
         <section
           id="sobre"
           className="about reveal"
         >
+          <BlackSheepMark />
 
-          <div className="about-mark">
-            <BlackSheepMark />
-          </div>
-
-          <div className="about-heading">
-
+          <div>
             <p className="eyebrow">
               {t.about.eyebrow}
             </p>
-
-            <span className="section-number">
-              02
-            </span>
 
             <h2>
               {t.about.title1}
               <br />
               <em>{t.about.titleEm}</em>
             </h2>
-
           </div>
 
           <div className="about-copy">
+            <p>
+              {t.about.p1}
+            </p>
 
-            <div className="about-text">
-              <p>{t.about.p1}</p>
-              <p>{t.about.p2}</p>
-            </div>
-
-            <div className="about-highlight">
-
-              <span className="highlight-line" />
-
-              <p>
-                BUILD.
-                <br />
-                LEARN.
-                <br />
-                <em>REPEAT.</em>
-              </p>
-
-            </div>
+            <p>
+              {t.about.p2}
+            </p>
 
             <button
               className="game-trigger"
@@ -469,32 +310,17 @@ export default function App() {
             >
               <span>◉</span>
               {t.about.game}
-              <b>↗</b>
             </button>
-
           </div>
-
         </section>
 
-        {/* =========================================================
-            CONTACT
-        ========================================================= */}
         <section
           id="contato"
-          className="contact reveal"
+          className="contact"
         >
-
-          <div className="contact-header">
-
-            <p className="eyebrow">
-              {t.contact.eyebrow}
-            </p>
-
-            <span className="section-number">
-              03
-            </span>
-
-          </div>
+          <p className="eyebrow">
+            {t.contact.eyebrow}
+          </p>
 
           <h2>
             {t.contact.title1}
@@ -502,17 +328,9 @@ export default function App() {
             <em>{t.contact.titleEm}</em>
           </h2>
 
-          <p className="contact-description">
-            Aberta a novos projetos, oportunidades e conexões
-            dentro do universo da tecnologia.
-          </p>
-
           <div className="contact-links">
-
             <a href="mailto:ferreiradesouzashamara@gmail.com">
-              <span>
-                ferreiradesouzashamara@gmail.com
-              </span>
+              ferreiradesouzashamara@gmail.com
               <b>↗</b>
             </a>
 
@@ -521,9 +339,7 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
             >
-              <span>
-                {t.contact.linkedin}
-              </span>
+              {t.contact.linkedin}
               <b>↗</b>
             </a>
 
@@ -532,46 +348,24 @@ export default function App() {
               target="_blank"
               rel="noreferrer"
             >
-              <span>
-                GitHub
-              </span>
+              GitHub
               <b>↗</b>
             </a>
-
           </div>
-
         </section>
 
       </main>
 
-      {/* =========================================================
-          FOOTER
-      ========================================================= */}
-      <footer className="site-footer">
-
-        <div>
-          <span className="footer-mark">
-            SS_
-          </span>
-
-          <span>
-            {t.footer.name}
-          </span>
-        </div>
+      <footer>
+        <span>
+          {t.footer.name}
+        </span>
 
         <span>
           {t.footer.stack}
         </span>
-
-        <span>
-          © 2026
-        </span>
-
       </footer>
 
-      {/* =========================================================
-          EASTER EGG
-      ========================================================= */}
       {gameOpen && (
         <DinoGame
           onClose={() => setGameOpen(false)}
