@@ -1,135 +1,266 @@
 export type Lang = 'pt' | 'en'
 
 export const projectMeta = [
-  { code: '01', name: 'ParkFácil', tags: ['React', 'TypeScript', 'UX'], live: 'https://park-facil.vercel.app', repo: 'https://github.com/shamarafsouza/parkfacil' },
-  { code: '02', name: 'Credenciais de Estacionamento', tags: ['PHP', 'SQLite', 'FPDF'], repo: 'https://github.com/shamarafsouza/credenciais-estacionamento' },
-  { code: '03', name: 'Painel Meteorológico', tags: ['JavaScript', 'REST API', 'Dados'], live: '/previsao-tempo.html' }
+  {
+    code: '01',
+    name: 'ParkFácil',
+    tags: ['React', 'TypeScript', 'UX'],
+    live: 'https://park-facil.vercel.app',
+    repo: 'https://github.com/shamarafsouza/parkfacil'
+  },
+  {
+    code: '02',
+    name: 'Credenciais de Estacionamento',
+    tags: ['PHP', 'SQLite', 'FPDF'],
+    repo: 'https://github.com/shamarafsouza/credenciais-estacionamento'
+  },
+  {
+    code: '03',
+    name: 'Painel Meteorológico',
+    tags: ['JavaScript', 'REST API', 'Open-Meteo'],
+    live: '/previsao-tempo.html'
+  }
 ]
 
 export const translations = {
   pt: {
-    nav: { projects: 'Projetos', profile: 'Perfil', contact: 'Contato' },
+    nav: {
+      projects: 'Projetos',
+      profile: 'Perfil',
+      contact: 'Contato'
+    },
+
     langToggle: 'EN',
+
     systemStatus: 'SISTEMA ONLINE, BAIXO GUANDU, ES',
+
     intro: [
       'INICIANDO PROTOCOLO DE IDENTIDADE...',
       'LENDO ARQUIVO 0027...',
-      'COMPARANDO PADRÃO COM BASE DE DADOS...',
+      'ANALISANDO PERFIL PROFISSIONAL...',
       'CORRESPONDÊNCIA ENCONTRADA: 99.98%',
       'DESIGNAÇÃO: SHAMARA FERREIRA DE SOUZA',
-      'STATUS: VERIFICANDO ACESSO.',
-      'ACESSO CONCEDIDO.'
+      'STATUS: ACESSO AUTORIZADO.',
+      'BEM-VINDA AO ARQUIVO.'
     ],
+
     introSkip: 'TOQUE PARA PULAR',
+
     hero: {
-      eyebrow: 'ARQUIVO 0027, DESENVOLVEDORA',
+      eyebrow: 'ARQUIVO 0027, DESENVOLVEDORA FULL STACK',
+
       title1: 'UMA MENTE,',
+
       titleEm: 'MÚLTIPLAS',
+
       title2: 'SOLUÇÕES.',
-      text: 'Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta, do design da interface à lógica por trás dela.',
+
+      text: 'Sou Shamara Ferreira de Souza, bacharel em Sistemas de Informação e desenvolvedora Full Stack. Trabalho entre front-end e back-end com React, TypeScript, Node.js, Python, PHP, C# e .NET, criando aplicações que transformam necessidades reais em soluções digitais.',
+
       exploreBtn: 'EXPLORAR PROJETOS',
+
       githubBtn: 'GITHUB'
     },
+
     identity: {
       verified: 'IDENTIDADE VERIFICADA',
+
       name1: 'SHAMARA',
+
       name2: 'F. DE SOUZA',
-      area: 'ÁREA', areaVal: 'FULLSTACK',
-      focus: 'FOCO', focusVal: 'DESENVOLVIMENTO WEB',
-      status: 'STATUS', statusVal: 'DISPONÍVEL'
+
+      area: 'ÁREA',
+      areaVal: 'FULL STACK',
+
+      focus: 'FOCO',
+      focusVal: 'DESENVOLVIMENTO WEB',
+
+      status: 'STATUS',
+      statusVal: 'DISPONÍVEL'
     },
+
     projectsSection: {
       label: 'SELEÇÃO DE PROJETOS',
-      count: '03 REGISTROS ATIVOS',
-      title1: 'TESTADO',
-      titleEm: 'APROVADO.',
+
+      count: '03 PROJETOS EM DESTAQUE',
+
+      title1: 'IDEIAS',
+
+      titleEm: 'EM FUNCIONAMENTO.',
+
       open: 'ABRIR PROJETO',
+
       code: 'VER CÓDIGO'
     },
+
     projects: [
-      { type: 'Protótipo de Site', text: 'ParkFácil é uma landing page fictícia que desenvolvi para demonstrar, de forma pública e sem dados reais, a experiência de solicitar uma credencial de estacionamento. O sistema real, com o código de emissão de verdade, está no projeto de Credenciais de Estacionamento.' },
-      { type: 'Produto em uso', text: 'Sistema que eliminou o fluxo manual de emissão de credenciais na secretaria, incluindo numeração automática, assinatura digital e PDF com QR Code.' },
-      { type: 'API em tempo real', text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.' }
+      {
+        type: 'Experiência Web',
+
+        text: 'ParkFácil é uma experiência web conceitual criada para apresentar, de forma clara e acessível, o fluxo de solicitação de uma credencial de estacionamento. O projeto explora interface, experiência do usuário e desenvolvimento front-end com uma abordagem próxima de um produto real.'
+      },
+
+      {
+        type: 'Sistema em uso real',
+
+        text: 'Sistema desenvolvido para automatizar a emissão de credenciais de estacionamento para idosos e pessoas com deficiência. A solução automatiza a numeração, geração do documento, assinatura digital e criação de PDFs com QR Code, substituindo o fluxo manual anterior.'
+      },
+
+      {
+        type: 'Aplicação com API',
+
+        text: 'Aplicação meteorológica desenvolvida com JavaScript e integração com a Open-Meteo. Permite pesquisar cidades, consultar condições atuais e visualizar a previsão dos próximos sete dias a partir de dados meteorológicos em tempo real.'
+      }
     ],
+
     about: {
-      eyebrow: 'ARQUIVO PESSOAL, DESIGNAÇÃO ÚNICA',
+      eyebrow: 'ARQUIVO PESSOAL, DESIGNADA A RESOLVER',
+
       title1: 'QUEM SOU',
+
       titleEm: 'EU.',
-      p1: 'Sou Shamara Ferreira de Souza, formada em Sistemas de Informação. Minha trajetória não começou no código, começou na gestão pública. Hoje sou Chefe de Departamento de Engenharia de Trânsito em Baixo Guandu (ES), onde projetei e implementei sozinha um sistema de emissão automatizada de credenciais de estacionamento para idosos e PCD, hoje em uso real, que eliminou por completo o processo manual em papel e reduziu em 20% o tempo do fluxo antigo.',
-      p2: 'Foi ali que aprendi que resolver problemas de verdade importa mais do que seguir modelo pronto. Hoje aplico essa mesma lógica ao desenvolvimento: React, TypeScript, Node.js, Python, PHP e C# são as ferramentas, mas o objetivo continua o mesmo, construir o que funciona, não o que só parece funcionar.',
+
+      p1: 'Sou Shamara Ferreira de Souza, bacharel em Sistemas de Informação. Minha trajetória na tecnologia nasceu da necessidade de resolver problemas reais. Atualmente trabalho na área pública, onde desenvolvi e implementei um sistema de emissão automatizada de credenciais de estacionamento para idosos e pessoas com deficiência, utilizado em um processo real da administração municipal.',
+
+      p2: 'Essa experiência mudou a forma como enxergo desenvolvimento. Código não existe apenas para funcionar: ele precisa simplificar processos, reduzir trabalho e fazer sentido para quem utiliza a solução. Hoje aplico essa visão no desenvolvimento Full Stack, utilizando React, TypeScript, Node.js, Python, PHP, C# e .NET para transformar ideias em produtos e sistemas funcionais.',
+
       game: 'ACESSAR SIMULAÇÃO SECRETA, JOGO DO DINOSSAURO'
     },
+
     contact: {
       eyebrow: 'CANAL DE CONTATO ABERTO',
+
       title1: 'VAMOS CRIAR',
+
       titleEm: 'ALGO NOVO?',
-      linkedin: 'LinkedIn'
+
+      linkedin: 'LINKEDIN'
     },
+
     footer: {
       name: '© 2026 SHAMARA FERREIRA DE SOUZA',
-      stack: 'DESENVOLVIDO EM REACT + TYPESCRIPT'
+
+      stack: 'DESENVOLVIDO COM REACT + TYPESCRIPT'
     }
   },
+
   en: {
-    nav: { projects: 'Projects', profile: 'Profile', contact: 'Contact' },
+    nav: {
+      projects: 'Projects',
+      profile: 'Profile',
+      contact: 'Contact'
+    },
+
     langToggle: 'PT',
+
     systemStatus: 'SYSTEM ONLINE, BAIXO GUANDU, BRAZIL',
+
     intro: [
       'INITIALIZING IDENTITY PROTOCOL...',
       'READING FILE 0027...',
-      'COMPARING PATTERN WITH DATABASE...',
+      'ANALYZING PROFESSIONAL PROFILE...',
       'MATCH FOUND: 99.98%',
       'DESIGNATION: SHAMARA FERREIRA DE SOUZA',
-      'STATUS: VERIFICANDO ACESSO. NOT A COPY.',
-      'ACCESS GRANTED.'
+      'STATUS: ACCESS AUTHORIZED.',
+      'WELCOME TO THE FILE.'
     ],
+
     introSkip: 'TAP TO SKIP',
+
     hero: {
-      eyebrow: 'FILE 0027, DEVELOPER',
+      eyebrow: 'FILE 0027, FULL STACK DEVELOPER',
+
       title1: 'ONE MIND,',
+
       titleEm: 'MULTIPLE',
+
       title2: 'SOLUTIONS.',
-      text: 'I\'m Shamara Ferreira de Souza, a fullstack developer with a degree in Information Systems. I move between front-end and back-end with React, Node.js, TypeScript, Python, PHP and C#, and I like solving the problem end to end — from interface design to the logic behind it.',
+
+      text: 'I’m Shamara Ferreira de Souza, a graduate in Information Systems and a Full Stack Developer. I work across front-end and back-end development with React, TypeScript, Node.js, Python, PHP, C# and .NET, building applications that turn real needs into digital solutions.',
+
       exploreBtn: 'EXPLORE PROJECTS',
+
       githubBtn: 'GITHUB'
     },
+
     identity: {
       verified: 'IDENTITY VERIFIED',
+
       name1: 'SHAMARA',
+
       name2: 'F. DE SOUZA',
-      area: 'FIELD', areaVal: 'FULLSTACK',
-      focus: 'FOCUS', focusVal: 'WEB DEVELOPMENT',
-      status: 'STATUS', statusVal: 'AVAILABLE'
+
+      area: 'FIELD',
+      areaVal: 'FULL STACK',
+
+      focus: 'FOCUS',
+      focusVal: 'WEB DEVELOPMENT',
+
+      status: 'STATUS',
+      statusVal: 'AVAILABLE'
     },
+
     projectsSection: {
       label: 'SELECTED PROJECTS',
-      count: '03 ACTIVE RECORDS',
-      title1: 'TESTED',
-      titleEm: 'APPROVED.',
+
+      count: '03 FEATURED PROJECTS',
+
+      title1: 'IDEAS',
+
+      titleEm: 'IN ACTION.',
+
       open: 'OPEN PROJECT',
+
       code: 'VIEW CODE'
     },
+
     projects: [
-      { type: 'Portfolio Prototype', text: 'ParkFácil is a fictional landing page I built to demonstrate, publicly and without real data, the experience of requesting a parking credential. The real system, with the actual issuance code, is in the Parking Credentials project.' },
-      { type: 'Product in production', text: 'System that eliminated the manual credential-issuing workflow at the city department, including automatic numbering, digital signature and QR Code PDFs.' },
-      { type: 'Real-time API', text: 'Weather app with city search, current conditions and a seven-day forecast powered by Open-Meteo.' }
+      {
+        type: 'Web Experience',
+
+        text: 'ParkFácil is a conceptual web experience designed to present a clear and accessible parking credential request flow. The project explores interface design, user experience and front-end development through an experience inspired by a real-world product.'
+      },
+
+      {
+        type: 'System in Real Use',
+
+        text: 'A system developed to automate the issuance of parking credentials for elderly and disabled citizens. The solution automates numbering, document generation, digital signing and QR Code PDF creation, replacing the previous manual workflow.'
+      },
+
+      {
+        type: 'API-Powered Application',
+
+        text: 'A weather application built with JavaScript and integrated with the Open-Meteo API. Users can search for cities, view current weather conditions and access a seven-day forecast using real-time meteorological data.'
+      }
     ],
+
     about: {
-      eyebrow: 'PERSONAL FILE, UNIQUE DESIGNATION',
+      eyebrow: 'PERSONAL FILE, DESIGNATED TO SOLVE',
+
       title1: 'WHO',
+
       titleEm: 'I AM.',
-      p1: 'I\'m Shamara Ferreira de Souza, with a degree in Information Systems. My path didn\'t start in code — it started in public administration. I currently lead the Traffic Engineering Department in Baixo Guandu (ES), where I designed and built, on my own, an automated parking-credential system for elderly and disabled citizens, now in real use, which fully eliminated the paper-based process and cut processing time by 20%.',
-      p2: 'That\'s where I learned that solving real problems matters more than following a template. I bring the same mindset to development today: React, TypeScript, Node.js, Python, PHP and C# are the tools — but the goal stays the same, building what works, not what just looks like it works.',
+
+      p1: 'I’m Shamara Ferreira de Souza, a graduate in Information Systems. My path into technology was driven by the need to solve real problems. I currently work in the public sector, where I designed and implemented an automated parking credential system for elderly and disabled citizens, now used as part of a real municipal process.',
+
+      p2: 'That experience changed the way I see software development. Code should not only work — it should simplify processes, reduce unnecessary work and make sense to the people using it. Today, I bring the same mindset to Full Stack development, using React, TypeScript, Node.js, Python, PHP, C# and .NET to turn ideas into functional products and systems.',
+
       game: 'ACCESS SECRET SIMULATION, DINOSAUR GAME'
     },
+
     contact: {
       eyebrow: 'OPEN CONTACT CHANNEL',
-      title1: 'LET\'S BUILD',
+
+      title1: 'LET’S BUILD',
+
       titleEm: 'SOMETHING NEW?',
-      linkedin: 'LinkedIn'
+
+      linkedin: 'LINKEDIN'
     },
+
     footer: {
       name: '© 2026 SHAMARA FERREIRA DE SOUZA',
+
       stack: 'BUILT WITH REACT + TYPESCRIPT'
     }
   }
