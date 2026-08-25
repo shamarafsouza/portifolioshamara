@@ -180,7 +180,7 @@ main {
     position: relative;
     z-index: 1;
     width: min(100%, 420px);
-    max-height: 560px;
+    max-height: 680px;
     object-fit: contain;
     object-position: center;
     justify-self: center;
