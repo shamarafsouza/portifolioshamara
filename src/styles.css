@@ -1,14 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-    --ink: #090b12;
-    --panel: #10141d;
-    --line: rgba(207, 238, 232, .18);
-    --mint: #8ff7dd;
-    --acid: #e8ff5a;
-    --pink: #ff5a8c;
-    --paper: #eef5f0;
-    --muted: #9eabb6;
+    --ink: #07050d;
+    --panel: #0d0916;
+    --line: rgba(168, 92, 255, .22);
+
+    --mint: #a855f7;
+    --acid: #8b2cff;
+    --pink: #d946ef;
+
+    --paper: #f5f0ff;
+    --muted: #a89bb8;
+
+    --purple: #8b2cff;
+    --purple-light: #b66cff;
+    --purple-dark: #5b16b8;
+    --purple-glow: rgba(139, 44, 255, .45);
 }
 
 * {
@@ -56,6 +63,7 @@ header {
     font: 700 30px/1 'DM Mono', monospace;
     letter-spacing: -.14em;
     color: var(--mint);
+    text-shadow: 0 0 18px rgba(139, 44, 255, .35);
 }
 
 .brand span {
@@ -95,6 +103,7 @@ nav a {
 
 nav a:hover {
     color: var(--mint);
+    text-shadow: 0 0 12px rgba(168, 92, 255, .55);
 }
 
 main {
@@ -113,17 +122,64 @@ main {
     gap: clamp(40px, 6vw, 100px);
     align-items: center;
     overflow: hidden;
+
     background:
         radial-gradient(
-            circle at 80% 38%,
-            rgba(45, 97, 111, .28),
-            transparent 30%
+            circle at 75% 40%,
+            rgba(139, 44, 255, .18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 60%,
+            rgba(91, 22, 184, .12),
+            transparent 32%
         ),
         linear-gradient(
             130deg,
-            #090b12 45%,
-            #10161d
+            #07050d 45%,
+            #100a19
         );
+}
+
+/* GRANDE SÍMBOLO ROXO */
+
+.hero::before {
+    content: '✦';
+    position: absolute;
+    right: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(280px, 32vw, 560px);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
+    text-shadow:
+        0 0 25px rgba(139, 44, 255, .18),
+        0 0 70px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .75;
+}
+
+/* CÍRCULO HUD AO REDOR DO SÍMBOLO */
+
+.hero::after {
+    content: '';
+    position: absolute;
+    right: 5%;
+    top: 18%;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(139, 44, 255, .18);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 12px rgba(139, 44, 255, .025),
+        0 0 0 35px rgba(139, 44, 255, .018),
+        0 0 45px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
 }
 
 .eyebrow {
@@ -150,7 +206,9 @@ main {
 .contact h2 em {
     font-style: normal;
     color: var(--acid);
-    text-shadow: 3px 0 var(--pink);
+    text-shadow:
+        3px 0 var(--pink),
+        0 0 25px rgba(139, 44, 255, .25);
 }
 
 .hero-copy {
@@ -158,10 +216,37 @@ main {
     z-index: 1;
 }
 
+/* ASSINATURA DO SISTEMA */
+
+.hero-copy::before {
+    content: '// SHAMARA.SYSTEM';
+    position: absolute;
+    top: -38px;
+    left: 0;
+    color: rgba(168, 92, 255, .65);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.hero-copy::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -35px;
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        transparent
+    );
+    box-shadow: 0 0 10px var(--purple-glow);
+}
+
 .hero-text {
     max-width: 470px;
     margin: 28px 0;
-    color: #c2cdd1;
+    color: #d1c8dc;
     font-size: 18px;
     line-height: 1.55;
 }
@@ -226,12 +311,14 @@ main {
     border-color: var(--mint);
     color: var(--mint);
     transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(139, 44, 255, .15);
 }
 
 .primary {
     border-color: var(--acid);
     background: var(--acid);
     color: var(--ink);
+    box-shadow: 0 0 25px rgba(139, 44, 255, .18);
 }
 
 .primary:hover {
@@ -249,10 +336,11 @@ main {
     justify-self: end;
     padding: 20px;
     border: 1px solid var(--mint);
-    background: rgba(12, 17, 25, .88);
+    background: rgba(13, 9, 22, .9);
     box-shadow:
-        16px 16px 0 rgba(255, 90, 140, .18),
-        0 0 45px rgba(143, 247, 221, .12);
+        16px 16px 0 rgba(217, 70, 239, .12),
+        0 0 45px rgba(139, 44, 255, .16),
+        inset 0 0 35px rgba(139, 44, 255, .025);
 }
 
 .identity-card:before,
@@ -292,21 +380,24 @@ main {
     background:
         repeating-linear-gradient(
             0deg,
-            rgba(143, 247, 221, .08) 0 1px,
+            rgba(168, 92, 255, .08) 0 1px,
             transparent 1px 8px
         ),
         linear-gradient(
             135deg,
-            #19313a,
+            #160d24,
             #35213a
         );
+    border: 1px solid rgba(139, 44, 255, .15);
 }
 
 .portrait span {
     font: 700 80px 'DM Mono', monospace;
     color: var(--acid);
     mix-blend-mode: screen;
-    text-shadow: 4px 0 var(--pink);
+    text-shadow:
+        4px 0 var(--pink),
+        0 0 25px rgba(139, 44, 255, .45);
 }
 
 .identity-card h2 {
@@ -459,8 +550,8 @@ main {
     background:
         linear-gradient(
             90deg,
-            rgba(143, 247, 221, .08),
-            rgba(143, 247, 221, .02),
+            rgba(139, 44, 255, .09),
+            rgba(139, 44, 255, .025),
             transparent
         );
 }
@@ -487,7 +578,7 @@ main {
 
 .project-info > p {
     margin: 0;
-    color: #bdc6cc;
+    color: #c8bfce;
     line-height: 1.55;
 }
 
@@ -503,6 +594,13 @@ main {
     border: 1px solid var(--line);
     color: var(--muted);
     font: 10px 'DM Mono', monospace;
+    transition: .2s;
+}
+
+.tags span:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+    box-shadow: 0 0 12px rgba(139, 44, 255, .15);
 }
 
 .project-links {
@@ -530,14 +628,24 @@ main {
     gap: 8vw;
     min-height: 720px;
     padding: 115px clamp(20px, 10vw, 150px);
-    background: #dbe8e0;
-    color: var(--ink);
+    background: #100b17;
+    color: var(--paper);
     overflow: hidden;
     align-items: center;
 }
 
+.about::before {
+    content: '// 02 / ABOUT.SH';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .4);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
 .about .eyebrow {
-    color: #235e5b;
+    color: var(--purple-light);
 }
 
 .about h2 {
@@ -545,8 +653,10 @@ main {
 }
 
 .about h2 em {
-    color: #285e59;
-    text-shadow: 3px 0 var(--pink);
+    color: var(--purple-light);
+    text-shadow:
+        3px 0 var(--pink),
+        0 0 20px rgba(139, 44, 255, .25);
 }
 
 .about-copy {
@@ -561,9 +671,9 @@ main {
 .game-trigger {
     margin-top: 22px;
     background: transparent;
-    border: 1px solid rgba(9, 11, 18, .28);
+    border: 1px solid rgba(168, 92, 255, .35);
     padding: 13px;
-    color: var(--ink);
+    color: var(--paper);
     font: 11px 'DM Mono', monospace;
     letter-spacing: .05em;
     cursor: pointer;
@@ -571,13 +681,15 @@ main {
 }
 
 .game-trigger span {
-    color: #e42365;
+    color: var(--pink);
     margin-right: 7px;
 }
 
 .game-trigger:hover {
-    background: var(--ink);
-    color: var(--acid);
+    background: var(--purple);
+    color: #fff;
+    border-color: var(--purple);
+    box-shadow: 0 0 25px rgba(139, 44, 255, .3);
 }
 
 .sheep-mark {
@@ -589,6 +701,7 @@ main {
     pointer-events: none;
     z-index: 0;
     opacity: .9;
+    filter: drop-shadow(0 0 15px rgba(139, 44, 255, .25));
 }
 
 /* CONTACT */
@@ -598,7 +711,7 @@ main {
     background:
         radial-gradient(
             circle at 80% 30%,
-            rgba(255, 90, 140, .18),
+            rgba(139, 44, 255, .18),
             transparent 35%
         ),
         var(--panel);
@@ -625,6 +738,7 @@ main {
 
 .contact-links a:hover {
     color: var(--mint);
+    text-shadow: 0 0 15px rgba(139, 44, 255, .3);
 }
 
 .contact-links b {
@@ -663,7 +777,9 @@ footer {
     padding: 35px;
     border: 1px solid var(--mint);
     background: var(--panel);
-    box-shadow: 0 0 50px rgba(143, 247, 221, .15);
+    box-shadow:
+        0 0 50px rgba(139, 44, 255, .2),
+        inset 0 0 35px rgba(139, 44, 255, .025);
 }
 
 .game-panel h2 {
@@ -792,6 +908,10 @@ footer {
     opacity: .5;
     pointer-events: none;
     z-index: 1;
+
+    filter:
+        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
+        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
 }
 
 /* LANGUAGE */
@@ -811,6 +931,7 @@ footer {
 .lang-toggle:hover {
     background: var(--mint);
     color: var(--ink);
+    box-shadow: 0 0 20px rgba(139, 44, 255, .25);
 }
 
 /* FOG */
@@ -838,12 +959,12 @@ footer {
     background:
         radial-gradient(
             circle at 30% 35%,
-            rgba(45, 97, 111, .35),
+            rgba(139, 44, 255, .16),
             transparent 55%
         ),
         radial-gradient(
             circle at 65% 60%,
-            rgba(15, 25, 32, .5),
+            rgba(15, 8, 25, .55),
             transparent 60%
         );
     animation: fog-drift-1 34s ease-in-out infinite;
@@ -853,12 +974,12 @@ footer {
     background:
         radial-gradient(
             circle at 60% 30%,
-            rgba(143, 247, 221, .06),
+            rgba(168, 92, 255, .07),
             transparent 50%
         ),
         radial-gradient(
             circle at 25% 70%,
-            rgba(9, 11, 18, .6),
+            rgba(9, 5, 18, .6),
             transparent 55%
         );
     animation: fog-drift-2 46s ease-in-out infinite;
@@ -899,6 +1020,75 @@ footer {
     }
 }
 
+/* DETALHES CYBER */
+
+.hero,
+.projects,
+.about,
+.contact {
+    isolation: isolate;
+}
+
+.hero,
+.projects,
+.contact {
+    position: relative;
+}
+
+.projects::before {
+    content: '// 03 / PROJECTS';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .35);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.projects::after {
+    content: '';
+    position: absolute;
+    top: 55px;
+    left: clamp(20px, 10vw, 150px);
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        transparent
+    );
+    box-shadow: 0 0 10px var(--purple-glow);
+    pointer-events: none;
+}
+
+.contact::before {
+    content: '// 04 / CONTACT.SYSTEM';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .35);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.contact {
+    position: relative;
+}
+
+/* PEQUENOS PONTOS TECNOLÓGICOS */
+
+.identity-card::before {
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px rgba(139, 44, 255, .3);
+}
+
+.identity-card::after {
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px rgba(139, 44, 255, .3);
+}
+
 /* MOBILE */
 
 @media (max-width: 720px) {
@@ -919,6 +1109,24 @@ footer {
         padding: 75px 24px;
         grid-template-columns: 1fr;
         gap: 50px;
+    }
+
+    .hero::before {
+        right: -15%;
+        top: 30%;
+        font-size: 300px;
+        opacity: .45;
+    }
+
+    .hero::after {
+        right: -5%;
+        top: 18%;
+        width: 180px;
+        height: 180px;
+    }
+
+    .hero-copy::before {
+        top: -32px;
     }
 
     .identity-card {
@@ -950,6 +1158,13 @@ footer {
 
     .projects h2 {
         margin-bottom: 45px;
+    }
+
+    .projects::before,
+    .about::before,
+    .contact::before {
+        right: 24px;
+        top: 25px;
     }
 
     .project {
