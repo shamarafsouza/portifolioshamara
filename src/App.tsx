@@ -96,8 +96,47 @@ export default function App() {
             ✦
           </div>
 
-          <div className="hero-copy">
+          {/* DETALHES HUD / PORTFÓLIO */}
+          <div className="hero-hud hero-hud-left">
+            <section className="hud-box hud-system">
+              <div className="hud-box-header">
+                <span>_SYS.CONFIG</span>
+                <span className="hud-dots">● ● ●</span>
+              </div>
 
+              <div className="hud-list">
+                <span>&gt; lógica</span>
+                <span>&gt; criatividade</span>
+                <span>&gt; estratégia</span>
+                <span>&gt; resultado</span>
+                <span>&gt;_</span>
+              </div>
+            </section>
+
+            <section className="hud-box hud-languages">
+              <p className="hud-label">// LINGUAGENS</p>
+
+              <div className="hud-chip-grid">
+                <span className="hud-chip chip-js">JS</span>
+                <span className="hud-chip chip-ts">TS</span>
+                <span className="hud-chip chip-csharp">C#</span>
+                <span className="hud-chip chip-python">PYTHON</span>
+                <span className="hud-chip chip-php">PHP</span>
+                <span className="hud-chip chip-dart">DART</span>
+                <span className="hud-chip chip-html">HTML5</span>
+                <span className="hud-chip chip-css">CSS3</span>
+              </div>
+            </section>
+
+            <section className="hud-box hud-code">
+              <p>C:\&gt; desenvolvimento.fullstack</p>
+              <p>C:\&gt; foco = disciplina + consistência</p>
+              <p>C:\&gt; sucesso = planejamento + ação</p>
+              <p>C:\&gt;_</p>
+            </section>
+          </div>
+
+          <div className="hero-copy">
             <DnaHelix />
 
             <p className="eyebrow">
@@ -179,24 +218,71 @@ export default function App() {
               ||| || |||| | ||| || ||||
             </div>
           </div>
+
+          <div className="hero-hud hero-hud-right">
+            <section className="hud-box hud-frameworks">
+              <p className="hud-label">// FRAMEWORKS E PLATAFORMAS</p>
+
+              <div className="hud-chip-grid">
+                <span className="hud-chip chip-react">⚛ REACT</span>
+                <span className="hud-chip chip-node">⬡ NODE.JS</span>
+                <span className="hud-chip chip-dotnet">.NET</span>
+                <span className="hud-chip chip-asp">ASP.NET</span>
+                <span className="hud-chip chip-flutter">◩ FLUTTER</span>
+                <span className="hud-chip chip-wordpress">◉ WORDPRESS</span>
+              </div>
+            </section>
+
+            <section className="hud-box hud-database">
+              <p className="hud-label">// BANCO DE DADOS & FERRAMENTAS</p>
+
+              <div className="hud-chip-grid hud-chip-grid-database">
+                <span className="hud-chip chip-mysql">◈ MYSQL</span>
+                <span className="hud-chip chip-git">◆ GIT</span>
+                <span className="hud-chip chip-github">◉ GITHUB</span>
+                <span className="hud-chip chip-api">APIS REST</span>
+              </div>
+            </section>
+
+            <section className="hud-box hud-quote">
+              <span className="hud-quote-mark">“</span>
+
+              <p>
+                A IMPRESSÃO DIGITAL
+                <br />
+                NUNCA MENTE.
+                <br />
+                MAS A IDENTIDADE
+                <br />
+                PODE SER REESCRITA.
+              </p>
+
+              <span className="hud-quote-mark hud-quote-close">”</span>
+
+              <strong>— ORPHAN BLACK</strong>
+            </section>
+          </div>
+
+          <div className="hud-bottom">
+            <span className="hud-line" />
+            <span>&lt;/&gt;</span>
+            <span>•</span>
+            <span className="hud-database-icon">▱</span>
+            <span>•</span>
+            <span>{'{...}'}</span>
+            <span>•</span>
+            <span>☁</span>
+            <span>•</span>
+            <span>&gt;_</span>
+            <span className="hud-line" />
+          </div>
         </section>
 
         <section
           className="ticker"
           aria-label="Tecnologias"
         >
-          <div className="ticker-track">
-            <span>REACT</span>
-            <span>TYPESCRIPT</span>
-            <span>NODE.JS</span>
-            <span>PYTHON</span>
-            <span>C#</span>
-            <span>.NET</span>
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>MYSQL</span>
-            <span>PHP</span>
-
+          <div className="ticker-track ticker-static">
             <span>REACT</span>
             <span>TYPESCRIPT</span>
             <span>NODE.JS</span>
