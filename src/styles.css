@@ -518,7 +518,54 @@ main {
     text-shadow: 0 0 8px rgba(255, 138, 61, .18);
 }
 
+/* SCANNER DO CARTÃO */
 
+.scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    top: 55px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--orange) 12%,
+        #ffd0ad 50%,
+        var(--orange) 88%,
+        transparent
+    );
+
+    box-shadow:
+        0 0 8px var(--orange),
+        0 0 18px var(--orange),
+        0 0 30px var(--orange-glow);
+
+    opacity: .95;
+
+    animation: scan 3.6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: .35;
+    }
+
+    12% {
+        opacity: .95;
+    }
+
+    50% {
+        transform: translateY(220px);
+        opacity: 1;
+    }
+
+    88% {
+        opacity: .95;
+    }
 }
 
 /* TICKER */
