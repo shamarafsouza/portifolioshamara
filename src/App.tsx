@@ -89,6 +89,13 @@ export default function App() {
         <section className="hero">
           <div className="fog" />
 
+          <div
+            className="purple-symbol"
+            aria-hidden="true"
+          >
+            ✦
+          </div>
+
           <div className="hero-copy">
             <p className="eyebrow">
               {t.hero.eyebrow}
