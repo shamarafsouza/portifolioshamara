@@ -101,13 +101,19 @@ export default function App() {
               {t.hero.eyebrow}
             </p>
 
-            <h1>
-              {t.hero.title1}
-              <br />
-              <em>{t.hero.titleEm}</em>
-              <br />
-              {t.hero.title2}
-            </h1>
+            <div className="hero-title-wrap">
+
+              <DnaHelix />
+
+              <h1>
+                {t.hero.title1}
+                <br />
+                <em>{t.hero.titleEm}</em>
+                <br />
+                {t.hero.title2}
+              </h1>
+
+            </div>
 
             <p className="hero-text">
               {t.hero.text}
@@ -176,8 +182,6 @@ export default function App() {
               ||| || |||| | ||| || ||||
             </div>
           </div>
-
-          <DnaHelix />
         </section>
 
         <section
