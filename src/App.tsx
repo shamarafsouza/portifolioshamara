@@ -97,23 +97,20 @@ export default function App() {
           </div>
 
           <div className="hero-copy">
+
+            <DnaHelix />
+
             <p className="eyebrow">
               {t.hero.eyebrow}
             </p>
 
-            <div className="hero-title-wrap">
-
-              <DnaHelix />
-
-              <h1>
-                {t.hero.title1}
-                <br />
-                <em>{t.hero.titleEm}</em>
-                <br />
-                {t.hero.title2}
-              </h1>
-
-            </div>
+            <h1>
+              {t.hero.title1}
+              <br />
+              <em>{t.hero.titleEm}</em>
+              <br />
+              {t.hero.title2}
+            </h1>
 
             <p className="hero-text">
               {t.hero.text}
