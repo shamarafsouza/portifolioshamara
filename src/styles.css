@@ -529,63 +529,123 @@ main {
 }
 
 /* TICKER — TECNOLOGIAS */
+
 .ticker {
     width: 100%;
-    display: block;
     overflow: hidden;
-    border-top: 1px solid rgba(255, 138, 61, .65);
-    border-bottom: 1px solid rgba(255, 138, 61, .65);
+    position: relative;
+
+    /* laranja apenas como detalhe, sem brigar com o roxo */
+    border-top: 1px solid rgba(255, 138, 61, .28);
+    border-bottom: 1px solid rgba(255, 138, 61, .28);
+
     background:
         linear-gradient(
             90deg,
-            #160b06 0%,
-            #241008 45%,
-            #160b06 100%
+            rgba(7, 5, 13, .96) 0%,
+            rgba(24, 11, 28, .96) 50%,
+            rgba(7, 5, 13, .96) 100%
         );
+
     box-shadow:
-        inset 0 0 28px rgba(255, 138, 61, .08),
-        0 0 22px rgba(255, 138, 61, .07);
-    color: #fff4ec;
+        inset 0 1px 0 rgba(255, 138, 61, .05),
+        inset 0 -1px 0 rgba(139, 44, 255, .12),
+        0 0 28px rgba(139, 44, 255, .08);
+
+    color: var(--paper);
+}
+
+.ticker::before,
+.ticker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(35px, 8vw, 120px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ticker::before {
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        var(--ink),
+        transparent
+    );
+}
+
+.ticker::after {
+    right: 0;
+    background: linear-gradient(
+        270deg,
+        var(--ink),
+        transparent
+    );
 }
 
 .ticker-track {
-    width: max-content;
-    min-width: 100%;
-    margin: 0;
-    padding: 12px clamp(14px, 2.5vw, 32px);
     display: flex;
-    align-items: stretch;
-    gap: clamp(7px, 1vw, 14px);
+    align-items: center;
+
+    width: max-content;
+    min-width: max-content;
+
+    padding: 10px clamp(14px, 2.5vw, 32px);
+
+    gap: clamp(8px, 1vw, 14px);
+
     will-change: transform;
-    animation: ticker-scroll 28s linear infinite;
+    animation: ticker-scroll 30s linear infinite;
 }
 
 @keyframes ticker-scroll {
     from {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 }
 
 .tech-item {
-    min-width: 0;
-    min-height: 56px;
+    flex: 0 0 clamp(125px, 11vw, 170px);
+
+    min-height: 54px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     gap: 9px;
-    padding: 8px 10px;
-    border: 1px solid rgba(255, 138, 61, .42);
+    padding: 8px 12px;
+
+    border: 1px solid rgba(168, 92, 255, .20);
     border-radius: 2px;
-    background: rgba(255, 138, 61, .055);
-    color: #fff4ec;
-    font: 500 clamp(9px, .72vw, 12px) 'DM Mono', monospace;
+
+    /*
+       Mantém o roxo predominante.
+       O laranja aparece só como reflexo.
+    */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 44, 255, .045),
+            rgba(255, 138, 61, .025)
+        );
+
+    color: var(--paper);
+
+    font:
+        500 clamp(9px, .72vw, 12px)
+        'DM Mono',
+        monospace;
+
     letter-spacing: .045em;
     text-transform: uppercase;
     white-space: nowrap;
+
     transition:
         border-color .2s ease,
         background .2s ease,
@@ -594,38 +654,60 @@ main {
 }
 
 .tech-item:hover {
-    border-color: var(--orange);
-    background: rgba(255, 138, 61, .12);
+    border-color: rgba(255, 138, 61, .55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 44, 255, .09),
+            rgba(255, 138, 61, .07)
+        );
+
     transform: translateY(-2px);
-    box-shadow: 0 0 18px rgba(255, 138, 61, .14);
+
+    box-shadow:
+        0 0 18px rgba(139, 44, 255, .12),
+        0 0 18px rgba(255, 138, 61, .06);
 }
 
 .tech-icon {
     width: 28px;
     height: 28px;
+
     flex: 0 0 28px;
+
     display: grid;
     place-items: center;
+
     position: relative;
-    color: var(--orange);
 }
 
 .tech-icon img {
     width: 100%;
     height: 100%;
+
     object-fit: contain;
     display: block;
 }
 
 .tech-icon-fallback {
     display: none;
+
     width: 28px;
     height: 28px;
+
     place-items: center;
-    border: 1px solid rgba(255, 138, 61, .7);
-    color: var(--orange-light);
-    background: rgba(255, 138, 61, .08);
-    font: 700 9px 'DM Mono', monospace;
+
+    border: 1px solid rgba(168, 92, 255, .35);
+
+    color: var(--purple-light);
+
+    background: rgba(139, 44, 255, .06);
+
+    font:
+        700 9px
+        'DM Mono',
+        monospace;
 }
 
 .tech-icon-fallback.visible {
@@ -634,28 +716,37 @@ main {
 
 .tech-name {
     min-width: 0;
+
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* notebooks / telas médias */
 @media (max-width: 1250px) {
-    .ticker-track {
-        gap: 10px;
-        animation-duration: 24s;
-    }
-}
 
-@media (max-width: 720px) {
     .ticker-track {
-        padding: 10px 14px;
-        gap: 7px;
-        animation-duration: 20s;
+        animation-duration: 27s;
     }
 
     .tech-item {
+        flex-basis: 140px;
+    }
+}
+
+/* celular */
+@media (max-width: 720px) {
+
+    .ticker-track {
+        padding: 8px 12px;
+        gap: 8px;
+        animation-duration: 22s;
+    }
+
+    .tech-item {
+        flex-basis: 122px;
         min-height: 48px;
-        justify-content: flex-start;
         padding: 7px 9px;
+        gap: 7px;
     }
 
     .tech-icon {
@@ -667,6 +758,13 @@ main {
     .tech-icon-fallback {
         width: 24px;
         height: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ticker-track {
+        animation: none;
     }
 }
 
