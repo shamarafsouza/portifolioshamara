@@ -1470,12 +1470,16 @@ footer {
         display: none;
     }
 
-    .hero {
-        min-height: 0;
-        padding: 75px 24px;
-        grid-template-columns: 1fr;
-        gap: 38px;
-    }
+  .hero {
+    min-height: 0;
+    padding: 75px 24px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "copy"
+        "image"
+        "card";
+    gap: 38px;
+   }    
 
     .hero::before {
         right: -15%;
