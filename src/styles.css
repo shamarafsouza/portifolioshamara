@@ -16,6 +16,10 @@
     --purple-light: #b66cff;
     --purple-dark: #5b16b8;
     --purple-glow: rgba(139, 44, 255, .45);
+
+    --orange: #ff8a3d;
+    --orange-light: #ffad66;
+    --orange-glow: rgba(255, 138, 61, .35);
 }
 
 * {
@@ -416,6 +420,7 @@ main {
         16px 16px 0 rgba(217, 70, 239, .12),
         0 0 45px rgba(139, 44, 255, .16),
         inset 0 0 35px rgba(139, 44, 255, .025);
+    overflow: hidden;
 }
 
 .identity-card:before,
@@ -520,13 +525,11 @@ main {
 
 /* SCANNER DO CARTÃO */
 
-/* SCANNER DO CARTÃO */
-
 .scan {
     position: absolute;
     left: 0;
     right: 0;
-    top: 55px;
+    top: 0;
 
     height: 3px;
 
@@ -534,30 +537,29 @@ main {
         90deg,
         transparent 0%,
         rgba(255, 138, 61, .15) 8%,
-        var(--orange) 20%,
+        var(--orange) 22%,
         #ffd8bd 50%,
-        var(--orange) 80%,
+        var(--orange) 78%,
         rgba(255, 138, 61, .15) 92%,
         transparent 100%
     );
 
     box-shadow:
-        0 0 6px var(--orange),
-        0 0 14px var(--orange),
-        0 0 28px var(--orange-glow);
+        0 0 7px var(--orange),
+        0 0 16px var(--orange),
+        0 0 30px var(--orange-glow);
 
-    opacity: .95;
+    opacity: .15;
     pointer-events: none;
+    z-index: 50;
 
-    z-index: 20;
-
-    animation: scan 3.2s cubic-bezier(.45, 0, .55, 1) infinite;
+    animation: identity-card-scan 3.2s ease-in-out infinite;
 }
 
-@keyframes scan {
+@keyframes identity-card-scan {
     0% {
-        transform: translateY(0);
-        opacity: .2;
+        transform: translateY(-2px);
+        opacity: .15;
     }
 
     10% {
@@ -565,17 +567,17 @@ main {
     }
 
     50% {
-        transform: translateY(300px);
+        transform: translateY(500px);
         opacity: 1;
     }
 
     90% {
-        opacity: .9;
+        opacity: .85;
     }
 
     100% {
-        transform: translateY(0);
-        opacity: .2;
+        transform: translateY(-2px);
+        opacity: .15;
     }
 }
 
@@ -1199,60 +1201,9 @@ footer {
 }
 
 .identity-card::after {
-    border-color: var(--orange);
     box-shadow:
-        0 0 8px var(--orange),
-        0 0 18px var(--orange-glow);
-}
-
-/* SCANNER DO CARTÃO */
-
-.scan {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 2px;
-    top: 55px;
-
-    background: linear-gradient(
-        90deg,
-        transparent,
-        var(--orange) 12%,
-        #ffd0ad 50%,
-        var(--orange) 88%,
-        transparent
-    );
-
-    box-shadow:
-        0 0 8px var(--orange),
-        0 0 18px var(--orange),
-        0 0 30px var(--orange-glow);
-
-    opacity: .95;
-
-    animation: scan 3.6s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes scan {
-    0%,
-    100% {
-        transform: translateY(0);
-        opacity: .35;
-    }
-
-    12% {
-        opacity: .95;
-    }
-
-    50% {
-        transform: translateY(220px);
-        opacity: 1;
-    }
-
-    88% {
-        opacity: .95;
-    }
+        0 0 8px var(--purple),
+        0 0 18px rgba(139, 44, 255, .3);
 }
 
 /* MOBILE */
