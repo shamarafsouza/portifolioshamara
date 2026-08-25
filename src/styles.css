@@ -520,51 +520,62 @@ main {
 
 /* SCANNER DO CARTÃO */
 
+/* SCANNER DO CARTÃO */
+
 .scan {
     position: absolute;
     left: 0;
     right: 0;
-    height: 2px;
     top: 55px;
+
+    height: 3px;
 
     background: linear-gradient(
         90deg,
-        transparent,
-        var(--orange) 12%,
-        #ffd0ad 50%,
-        var(--orange) 88%,
-        transparent
+        transparent 0%,
+        rgba(255, 138, 61, .15) 8%,
+        var(--orange) 20%,
+        #ffd8bd 50%,
+        var(--orange) 80%,
+        rgba(255, 138, 61, .15) 92%,
+        transparent 100%
     );
 
     box-shadow:
-        0 0 8px var(--orange),
-        0 0 18px var(--orange),
-        0 0 30px var(--orange-glow);
+        0 0 6px var(--orange),
+        0 0 14px var(--orange),
+        0 0 28px var(--orange-glow);
 
     opacity: .95;
-
-    animation: scan 3.6s ease-in-out infinite;
     pointer-events: none;
+
+    z-index: 20;
+
+    animation: scan 3.2s cubic-bezier(.45, 0, .55, 1) infinite;
 }
 
 @keyframes scan {
-    0%,
-    100% {
+    0% {
         transform: translateY(0);
-        opacity: .35;
+        opacity: .2;
     }
 
-    12% {
-        opacity: .95;
-    }
-
-    50% {
-        transform: translateY(220px);
+    10% {
         opacity: 1;
     }
 
-    88% {
-        opacity: .95;
+    50% {
+        transform: translateY(300px);
+        opacity: 1;
+    }
+
+    90% {
+        opacity: .9;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: .2;
     }
 }
 
