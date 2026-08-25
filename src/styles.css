@@ -69,7 +69,8 @@ header {
 }
 
 .brand span {
-    color: var(--pink);
+    color: var(--orange);
+    text-shadow: 0 0 12px var(--orange-glow);
 }
 
 .system-status {
@@ -85,8 +86,8 @@ header {
     height: 7px;
     margin-right: 7px;
     border-radius: 50%;
-    background: var(--acid);
-    box-shadow: 0 0 12px var(--acid);
+    background: var(--orange);
+    box-shadow: 0 0 12px var(--orange-glow);
 }
 
 nav {
@@ -292,9 +293,10 @@ main {
     position: absolute;
     top: -38px;
     left: 0;
-    color: rgba(168, 92, 255, .65);
+    color: rgba(255, 138, 61, .72);
     font: 10px 'DM Mono', monospace;
     letter-spacing: .12em;
+    text-shadow: 0 0 10px rgba(255, 138, 61, .12);
 }
 
 .hero-copy::after {
@@ -435,7 +437,11 @@ main {
 .identity-card:after {
     right: -5px;
     bottom: -5px;
+    border-color: var(--orange);
     border-width: 0 2px 2px 0;
+    box-shadow:
+        0 0 8px var(--orange),
+        0 0 18px var(--orange-glow);
 }
 
 .identity-card > p {
@@ -509,6 +515,7 @@ main {
     font: 11px 'DM Mono', monospace;
     letter-spacing: 3px;
     color: var(--paper);
+    text-shadow: 0 0 8px rgba(255, 138, 61, .18);
 }
 
 .scan {
@@ -517,9 +524,9 @@ main {
     right: 0;
     height: 2px;
     top: 55px;
-    background: var(--acid);
-    box-shadow: 0 0 15px var(--acid);
-    opacity: .8;
+    background: var(--orange);
+    box-shadow: 0 0 15px var(--orange);
+    opacity: .82;
     animation: scan 4s ease-in-out infinite;
 }
 
@@ -671,9 +678,9 @@ main {
 }
 
 .tags span:hover {
-    border-color: var(--purple);
-    color: var(--purple-light);
-    box-shadow: 0 0 12px rgba(139, 44, 255, .15);
+    border-color: var(--orange);
+    color: var(--orange-light);
+    box-shadow: 0 0 12px var(--orange-glow);
 }
 
 .project-links {
@@ -689,7 +696,8 @@ main {
 }
 
 .project-links a:hover {
-    color: var(--mint);
+    color: var(--orange-light);
+    text-shadow: 0 0 10px var(--orange-glow);
 }
 
 /* ABOUT */
@@ -754,8 +762,9 @@ main {
 }
 
 .game-trigger span {
-    color: var(--pink);
+    color: var(--orange);
     margin-right: 7px;
+    text-shadow: 0 0 10px var(--orange-glow);
 }
 
 .game-trigger:hover {
@@ -810,8 +819,8 @@ main {
 }
 
 .contact-links a:hover {
-    color: var(--mint);
-    text-shadow: 0 0 15px rgba(139, 44, 255, .3);
+    color: var(--orange-light);
+    text-shadow: 0 0 15px var(--orange-glow);
 }
 
 .contact-links b {
@@ -991,9 +1000,10 @@ footer {
 }
 
 .lang-toggle:hover {
-    background: var(--mint);
+    background: var(--orange);
     color: var(--ink);
-    box-shadow: 0 0 20px rgba(139, 44, 255, .25);
+    border-color: var(--orange);
+    box-shadow: 0 0 20px var(--orange-glow);
 }
 
 /* FOG */
