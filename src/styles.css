@@ -112,21 +112,33 @@ main {
 
 /* HERO */
 
- .hero {
+.hero {
     position: relative;
     z-index: 0;
-    min-height: max(680px, calc(100vh - 76px));
-    padding: clamp(64px, 7vw, 100px) clamp(24px, 6vw, 92px);
+    min-height: 680px;
+    padding: 80px clamp(24px, 8vw, 120px);
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .82fr) minmax(270px, .72fr);
-    gap: clamp(28px, 4vw, 64px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .72fr) minmax(280px, .7fr);
+    gap: clamp(24px, 3.5vw, 58px);
     align-items: center;
     overflow: hidden;
 
     background:
-        radial-gradient(circle at 76% 42%, rgba(139, 44, 255, .18), transparent 28%),
-        radial-gradient(circle at 20% 60%, rgba(91, 22, 184, .12), transparent 32%),
-        linear-gradient(130deg, #07050d 45%, #100a19);
+        radial-gradient(
+            circle at 75% 40%,
+            rgba(139, 44, 255, .18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 60%,
+            rgba(91, 22, 184, .12),
+            transparent 32%
+        ),
+        linear-gradient(
+            130deg,
+            #07050d 45%,
+            #100a19
+        );
 }
 
 /* GRANDE SÍMBOLO ROXO */
@@ -216,7 +228,7 @@ main {
     filter:
         drop-shadow(0 0 22px rgba(139, 44, 255, .18))
         drop-shadow(0 0 45px rgba(139, 44, 255, .10));
-    animation: none;
+    animation: clones-float 6s ease-in-out infinite;
 }
 
 @keyframes clones-float {
@@ -510,95 +522,87 @@ main {
     }
 }
 
-/* TICKER */
+/* TICKER — TECNOLOGIAS FIXAS */
 
 .ticker {
-    display: flex;
+    width: 100%;
+    display: block;
     overflow: hidden;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--acid);
+    border-top: 1px solid rgba(168, 92, 255, .28);
+    border-bottom: 1px solid rgba(168, 92, 255, .28);
+    background:
+        linear-gradient(
+            90deg,
+            rgba(139, 44, 255, .96),
+            rgba(168, 92, 255, .96),
+            rgba(139, 44, 255, .96)
+        );
     color: var(--ink);
 }
 
 .ticker-track {
+    width: min(100%, 1500px);
+    margin: 0 auto;
+    padding: 10px clamp(12px, 2vw, 28px);
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    align-items: center;
+    gap: clamp(6px, 1vw, 16px);
+}
+
+.tech-item {
+    min-width: 0;
+    min-height: 52px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid rgba(7, 5, 13, .24);
+    background: rgba(7, 5, 13, .10);
+    color: var(--ink);
+    font: 500 clamp(9px, .72vw, 12px) 'DM Mono', monospace;
+    letter-spacing: .05em;
+    text-transform: uppercase;
     white-space: nowrap;
-    animation: ticker-scroll 24s linear infinite;
+    transition: .2s ease;
 }
 
-.ticker:hover .ticker-track {
-    animation-play-state: paused;
+.tech-item:hover {
+    background: rgba(7, 5, 13, .18);
+    transform: translateY(-2px);
 }
 
-.ticker-track span {
-    padding: 14px 30px;
-    font: 500 12px 'DM Mono', monospace;
-    letter-spacing: .12em;
+.tech-item img {
+    width: clamp(18px, 1.6vw, 28px);
+    height: clamp(18px, 1.6vw, 28px);
+    flex: 0 0 auto;
+    object-fit: contain;
+    display: block;
 }
 
-.ticker-track span:after {
-    content: '✦';
-    margin-left: 30px;
-    color: var(--pink);
+.tech-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-@keyframes ticker-scroll {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media (max-width: 1100px) {
     .ticker-track {
-        animation: none;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 }
 
-/* LOGOS DAS LINGUAGENS — IMAGENS ESTÁTICAS */
-.hud-chip {
-    gap: 7px;
-}
+@media (max-width: 620px) {
+    .ticker-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 10px 14px;
+    }
 
-.hud-chip::before {
-    content: '';
-    width: 17px;
-    height: 17px;
-    flex: 0 0 17px;
-    display: inline-block;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-}
-
-.chip-js::before { background-image: url('https://cdn.simpleicons.org/javascript/F7DF1E'); }
-.chip-ts::before { background-image: url('https://cdn.simpleicons.org/typescript/3178C6'); }
-.chip-csharp::before { background-image: url('https://cdn.simpleicons.org/csharp/512BD4'); }
-.chip-python::before { background-image: url('https://cdn.simpleicons.org/python/3776AB'); }
-.chip-php::before { background-image: url('https://cdn.simpleicons.org/php/777BB4'); }
-.chip-dart::before { background-image: url('https://cdn.simpleicons.org/dart/0175C2'); }
-.chip-html::before { background-image: url('https://cdn.simpleicons.org/html5/E34F26'); }
-.chip-css::before { background-image: url('https://cdn.simpleicons.org/css3/1572B6'); }
-
-.chip-react::before { background-image: url('https://cdn.simpleicons.org/react/61DAFB'); }
-.chip-node::before { background-image: url('https://cdn.simpleicons.org/nodedotjs/5FA04E'); }
-.chip-dotnet::before { background-image: url('https://cdn.simpleicons.org/dotnet/512BD4'); }
-.chip-asp::before { background-image: url('https://cdn.simpleicons.org/dotnet/512BD4'); }
-.chip-flutter::before { background-image: url('https://cdn.simpleicons.org/flutter/02569B'); }
-.chip-wordpress::before { background-image: url('https://cdn.simpleicons.org/wordpress/21759B'); }
-.chip-mysql::before { background-image: url('https://cdn.simpleicons.org/mysql/4479A1'); }
-.chip-git::before { background-image: url('https://cdn.simpleicons.org/git/F05032'); }
-.chip-github::before { background-image: url('https://cdn.simpleicons.org/github/FFFFFF'); }
-.chip-api::before { background-image: url('https://cdn.simpleicons.org/openapiinitiative/6BA539'); }
-
-/* A FAIXA DE TECNOLOGIAS É FIXA — SEM ROLAGEM */
-.ticker-track {
-    animation: none !important;
-    transform: none !important;
+    .tech-item {
+        justify-content: flex-start;
+        min-height: 46px;
+        padding: 7px 9px;
+    }
 }
 
 /* PROJECTS */
@@ -1185,149 +1189,121 @@ footer {
         0 0 18px rgba(139, 44, 255, .3);
 }
 
-/* MOBILE */
+
+/* HERO RESPONSIVO — não deixa a composição estourar em notebooks */
+
+.hero {
+    width: 100%;
+}
+
+.hero-copy,
+.shamara-clones,
+.identity-card {
+    min-width: 0;
+}
 
 @media (max-width: 1200px) {
     .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr);
-        gap: 44px;
+        grid-template-columns:
+            minmax(0, 1.05fr)
+            minmax(240px, .72fr)
+            minmax(250px, .72fr);
+        gap: clamp(18px, 2.5vw, 38px);
         padding-left: clamp(28px, 5vw, 70px);
         padding-right: clamp(28px, 5vw, 70px);
     }
 
-    .shamara-clones {
-        grid-column: 2;
-        grid-row: 1;
-        width: min(100%, 390px);
-        justify-self: center;
+    .hero h1 {
+        font-size: clamp(50px, 6.4vw, 86px);
     }
 
-    .hero-copy {
-        grid-column: 1;
-        grid-row: 1;
+    .hero-text {
+        max-width: 430px;
+        font-size: clamp(15px, 1.35vw, 18px);
+    }
+
+    .shamara-clones {
+        width: min(100%, 360px);
     }
 
     .identity-card {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        justify-self: center;
-        width: min(350px, 100%);
-    }
-
-    .hero-hud-left,
-    .hero-hud-right {
-        opacity: .28;
-    }
-
-    .hero-hud-left {
-        left: 14px;
-        width: 200px;
-    }
-
-    .hero-hud-right {
-        right: 14px;
-        width: 230px;
+        width: min(310px, 100%);
     }
 }
 
 @media (max-width: 900px) {
     header {
-        padding: 0 24px;
-    }
-
-    .system-status {
-        display: none;
-    }
-
-    nav {
-        gap: 16px;
+        padding-left: 28px;
+        padding-right: 28px;
     }
 
     .hero {
         min-height: auto;
-        padding-top: 85px;
-        padding-bottom: 90px;
-        grid-template-columns: 1fr;
-        gap: 45px;
+        grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr);
+        grid-template-areas:
+            "copy image"
+            "card image";
+        align-items: center;
+        padding: 70px clamp(28px, 5vw, 55px) 80px;
+        gap: 34px;
     }
 
     .hero-copy {
-        grid-column: 1;
-        grid-row: auto;
-        max-width: 720px;
+        grid-area: copy;
     }
 
     .shamara-clones {
-        grid-column: 1;
-        grid-row: auto;
-        width: min(100%, 500px);
+        grid-area: image;
+        width: min(100%, 390px);
     }
 
     .identity-card {
-        grid-column: 1;
-        grid-row: auto;
-        justify-self: center;
-    }
-
-    .hero-hud {
-        opacity: .20;
-    }
-
-    .hero-hud-left {
-        left: 12px;
-        top: 32px;
-        width: 175px;
-    }
-
-    .hero-hud-right {
-        right: 12px;
-        top: 32px;
-        width: 190px;
-    }
-
-    .hud-bottom {
-        left: 8%;
-        right: 8%;
+        grid-area: card;
+        justify-self: start;
+        width: min(330px, 100%);
     }
 
     .hero h1 {
-        font-size: clamp(58px, 9vw, 88px);
+        font-size: clamp(48px, 7.4vw, 72px);
     }
 
-    .dna-helix {
-        right: 8px;
+    .hero-text {
+        max-width: 520px;
+    }
+
+    .hero-copy .dna-helix {
+        right: -10px;
         width: 48px;
-        opacity: .35;
-    }
-
-    .projects,
-    .about,
-    .contact {
-        padding-left: clamp(24px, 6vw, 70px);
-        padding-right: clamp(24px, 6vw, 70px);
     }
 }
 
+/* MOBILE */
+
 @media (max-width: 720px) {
+
     header {
         height: auto;
         min-height: 65px;
         padding: 15px 20px;
     }
 
+    .system-status,
     nav {
         display: none;
     }
 
     .hero {
         min-height: 0;
-        padding: 75px 24px 80px;
+        padding: 75px 24px;
         grid-template-columns: 1fr;
         gap: 38px;
     }
 
     .hero::before {
-        display: none;
+        right: -15%;
+        top: 30%;
+        font-size: 300px;
+        opacity: .45;
     }
 
     .hero::after {
@@ -1341,15 +1317,6 @@ footer {
         top: -32px;
     }
 
-    .hero-copy .dna-helix {
-        width: 105px;
-        height: 390px;
-        left: -58px;
-        right: auto;
-        top: -48px;
-        opacity: .38;
-    }
-
     .shamara-clones {
         width: min(100%, 430px);
         max-height: none;
@@ -1357,12 +1324,15 @@ footer {
     }
 
     .purple-symbol {
-        display: none;
+        right: 50%;
+        top: 48%;
+        font-size: 260px;
+        opacity: .35;
     }
 
     .identity-card {
-        justify-self: center;
-        width: min(350px, 100%);
+        justify-self: start;
+        width: min(350px, 92%);
     }
 
     .hero h1 {
@@ -1371,14 +1341,6 @@ footer {
 
     .hero-text {
         font-size: 16px;
-    }
-
-    .hero-actions {
-        align-items: stretch;
-    }
-
-    .button {
-        flex: 1 1 auto;
     }
 
     .intro-boot {
@@ -1470,33 +1432,10 @@ footer {
         display: none;
     }
 
-    .hero-hud {
-        display: none;
+    .sheep-mark {
+        width: 190px;
+        height: 190px;
+        left: -35px;
+        bottom: -30px;
     }
-
-    .hud-bottom {
-        display: none;
-    }
-
-    .ticker-track {
-        justify-content: flex-start;
-        overflow: hidden;
-    }
-
-    .ticker-track span {
-        padding: 12px 16px;
-        font-size: 10px;
-    }
-
-    .ticker-track span::after {
-        margin-left: 16px;
-    }
-}
-
-/* GARANTIA: A FAIXA DE TECNOLOGIAS NUNCA SE MOVE */
-.ticker-track,
-.ticker-track:hover,
-.ticker:hover .ticker-track {
-    animation: none !important;
-    transform: none !important;
 }
