@@ -132,14 +132,11 @@ export default function App() {
             </div>
           </div>
 
-          {/* IMAGEM DAS VERSÕES DA SHAMARA */}
-          <div className="shamara-clones-wrapper">
-            <img
-              className="shamara-clones"
-              src="/shamara-clones.png"
-              alt="Shamara Souza em múltiplas versões"
-            />
-          </div>
+          <img
+            className="shamara-clones"
+            src="/shamara-clones.png"
+            alt="Shamara Souza em múltiplas versões"
+          />
 
           <div className="identity-card">
             <div className="scan" />
