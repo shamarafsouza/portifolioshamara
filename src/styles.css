@@ -48,6 +48,8 @@ a {
     text-decoration: none;
 }
 
+/* HEADER */
+
 header {
     height: 76px;
     display: flex;
@@ -141,26 +143,10 @@ main {
         );
 }
 
-/* GRANDE SÍMBOLO ROXO */
+/* SÍMBOLO ROXO DE FUNDO */
 
 .hero::before {
-    content: '✦';
-    position: absolute;
-    right: 7%;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(280px, 32vw, 560px);
-    font-weight: 700;
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
-    text-shadow:
-        0 0 25px rgba(139, 44, 255, .18),
-        0 0 70px rgba(139, 44, 255, .12);
-    pointer-events: none;
-    z-index: 0;
-    opacity: .75;
+    display: none;
 }
 
 /* CÍRCULO HUD AO REDOR DO SÍMBOLO */
@@ -182,38 +168,13 @@ main {
     z-index: 0;
 }
 
-.hero::before {
+/* SÍMBOLO ANTIGO */
+
+.purple-symbol {
     display: none;
 }
 
-/* SÍMBOLO ROXO ANIMADO */
-.purple-symbol {
-    position: absolute;
-    right: 24%;
-    top: 50%;
-    transform: translate(50%, -50%);
-    font-size: clamp(180px, 20vw, 340px);
-    line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
-    text-shadow:
-        0 0 25px rgba(139, 44, 255, .18),
-        0 0 70px rgba(139, 44, 255, .12);
-    pointer-events: none;
-    z-index: 0;
-    opacity: .65;
-    animation: purple-symbol-spin 18s linear infinite;
-}
-
-@keyframes purple-symbol-spin {
-    from {
-        transform: translate(50%, -50%) rotate(0deg);
-    }
-
-    to {
-        transform: translate(50%, -50%) rotate(360deg);
-    }
-}
+/* FOTOGRAFIA DAS VERSÕES DA SHAMARA */
 
 .shamara-clones {
     position: relative;
@@ -241,10 +202,59 @@ main {
     }
 }
 
+/* REDUÇÃO DE ANIMAÇÕES */
+
 @media (prefers-reduced-motion: reduce) {
     .purple-symbol,
-    .shamara-clones {
+    .shamara-clones,
+    .hero-title-wrap .dna-helix {
         animation: none;
+    }
+}
+
+/* TÍTULO + HÉLICE */
+
+.hero-title-wrap {
+    display: grid;
+    grid-template-columns: clamp(72px, 7vw, 110px) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(14px, 2vw, 28px);
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* HÉLICE GRANDE AO LADO DO TÍTULO */
+
+.hero-title-wrap .dna-helix {
+    position: relative;
+    top: auto;
+    right: auto;
+
+    width: 100%;
+    height: clamp(390px, 42vw, 500px);
+
+    opacity: .72;
+    pointer-events: none;
+    z-index: 2;
+
+    transform-origin: center center;
+
+    filter:
+        drop-shadow(0 0 8px rgba(139, 44, 255, .65))
+        drop-shadow(0 0 22px rgba(139, 44, 255, .35))
+        drop-shadow(0 0 45px rgba(139, 44, 255, .16));
+
+    animation: dna-helix-spin 18s linear infinite;
+}
+
+@keyframes dna-helix-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
     }
 }
 
@@ -323,6 +333,8 @@ main {
     gap: 10px;
 }
 
+/* REVEAL */
+
 .reveal {
     opacity: 0;
     transform: translateY(36px) scale(.97);
@@ -359,6 +371,8 @@ main {
         transition: none;
     }
 }
+
+/* BUTTONS */
 
 .button {
     border: 1px solid var(--line);
@@ -963,21 +977,12 @@ footer {
     }
 }
 
-/* DNA */
+/* DNA
+   A posição padrão agora é controlada pelo .hero-title-wrap.
+   Mantemos apenas uma regra de segurança para outros usos. */
 
 .dna-helix {
-    position: absolute;
-    right: clamp(10px, 4vw, 60px);
-    top: 0;
-    height: 100%;
-    width: 60px;
-    opacity: .5;
     pointer-events: none;
-    z-index: 1;
-
-    filter:
-        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
-        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
 }
 
 /* LANGUAGE */
@@ -1178,10 +1183,7 @@ footer {
     }
 
     .hero::before {
-        right: -15%;
-        top: 30%;
-        font-size: 300px;
-        opacity: .45;
+        display: none;
     }
 
     .hero::after {
@@ -1195,6 +1197,19 @@ footer {
         top: -32px;
     }
 
+    /* TÍTULO NO CELULAR */
+
+    .hero-title-wrap {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    /* A HÉLICE FICA OCULTA NO CELULAR */
+
+    .hero-title-wrap .dna-helix {
+        display: none;
+    }
+
     .shamara-clones {
         width: min(100%, 430px);
         max-height: none;
@@ -1202,10 +1217,7 @@ footer {
     }
 
     .purple-symbol {
-        right: 50%;
-        top: 48%;
-        font-size: 260px;
-        opacity: .35;
+        display: none;
     }
 
     .identity-card {
@@ -1304,10 +1316,6 @@ footer {
 
     .game-panel canvas {
         margin-top: 26px;
-    }
-
-    .dna-helix {
-        display: none;
     }
 
     .sheep-mark {
