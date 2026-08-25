@@ -16,6 +16,10 @@
     --purple-light: #b66cff;
     --purple-dark: #5b16b8;
     --purple-glow: rgba(139, 44, 255, .45);
+
+    --orange: #ff8a3d;
+    --orange-light: #ffb27a;
+    --orange-glow: rgba(255, 138, 61, .35);
 }
 
 * {
@@ -522,86 +526,132 @@ main {
     }
 }
 
-/* TICKER — TECNOLOGIAS FIXAS */
-
+/* TICKER — TECNOLOGIAS */
 .ticker {
     width: 100%;
     display: block;
     overflow: hidden;
-    border-top: 1px solid rgba(168, 92, 255, .28);
-    border-bottom: 1px solid rgba(168, 92, 255, .28);
+    border-top: 1px solid rgba(255, 138, 61, .65);
+    border-bottom: 1px solid rgba(255, 138, 61, .65);
     background:
         linear-gradient(
             90deg,
-            rgba(139, 44, 255, .96),
-            rgba(168, 92, 255, .96),
-            rgba(139, 44, 255, .96)
+            #160b06 0%,
+            #241008 45%,
+            #160b06 100%
         );
-    color: var(--ink);
+    box-shadow:
+        inset 0 0 28px rgba(255, 138, 61, .08),
+        0 0 22px rgba(255, 138, 61, .07);
+    color: #fff4ec;
 }
 
 .ticker-track {
-    width: min(100%, 1500px);
+    width: min(100%, 1540px);
     margin: 0 auto;
-    padding: 10px clamp(12px, 2vw, 28px);
+    padding: 12px clamp(14px, 2.5vw, 32px);
     display: grid;
     grid-template-columns: repeat(10, minmax(0, 1fr));
-    align-items: center;
-    gap: clamp(6px, 1vw, 16px);
+    align-items: stretch;
+    gap: clamp(7px, 1vw, 14px);
 }
 
 .tech-item {
     min-width: 0;
-    min-height: 52px;
+    min-height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 9px;
     padding: 8px 10px;
-    border: 1px solid rgba(7, 5, 13, .24);
-    background: rgba(7, 5, 13, .10);
-    color: var(--ink);
+    border: 1px solid rgba(255, 138, 61, .42);
+    border-radius: 2px;
+    background: rgba(255, 138, 61, .055);
+    color: #fff4ec;
     font: 500 clamp(9px, .72vw, 12px) 'DM Mono', monospace;
-    letter-spacing: .05em;
+    letter-spacing: .045em;
     text-transform: uppercase;
     white-space: nowrap;
-    transition: .2s ease;
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 .tech-item:hover {
-    background: rgba(7, 5, 13, .18);
+    border-color: var(--orange);
+    background: rgba(255, 138, 61, .12);
     transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255, 138, 61, .14);
 }
 
-.tech-item img {
-    width: clamp(18px, 1.6vw, 28px);
-    height: clamp(18px, 1.6vw, 28px);
-    flex: 0 0 auto;
+.tech-icon {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    display: grid;
+    place-items: center;
+    position: relative;
+    color: var(--orange);
+}
+
+.tech-icon img {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
     display: block;
 }
 
-.tech-item span {
+.tech-icon-fallback {
+    display: none;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid rgba(255, 138, 61, .7);
+    color: var(--orange-light);
+    background: rgba(255, 138, 61, .08);
+    font: 700 9px 'DM Mono', monospace;
+}
+
+.tech-icon-fallback.visible {
+    display: grid;
+}
+
+.tech-name {
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1250px) {
     .ticker-track {
         grid-template-columns: repeat(5, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 720px) {
     .ticker-track {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         padding: 10px 14px;
+        gap: 7px;
     }
 
     .tech-item {
+        min-height: 48px;
         justify-content: flex-start;
-        min-height: 46px;
         padding: 7px 9px;
+    }
+
+    .tech-icon {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+    }
+
+    .tech-icon-fallback {
+        width: 24px;
+        height: 24px;
     }
 }
 
