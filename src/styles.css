@@ -118,8 +118,8 @@ main {
     min-height: 680px;
     padding: 80px clamp(24px, 8vw, 120px);
     display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(280px, .7fr);
-    gap: clamp(40px, 6vw, 100px);
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .72fr) minmax(280px, .7fr);
+    gap: clamp(24px, 3.5vw, 58px);
     align-items: center;
     overflow: hidden;
 
@@ -180,6 +180,72 @@ main {
         0 0 45px rgba(139, 44, 255, .12);
     pointer-events: none;
     z-index: 0;
+}
+
+.hero::before {
+    display: none;
+}
+
+/* SÍMBOLO ROXO ANIMADO */
+.purple-symbol {
+    position: absolute;
+    right: 24%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    font-size: clamp(180px, 20vw, 340px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
+    text-shadow:
+        0 0 25px rgba(139, 44, 255, .18),
+        0 0 70px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .65;
+    animation: purple-symbol-spin 18s linear infinite;
+}
+
+@keyframes purple-symbol-spin {
+    from {
+        transform: translate(50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(50%, -50%) rotate(360deg);
+    }
+}
+
+.shamara-clones {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 420px);
+    max-height: 560px;
+    object-fit: contain;
+    object-position: center;
+    justify-self: center;
+    align-self: center;
+    display: block;
+    filter:
+        drop-shadow(0 0 22px rgba(139, 44, 255, .18))
+        drop-shadow(0 0 45px rgba(139, 44, 255, .10));
+    animation: clones-float 6s ease-in-out infinite;
+}
+
+@keyframes clones-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .purple-symbol,
+    .shamara-clones {
+        animation: none;
+    }
 }
 
 .eyebrow {
@@ -1108,7 +1174,7 @@ footer {
         min-height: 0;
         padding: 75px 24px;
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 38px;
     }
 
     .hero::before {
@@ -1127,6 +1193,19 @@ footer {
 
     .hero-copy::before {
         top: -32px;
+    }
+
+    .shamara-clones {
+        width: min(100%, 430px);
+        max-height: none;
+        justify-self: center;
+    }
+
+    .purple-symbol {
+        right: 50%;
+        top: 48%;
+        font-size: 260px;
+        opacity: .35;
     }
 
     .identity-card {
