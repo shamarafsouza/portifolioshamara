@@ -207,36 +207,29 @@ main {
 @media (prefers-reduced-motion: reduce) {
     .purple-symbol,
     .shamara-clones,
-    .hero-title-wrap .dna-helix {
+    .hero-copy .dna-helix {
         animation: none;
     }
 }
 
-/* TÍTULO + HÉLICE */
+/* HÉLICE ATRÁS DO TÍTULO */
 
-.hero-title-wrap {
-    display: grid;
-    grid-template-columns: clamp(72px, 7vw, 110px) minmax(0, 1fr);
-    align-items: center;
-    gap: clamp(14px, 2vw, 28px);
-    width: 100%;
+.hero-copy {
     position: relative;
-    z-index: 2;
+    z-index: 1;
 }
 
-/* HÉLICE GRANDE AO LADO DO TÍTULO */
+.hero-copy .dna-helix {
+    position: absolute;
+    left: -115px;
+    top: -65px;
 
-.hero-title-wrap .dna-helix {
-    position: relative;
-    top: auto;
-    right: auto;
+    width: 155px;
+    height: 520px;
 
-    width: 100%;
-    height: clamp(390px, 42vw, 500px);
-
-    opacity: .72;
+    opacity: .58;
     pointer-events: none;
-    z-index: 2;
+    z-index: -1;
 
     transform-origin: center center;
 
@@ -245,7 +238,7 @@ main {
         drop-shadow(0 0 22px rgba(139, 44, 255, .35))
         drop-shadow(0 0 45px rgba(139, 44, 255, .16));
 
-    animation: dna-helix-spin 18s linear infinite;
+    animation: dna-helix-spin 22s linear infinite;
 }
 
 @keyframes dna-helix-spin {
@@ -977,9 +970,7 @@ footer {
     }
 }
 
-/* DNA
-   A posição padrão agora é controlada pelo .hero-title-wrap.
-   Mantemos apenas uma regra de segurança para outros usos. */
+/* DNA */
 
 .dna-helix {
     pointer-events: none;
@@ -1197,17 +1188,14 @@ footer {
         top: -32px;
     }
 
-    /* TÍTULO NO CELULAR */
+    /* HÉLICE ATRÁS DO TÍTULO NO CELULAR */
 
-    .hero-title-wrap {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    /* A HÉLICE FICA OCULTA NO CELULAR */
-
-    .hero-title-wrap .dna-helix {
-        display: none;
+    .hero-copy .dna-helix {
+        width: 105px;
+        height: 390px;
+        left: -58px;
+        top: -48px;
+        opacity: .38;
     }
 
     .shamara-clones {
