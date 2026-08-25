@@ -6,46 +6,16 @@ import BlackSheepMark from './components/BlackSheepMark'
 import { translations, projectMeta, type Lang } from './translations'
 
 const technologies = [
-  {
-    name: 'React',
-    image: 'https://cdn.simpleicons.org/react/61DAFB'
-  },
-  {
-    name: 'TypeScript',
-    image: 'https://cdn.simpleicons.org/typescript/3178C6'
-  },
-  {
-    name: 'Node.js',
-    image: 'https://cdn.simpleicons.org/nodedotjs/5FA04E'
-  },
-  {
-    name: 'Python',
-    image: 'https://cdn.simpleicons.org/python/3776AB'
-  },
-  {
-    name: 'C#',
-    image: 'https://cdn.simpleicons.org/csharp/512BD4'
-  },
-  {
-    name: '.NET',
-    image: 'https://cdn.simpleicons.org/dotnet/512BD4'
-  },
-  {
-    name: 'HTML5',
-    image: 'https://cdn.simpleicons.org/html5/E34F26'
-  },
-  {
-    name: 'CSS3',
-    image: 'https://cdn.simpleicons.org/css3/1572B6'
-  },
-  {
-    name: 'MySQL',
-    image: 'https://cdn.simpleicons.org/mysql/4479A1'
-  },
-  {
-    name: 'PHP',
-    image: 'https://cdn.simpleicons.org/php/777BB4'
-  }
+  { name: 'React', image: 'https://cdn.simpleicons.org/react/61DAFB', fallback: '⚛' },
+  { name: 'TypeScript', image: 'https://cdn.simpleicons.org/typescript/3178C6', fallback: 'TS' },
+  { name: 'Node.js', image: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', fallback: 'JS' },
+  { name: 'Python', image: 'https://cdn.simpleicons.org/python/3776AB', fallback: 'PY' },
+  { name: 'C#', image: 'https://cdn.simpleicons.org/csharp', fallback: 'C#' },
+  { name: '.NET', image: 'https://cdn.simpleicons.org/dotnet', fallback: '.N' },
+  { name: 'HTML5', image: 'https://cdn.simpleicons.org/html5/E34F26', fallback: '5' },
+  { name: 'CSS3', image: 'https://cdn.simpleicons.org/css3', fallback: '3' },
+  { name: 'MySQL', image: 'https://cdn.simpleicons.org/mysql/4479A1', fallback: 'SQL' },
+  { name: 'PHP', image: 'https://cdn.simpleicons.org/php/777BB4', fallback: 'PHP' }
 ]
 
 export default function App() {
@@ -232,13 +202,21 @@ export default function App() {
                 className="tech-item"
                 key={technology.name}
               >
-                <img
-                  src={technology.image}
-                  alt=""
-                  aria-hidden="true"
-                />
+                <span className="tech-icon" aria-hidden="true">
+                  <img
+                    src={technology.image}
+                    alt=""
+                    onError={event => {
+                      event.currentTarget.style.display = 'none'
+                      event.currentTarget.nextElementSibling?.classList.add('visible')
+                    }}
+                  />
+                  <span className="tech-icon-fallback">
+                    {technology.fallback}
+                  </span>
+                </span>
 
-                <span>
+                <span className="tech-name">
                   {technology.name}
                 </span>
               </div>
