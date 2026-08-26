@@ -1688,26 +1688,30 @@ footer {
 
 
 /* =========================================================
-   TYPING TERMINAL — FUNDO DO HERO
-   Não participa do grid do hero.
+   TERMINAL — PAINEL DE SISTEMA DA SEÇÃO "QUEM SOU EU"
    ========================================================= */
 
-.typing-terminal {
+.about .typing-terminal {
     position: absolute;
 
-    left: clamp(20px, 5vw, 80px);
-    bottom: clamp(35px, 7vh, 80px);
+    left: clamp(20px, 5vw, 90px);
+    bottom: clamp(55px, 9vh, 105px);
 
-    width: clamp(220px, 22vw, 320px);
+    width: clamp(210px, 23vw, 320px);
 
     padding: 0;
 
     border: 1px solid rgba(168, 92, 255, .22);
 
-    background: rgba(7, 5, 13, .24);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(13, 9, 22, .58),
+            rgba(7, 5, 13, .36)
+        );
 
     box-shadow:
-        0 0 25px rgba(139, 44, 255, .07),
+        0 0 25px rgba(139, 44, 255, .06),
         inset 0 0 25px rgba(139, 44, 255, .025);
 
     font-family: 'DM Mono', monospace;
@@ -1715,18 +1719,59 @@ footer {
     pointer-events: none;
 
     z-index: 0;
+
+    overflow: hidden;
 }
 
+/* linha decorativa no topo */
+.about .typing-terminal::before {
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 30px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(168, 92, 255, .28),
+            transparent
+        );
+}
+
+/* brilho lateral discreto */
+.about .typing-terminal::after {
+    content: '';
+
+    position: absolute;
+
+    top: 32px;
+    left: 0;
+
+    width: 2px;
+    height: 55px;
+
+    background: var(--purple);
+
+    box-shadow:
+        0 0 12px rgba(139, 44, 255, .4);
+
+    opacity: .55;
+}
 
 /* cabeçalho */
 .typing-terminal-header {
+    height: 30px;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 9px 11px;
-
-    border-bottom: 1px solid rgba(168, 92, 255, .18);
+    padding: 0 11px;
 
     color: var(--muted);
 
@@ -1737,12 +1782,10 @@ footer {
 /* bolinhas */
 .typing-terminal-dots {
     display: flex;
-    gap: 6px;
+    gap: 5px;
 }
 
 .typing-terminal-dots i {
-    display: block;
-
     width: 5px;
     height: 5px;
 
@@ -1751,19 +1794,21 @@ footer {
     background: var(--purple-light);
 
     box-shadow:
-        0 0 7px rgba(168, 92, 255, .4);
+        0 0 7px rgba(168, 92, 255, .35);
 }
 
-/* corpo */
+/* conteúdo */
 .typing-terminal-body {
-    min-height: 130px;
+    min-height: 118px;
 
-    padding: 15px;
+    padding: 17px 14px 15px;
 
-    color: var(--paper);
+    color: rgba(245, 240, 255, .78);
 
-    font-size: clamp(10px, .72vw, 12px);
+    font-size: 10px;
+
     line-height: 1.8;
+
     letter-spacing: .04em;
 }
 
@@ -1775,7 +1820,8 @@ footer {
 
     color: var(--orange);
 
-    animation: typing-cursor-blink .8s step-end infinite;
+    animation:
+        typing-cursor-blink .8s step-end infinite;
 }
 
 @keyframes typing-cursor-blink {
@@ -1786,53 +1832,48 @@ footer {
 
 /* notebook */
 @media (max-width: 1200px) {
-    .typing-terminal {
-        left: 18px;
-        top: 31%;
+    .about .typing-terminal {
+        left: 30px;
+        bottom: 60px;
 
-        width: 230px;
+        width: 250px;
     }
 }
 
 /* tablet */
 @media (max-width: 900px) {
-    .typing-terminal {
-        left: 14px;
-        top: 27%;
+    .about .typing-terminal {
+        left: 28px;
+        bottom: 35px;
 
-        width: 195px;
+        width: 225px;
 
-        opacity: .65;
+        opacity: .38;
     }
 
     .typing-terminal-body {
-        min-height: 115px;
-        padding: 12px;
-
-        font-size: 10px;
+        min-height: 105px;
     }
 }
 
 /* celular */
 @media (max-width: 720px) {
-    .typing-terminal {
-        left: 12px;
-        top: 18%;
+    .about .typing-terminal {
+        position: relative;
 
-        width: min(195px, 55vw);
+        left: auto;
+        bottom: auto;
 
-        opacity: .32;
-    }
+        width: min(220px, 88%);
 
-    .typing-terminal-header {
-        padding: 7px 9px;
+        margin-top: 30px;
+        margin-left: 0;
 
-        font-size: 7px;
+        opacity: .30;
     }
 
     .typing-terminal-body {
-        min-height: 95px;
-        padding: 10px;
+        min-height: 90px;
 
         font-size: 8px;
     }
@@ -1843,3 +1884,4 @@ footer {
         animation: none;
     }
 }
+
