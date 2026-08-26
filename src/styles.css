@@ -1685,3 +1685,165 @@ footer {
         bottom: -30px;
     }
 }
+
+
+/* =========================================================
+   TYPING TERMINAL — FUNDO DO HERO
+   Não participa do grid do hero.
+   ========================================================= */
+
+.typing-terminal {
+    position: absolute;
+
+    left: clamp(28px, 5vw, 90px);
+    top: 30%;
+
+    width: clamp(220px, 20vw, 320px);
+
+    padding: 0;
+
+    border: 1px solid rgba(168, 92, 255, .22);
+
+    background: rgba(7, 5, 13, .24);
+
+    box-shadow:
+        0 0 25px rgba(139, 44, 255, .07),
+        inset 0 0 25px rgba(139, 44, 255, .025);
+
+    font-family: 'DM Mono', monospace;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+/* impede o terminal de entrar no grid */
+.hero > .typing-terminal {
+    grid-column: 1 / -1;
+}
+
+/* cabeçalho */
+.typing-terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 9px 11px;
+
+    border-bottom: 1px solid rgba(168, 92, 255, .18);
+
+    color: var(--muted);
+
+    font-size: 9px;
+    letter-spacing: .08em;
+}
+
+/* bolinhas */
+.typing-terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.typing-terminal-dots i {
+    display: block;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--purple-light);
+
+    box-shadow:
+        0 0 7px rgba(168, 92, 255, .4);
+}
+
+/* corpo */
+.typing-terminal-body {
+    min-height: 130px;
+
+    padding: 15px;
+
+    color: var(--paper);
+
+    font-size: clamp(10px, .72vw, 12px);
+    line-height: 1.8;
+    letter-spacing: .04em;
+}
+
+/* cursor */
+.typing-cursor {
+    display: inline-block;
+
+    margin-left: 3px;
+
+    color: var(--orange);
+
+    animation: typing-cursor-blink .8s step-end infinite;
+}
+
+@keyframes typing-cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* notebook */
+@media (max-width: 1200px) {
+    .typing-terminal {
+        left: 18px;
+        top: 31%;
+
+        width: 230px;
+    }
+}
+
+/* tablet */
+@media (max-width: 900px) {
+    .typing-terminal {
+        left: 14px;
+        top: 27%;
+
+        width: 195px;
+
+        opacity: .65;
+    }
+
+    .typing-terminal-body {
+        min-height: 115px;
+        padding: 12px;
+
+        font-size: 10px;
+    }
+}
+
+/* celular */
+@media (max-width: 720px) {
+    .typing-terminal {
+        left: 12px;
+        top: 18%;
+
+        width: min(195px, 55vw);
+
+        opacity: .32;
+    }
+
+    .typing-terminal-header {
+        padding: 7px 9px;
+
+        font-size: 7px;
+    }
+
+    .typing-terminal-body {
+        min-height: 95px;
+        padding: 10px;
+
+        font-size: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .typing-cursor {
+        animation: none;
+    }
+}
