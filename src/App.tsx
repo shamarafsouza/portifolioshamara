@@ -108,6 +108,7 @@ export default function App() {
           >
             ✦
           </div>
+          <TypingTerminal />
 
           <div className="hero-copy">
             <DnaHelix />
