@@ -1167,7 +1167,7 @@ footer {
 
 .dna-helix {
     position: absolute;
-    left: clamp(0px, 4vw, 64px);
+    left: clamp(-120px, -5vw, -42px);
     right: auto;
     top: 50%;
     transform: translateY(-50%);
@@ -1247,7 +1247,7 @@ footer {
 
 @media (max-width: 720px) {
     .dna-helix {
-        left: -10px;
+        left: -34px;
         right: auto;
         opacity: 0.1;
     }
@@ -1517,8 +1517,9 @@ footer {
     }
 
     .hero .dna-helix {
-        right: clamp(10px, 3vw, 35px);
-        width: clamp(65px, 8vw, 100px);
+        left: clamp(-78px, -7vw, -34px);
+        right: auto;
+        width: clamp(36px, 4vw, 50px);
     }
 }
 
