@@ -274,11 +274,6 @@ main {
     font-weight: 700;
 }
 
-.hero h1 {
-    position: relative;
-    z-index: 2;
-}
-
 .hero h1 em,
 .projects h2 em,
 .about h2 em,
@@ -1168,54 +1163,137 @@ footer {
     }
 }
 
-/* DNA — ÚNICO DNA, atravessando visualmente o título */
+/* DNA — ONDA SERPENTEANTE */
 
 .dna-helix {
     position: absolute;
 
-    /* fica na região do título, sem criar uma segunda imagem */
-    right: clamp(8px, 3.5vw, 55px);
+    right: clamp(18px, 5vw, 80px);
     top: 50%;
 
-    width: clamp(82px, 7vw, 125px);
-    height: clamp(430px, 72vh, 680px);
+    width: clamp(90px, 8vw, 150px);
+    height: clamp(460px, 78vh, 720px);
 
     transform: translateY(-50%);
-    transform-origin: center center;
-    transform-style: preserve-3d;
 
-    opacity: .46;
+    opacity: .72;
     pointer-events: none;
+    z-index: 0;
 
-    /* acima do título para parecer que o DNA passa pelas letras */
-    z-index: 3;
+    overflow: visible;
+    display: block;
 
-    /* mantém as letras visíveis através do brilho do DNA */
-    mix-blend-mode: screen;
+    --dna-height: clamp(460px, 78vh, 720px);
+    --dna-wave: 22px;
+}
+
+.dna-wave-row {
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: calc(100% / var(--dna-rows));
+
+    overflow: hidden;
+    display: block;
+
+    animation-duration: 1.6s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: var(--dna-delay);
+
+    will-change: transform;
+}
+
+.dna-wave-row img {
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: var(--dna-height);
+    max-width: none;
+
+    object-fit: contain;
+    object-position: center;
+
+    top: calc(
+        var(--dna-index) *
+        (var(--dna-height) / var(--dna-rows)) *
+        -1
+    );
+
+    display: block;
 
     filter:
-        drop-shadow(0 0 8px rgba(139, 44, 255, .60))
-        drop-shadow(0 0 25px rgba(139, 44, 255, .22));
-
-    perspective: 900px;
-
-    /* a própria helix gira; não existe uma segunda helix */
-    animation: dna-rotate 12s linear infinite;
+        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
+        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
 }
 
-.dna-helix svg {
-    width: 100%;
-    height: 100%;
-    display: block;
+.dna-wave-left {
+    animation-name: dna-wave-left;
 }
 
-@keyframes dna-rotate {
-    from {
-        transform: translateY(-50%) rotateY(0deg);
+.dna-wave-right {
+    animation-name: dna-wave-right;
+}
+
+@keyframes dna-wave-left {
+    0%,
+    100% {
+        transform: translateX(calc(var(--dna-wave) * -1));
     }
 
-    to {
-        transform: translateY(-50%) rotateY(360deg);
+    50% {
+        transform: translateX(var(--dna-wave));
+    }
+}
+
+@keyframes dna-wave-right {
+    0%,
+    100% {
+        transform: translateX(var(--dna-wave));
+    }
+
+    50% {
+        transform: translateX(calc(var(--dna-wave) * -1));
+    }
+}
+
+@media (max-width: 900px) {
+    .dna-helix {
+        right: clamp(10px, 3vw, 35px);
+
+        width: clamp(65px, 8vw, 100px);
+        height: clamp(420px, 70vh, 600px);
+
+        --dna-height: clamp(420px, 70vh, 600px);
+        --dna-wave: 15px;
+
+        opacity: .55;
+    }
+}
+
+@media (max-width: 720px) {
+    .dna-helix {
+        display: block;
+
+        right: -5px;
+        top: 50%;
+
+        width: 58px;
+        height: 80vh;
+
+        --dna-height: 80vh;
+        --dna-wave: 9px;
+
+        transform: translateY(-50%);
+        opacity: .28;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dna-wave-row {
+        animation: none !important;
     }
 }
 
@@ -1470,13 +1548,6 @@ footer {
 
     .hero h1 {
         font-size: clamp(48px, 7.4vw, 72px);
-    }
-
-    .dna-helix {
-        right: 2%;
-        width: 58px;
-        height: 430px;
-        opacity: .34;
     }
 
     .hero-text {
