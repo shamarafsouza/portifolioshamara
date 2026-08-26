@@ -197,10 +197,11 @@ export default function App() {
           aria-label="Tecnologias"
         >
           <div className="ticker-track">
-            {technologies.map(technology => (
+            {[...technologies, ...technologies].map((technology, index) => (
               <div
                 className="tech-item"
-                key={technology.name}
+                key={`${technology.name}-${index}`}
+                aria-hidden={index >= technologies.length}
               >
                 <span className="tech-icon" aria-hidden="true">
                   <img
