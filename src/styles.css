@@ -385,7 +385,7 @@ main {
     border-color: var(--mint);
     color: var(--mint);
     transform: translateY(-2px);
-    box-shadow: 0 0 20px rgba(139, 44, 255, .15);
+    box-shadow: 0 0 20px rgb(238, 137, 4);
 }
 
 .primary {
