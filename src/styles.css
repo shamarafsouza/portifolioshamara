@@ -1163,124 +1163,95 @@ footer {
     }
 }
 
-/* DNA — ONDA SERPENTEANTE
-   Usa a própria public/dna-helix.png em faixas.
-*/
+/* DNA — VERSÃO LEVE, SEM IMAGEM */
 
 .dna-helix {
     position: absolute;
-
-    right: clamp(18px, 5vw, 80px);
+    right: clamp(24px, 4vw, 64px);
     top: 50%;
-
-    width: clamp(90px, 8vw, 150px);
-    height: clamp(460px, 78vh, 720px);
-
     transform: translateY(-50%);
+    width: clamp(46px, 5vw, 70px);
+    height: clamp(400px, 68vh, 620px);
 
-    opacity: .72;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    opacity: 0.22;
     pointer-events: none;
     z-index: 0;
-
-    overflow: visible;
-    display: block;
-
-    --dna-height: clamp(460px, 78vh, 720px);
-    --dna-wave: 22px;
 }
 
-.dna-wave-row {
-    position: absolute;
-    left: 0;
-
-    width: 100%;
-    height: calc(100% / 30);
-
-    overflow: hidden;
-
-    background-image: url('/dna-helix.png');
-    background-repeat: no-repeat;
-
-    /* A imagem é sempre desenhada inteira.
-       Cada faixa mostra apenas a parte correspondente. */
-    background-size: 100% var(--dna-height);
-    background-position-x: center;
-    background-position-y: var(--dna-offset);
-
+.dna-dot-row {
+    display: flex;
+    justify-content: space-between;
     animation-duration: 1.6s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
-    animation-delay: var(--dna-delay);
-
-    will-change: transform;
-
-    filter:
-        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
-        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
 }
 
-.dna-wave-left {
-    animation-name: dna-wave-left;
+.dna-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
 }
 
-.dna-wave-right {
-    animation-name: dna-wave-right;
+.dna-dot.a {
+    background: var(--mint);
+    box-shadow: 0 0 8px var(--purple-glow);
 }
 
-@keyframes dna-wave-left {
-    0%,
-    100% {
-        transform: translateX(calc(var(--dna-wave) * -1));
+.dna-dot.b {
+    background: var(--pink);
+    box-shadow: 0 0 8px rgba(217, 70, 239, .4);
+}
+
+.dna-dot-left {
+    animation-name: dna-dot-wave-left;
+}
+
+.dna-dot-right {
+    animation-name: dna-dot-wave-right;
+}
+
+@keyframes dna-dot-wave-left {
+    0%, 100% {
+        transform: translateX(-12px);
     }
 
     50% {
-        transform: translateX(var(--dna-wave));
+        transform: translateX(12px);
     }
 }
 
-@keyframes dna-wave-right {
-    0%,
-    100% {
-        transform: translateX(var(--dna-wave));
+@keyframes dna-dot-wave-right {
+    0%, 100% {
+        transform: translateX(12px);
     }
 
     50% {
-        transform: translateX(calc(var(--dna-wave) * -1));
+        transform: translateX(-12px);
     }
 }
 
 @media (max-width: 900px) {
     .dna-helix {
-        right: clamp(10px, 3vw, 35px);
-
-        width: clamp(65px, 8vw, 100px);
-        height: clamp(420px, 70vh, 600px);
-
-        --dna-height: clamp(420px, 70vh, 600px);
-        --dna-wave: 15px;
-
-        opacity: .55;
+        right: clamp(10px, 3vw, 30px);
+        width: clamp(36px, 4vw, 50px);
+        height: clamp(360px, 60vh, 520px);
+        opacity: 0.16;
     }
 }
 
 @media (max-width: 720px) {
     .dna-helix {
-        right: -5px;
-        top: 50%;
-
-        width: 58px;
-        height: 80vh;
-
-        --dna-height: 80vh;
-        --dna-wave: 9px;
-
-        transform: translateY(-50%);
-        opacity: .28;
+        right: -4px;
+        opacity: 0.1;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .dna-wave-row {
+    .dna-dot-row {
         animation: none !important;
     }
 }
@@ -1701,20 +1672,6 @@ footer {
 
     .game-panel canvas {
         margin-top: 26px;
-    }
-
-    .dna-helix {
-        display: block;
-
-        right: -10px;
-        top: 50%;
-
-        width: 58px;
-        height: 80vh;
-
-        transform: translateY(-50%);
-
-        opacity: .22;
     }
 
     .sheep-mark {
