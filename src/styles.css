@@ -1166,29 +1166,50 @@ footer {
 
 .dna-helix {
     position: absolute;
-    right: clamp(10px, 4vw, 60px);
-    top: 0;
-    height: 100%;
-    width: 60px;
+
+    right: clamp(18px, 5vw, 80px);
+    top: 50%;
+    
+    width: clamp(90px, 8vw, 150px);
+    height: clamp(460px, 78vh, 720px);
+
+    transform: translateY(-50%);
+
     opacity: .5;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 900px;
+}
+
+.dna-helix img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    display: block;
+
+    transform-origin: center center;
+    transform-style: preserve-3d;
+
+    animation: dna-rotate 12s linear infinite;
 
     filter:
         drop-shadow(0 0 8px rgba(139, 44, 255, .55))
         drop-shadow(0 0 25px rgba(139, 44, 255, .25));
-
-    transform-origin: center center;
-    animation: dna-float 7s ease-in-out infinite;
 }
 
-@keyframes dna-float {
-    0%, 100% {
-        transform: translate3d(0, 0, 0) rotate(-2deg);
+@keyframes dna-rotate {
+    from {
+        transform: rotateY(0deg);
     }
 
-    50% {
-        transform: translate3d(0, -10px, 0) rotate(2deg);
+    to {
+        transform: rotateY(360deg);
     }
 }
 
