@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function DnaHelix() {
-  const rows = 30
+  const rows = 30 as number
 
   return (
     <div className="dna-helix" aria-hidden="true">
