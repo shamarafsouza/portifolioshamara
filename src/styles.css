@@ -1167,7 +1167,8 @@ footer {
 
 .dna-helix {
     position: absolute;
-    right: clamp(24px, 4vw, 64px);
+    left: clamp(18px, 4vw, 64px);
+    right: auto;
     top: 50%;
     transform: translateY(-50%);
     width: clamp(46px, 5vw, 70px);
