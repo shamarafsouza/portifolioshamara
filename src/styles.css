@@ -1470,9 +1470,9 @@ footer {
         max-width: 520px;
     }
 
-    .hero-copy .dna-helix {
-        right: -10px;
-        width: 48px;
+    .hero .dna-helix {
+        right: clamp(10px, 3vw, 35px);
+        width: clamp(65px, 8vw, 100px);
     }
 }
 
@@ -1633,11 +1633,16 @@ footer {
 
     .dna-helix {
         display: block;
-        right: -4px;
-        top: 4%;
-        width: 42px;
-        height: 92%;
-        opacity: .32;
+
+        right: -10px;
+        top: 50%;
+
+        width: 58px;
+        height: 80vh;
+
+        transform: translateY(-50%);
+
+        opacity: .22;
     }
 
     .sheep-mark {
