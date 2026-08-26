@@ -1237,7 +1237,8 @@ footer {
 
 @media (max-width: 900px) {
     .dna-helix {
-        right: clamp(10px, 3vw, 30px);
+        left: 0;
+        right: auto;
         width: clamp(36px, 4vw, 50px);
         height: clamp(360px, 60vh, 520px);
         opacity: 0.16;
@@ -1246,7 +1247,8 @@ footer {
 
 @media (max-width: 720px) {
     .dna-helix {
-        right: -4px;
+        left: -10px;
+        right: auto;
         opacity: 0.1;
     }
 }
