@@ -108,7 +108,7 @@ export default function App() {
           >
             ✦
           </div>
-          <TypingTerminal />
+          
 
           <div className="hero-copy">
             <DnaHelix />
@@ -312,6 +312,8 @@ export default function App() {
           className="about reveal"
         >
           <BlackSheepMark />
+
+          <TypingTerminal />
 
           <div>
             <p className="eyebrow">
