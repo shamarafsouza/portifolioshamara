@@ -389,16 +389,17 @@ main {
 }
 
 .primary {
-    border-color: var(--acid);
-    background: var(--acid);
-    color: var(--ink);
-    box-shadow: 0 0 25px rgb(245, 245, 245);
+    border: 1px solid #ff8a3d;
+    background: transparent;
+    color: var(--paper);
+    box-shadow: none;
 }
 
 .primary:hover {
-    color: var(--ink);
-    background: var(--mint);
-    border-color: var(--mint);
+    color: #ffb27a;
+    background: rgba(255, 138, 61, .08);
+    border-color: #ffb27a;
+    box-shadow: 0 0 18px rgba(255, 138, 61, .22);
 }
 
 /* IDENTITY CARD */
