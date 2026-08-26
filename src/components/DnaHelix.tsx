@@ -7,28 +7,29 @@ export default function DnaHelix() {
     <div
       className="dna-helix"
       aria-hidden="true"
-      style={
-        {
-          '--dna-rows': rows,
-        } as React.CSSProperties
-      }
     >
-      {Array.from({ length: rows }).map((_, index) => (
-        <div
-          key={index}
-          className={`dna-wave-row ${
-            index % 2 === 0
-              ? 'dna-wave-left'
-              : 'dna-wave-right'
-          }`}
-          style={
-            {
-              '--dna-index': index,
-              '--dna-delay': `${(index / rows) * 1.6}s`,
-            } as React.CSSProperties
-          }
-        />
-      ))}
+      {Array.from({ length: rows }).map((_, index) => {
+        const offset = rows === 1
+          ? '0%'
+          : `${(index / (rows - 1)) * 100}%`
+
+        return (
+          <div
+            key={index}
+            className={`dna-wave-row ${
+              index % 2 === 0
+                ? 'dna-wave-left'
+                : 'dna-wave-right'
+            }`}
+            style={
+              {
+                '--dna-offset': offset,
+                '--dna-delay': `${(index / rows) * 1.6}s`,
+              } as React.CSSProperties
+            }
+          />
+        )
+      })}
     </div>
   )
 }
