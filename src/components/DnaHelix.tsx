@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function DnaHelix() {
-  const rows = 80
+  const rows = 60
 
   return (
     <div
