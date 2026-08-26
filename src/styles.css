@@ -1695,10 +1695,10 @@ footer {
 .typing-terminal {
     position: absolute;
 
-    left: clamp(28px, 5vw, 90px);
-    top: 30%;
+    left: clamp(20px, 5vw, 80px);
+    bottom: clamp(35px, 7vh, 80px);
 
-    width: clamp(220px, 20vw, 320px);
+    width: clamp(220px, 22vw, 320px);
 
     padding: 0;
 
@@ -1717,10 +1717,6 @@ footer {
     z-index: 0;
 }
 
-/* impede o terminal de entrar no grid */
-.hero > .typing-terminal {
-    grid-column: 1 / -1;
-}
 
 /* cabeçalho */
 .typing-terminal-header {
