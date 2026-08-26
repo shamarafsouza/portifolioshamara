@@ -1164,8 +1164,7 @@ footer {
 }
 
 /* DNA — ONDA SERPENTEANTE
-   Usa a própria public/dna-helix.png em faixas,
-   preservando a imagem e criando o movimento de onda.
+   Usa a própria public/dna-helix.png em faixas.
 */
 
 .dna-helix {
@@ -1187,11 +1186,6 @@ footer {
     display: block;
 
     --dna-height: clamp(460px, 78vh, 720px);
-    --dna-rows: 30;
-    --dna-row-height: calc(
-        var(--dna-height) / var(--dna-rows)
-    );
-
     --dna-wave: 22px;
 }
 
@@ -1200,23 +1194,18 @@ footer {
     left: 0;
 
     width: 100%;
-    height: var(--dna-row-height);
+    height: calc(100% / 30);
 
     overflow: hidden;
 
     background-image: url('/dna-helix.png');
     background-repeat: no-repeat;
 
-    background-size:
-        100% var(--dna-height);
-
-    background-position:
-        center
-        calc(
-            var(--dna-index) *
-            var(--dna-row-height) *
-            -1
-        );
+    /* A imagem é sempre desenhada inteira.
+       Cada faixa mostra apenas a parte correspondente. */
+    background-size: 100% var(--dna-height);
+    background-position-x: center;
+    background-position-y: var(--dna-offset);
 
     animation-duration: 1.6s;
     animation-timing-function: ease-in-out;
@@ -1224,6 +1213,10 @@ footer {
     animation-delay: var(--dna-delay);
 
     will-change: transform;
+
+    filter:
+        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
+        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
 }
 
 .dna-wave-left {
@@ -1264,10 +1257,6 @@ footer {
         height: clamp(420px, 70vh, 600px);
 
         --dna-height: clamp(420px, 70vh, 600px);
-        --dna-row-height: calc(
-            var(--dna-height) / var(--dna-rows)
-        );
-
         --dna-wave: 15px;
 
         opacity: .55;
@@ -1276,8 +1265,6 @@ footer {
 
 @media (max-width: 720px) {
     .dna-helix {
-        display: block;
-
         right: -5px;
         top: 50%;
 
@@ -1285,14 +1272,9 @@ footer {
         height: 80vh;
 
         --dna-height: 80vh;
-        --dna-row-height: calc(
-            var(--dna-height) / var(--dna-rows)
-        );
-
         --dna-wave: 9px;
 
         transform: translateY(-50%);
-
         opacity: .28;
     }
 }
