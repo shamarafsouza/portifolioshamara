@@ -4,6 +4,7 @@ import DinoGame from './components/DinoGame'
 import DnaHelix from './components/DnaHelix'
 import BlackSheepMark from './components/BlackSheepMark'
 import { translations, projectMeta, type Lang } from './translations'
+import TypingTerminal from './components/TypingTerminal'
 
 const technologies = [
   { name: 'React', image: 'https://cdn.simpleicons.org/react/61DAFB', fallback: '⚛' },
