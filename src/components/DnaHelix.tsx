@@ -1,31 +1,24 @@
 import React from 'react'
 
 export default function DnaHelix() {
-  const rows = 30 as number
+  const rows = 24
 
   return (
     <div className="dna-helix" aria-hidden="true">
-      {Array.from({ length: rows }).map((_, index) => {
-        const offset = rows === 1
-          ? '0%'
-          : `${(index / (rows - 1)) * 100}%`
-
-        return (
-          <div
-            key={index}
-            className={`dna-wave-row ${
-              index % 2 === 0 ? 'dna-wave-left' : 'dna-wave-right'
-            }`}
-            style={
-              {
-                '--dna-offset': offset,
-                '--dna-delay': `${(index / rows) * 1.6}s`,
-                top: `${(index / rows) * 100}%`,
-              } as React.CSSProperties
-            }
-          />
-        )
-      })}
+      {Array.from({ length: rows }).map((_, index) => (
+        <div
+          key={index}
+          className={`dna-dot-row ${
+            index % 2 === 0 ? 'dna-dot-left' : 'dna-dot-right'
+          }`}
+          style={
+            { animationDelay: `${(index / rows) * 1.6}s` } as React.CSSProperties
+          }
+        >
+          <span className="dna-dot a" />
+          <span className="dna-dot b" />
+        </div>
+      ))}
     </div>
   )
 }
