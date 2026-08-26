@@ -224,8 +224,8 @@ main {
 .shamara-clones {
     position: relative;
     z-index: 1;
-    width: min(100%, 600px);
-    max-height: 600px;
+    width: min(100%, 1000px);
+    max-height: 900x;
     object-fit: contain;
     object-position: center;
     justify-self: center;
