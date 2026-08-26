@@ -297,7 +297,7 @@ main {
     position: absolute;
     top: -38px;
     left: 0;
-    color: rgba(168, 92, 255, .65);
+    color: #ff8a3d;
     font: 10px 'DM Mono', monospace;
     letter-spacing: .12em;
 }
