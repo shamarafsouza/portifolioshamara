@@ -1,405 +1,1726 @@
-import { useEffect, useState } from 'react'
-import IntroBoot from './components/IntroBoot'
-import DinoGame from './components/DinoGame'
-import DnaHelix from './components/DnaHelix'
-import BlackSheepMark from './components/BlackSheepMark'
-import { translations, projectMeta, type Lang } from './translations'
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-const technologies = [
-  { name: 'React', image: 'https://cdn.simpleicons.org/react/61DAFB', fallback: '⚛' },
-  { name: 'TypeScript', image: 'https://cdn.simpleicons.org/typescript/3178C6', fallback: 'TS' },
-  { name: 'Node.js', image: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', fallback: 'JS' },
-  { name: 'Python', image: 'https://cdn.simpleicons.org/python/3776AB', fallback: 'PY' },
-  { name: 'C#', image: 'https://cdn.simpleicons.org/csharp', fallback: 'C#' },
-  { name: '.NET', image: 'https://cdn.simpleicons.org/dotnet', fallback: '.N' },
-  { name: 'HTML5', image: 'https://cdn.simpleicons.org/html5/E34F26', fallback: '5' },
-  { name: 'CSS3', image: 'https://cdn.simpleicons.org/css3', fallback: '3' },
-  { name: 'MySQL', image: 'https://cdn.simpleicons.org/mysql/4479A1', fallback: 'SQL' },
-  { name: 'PHP', image: 'https://cdn.simpleicons.org/php/777BB4', fallback: 'PHP' }
-]
+:root {
+    --ink: #07050d;
+    --panel: #0d0916;
+    --line: rgba(168, 92, 255, .22);
 
-export default function App() {
-  const [lang, setLang] = useState<Lang>('pt')
-  const [introDone, setIntroDone] = useState(false)
-  const [gameOpen, setGameOpen] = useState(false)
+    --mint: #a855f7;
+    --acid: #8b2cff;
+    --pink: #d946ef;
 
-  const t = translations[lang]
+    --paper: #f5f0ff;
+    --muted: #a89bb8;
 
-  useEffect(() => {
-    const els = document.querySelectorAll('.reveal')
+    --purple: #8b2cff;
+    --purple-light: #b66cff;
+    --purple-dark: #5b16b8;
+    --purple-glow: rgba(139, 44, 255, .45);
 
-    const io = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in')
-            io.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        threshold: 0.15
-      }
-    )
+    --orange: #ff8a3d;
+    --orange-light: #ffb27a;
+    --orange-glow: rgba(255, 138, 61, .35);
+}
 
-    els.forEach(el => io.observe(el))
+* {
+    box-sizing: border-box;
+}
 
-    return () => io.disconnect()
-  }, [lang])
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
 
-  return (
-    <>
-      {!introDone && (
-        <IntroBoot
-          lines={t.intro}
-          skipLabel={t.introSkip}
-          onDone={() => setIntroDone(true)}
-        />
-      )}
+body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+}
 
-      <div className="noise" />
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: .075;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
 
-      <header>
-        <a
-          className="brand"
-          href="#inicio"
-          aria-label="Shamara Souza — início"
-        >
-          S<span>_</span>S
-        </a>
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
-        <p className="system-status">
-          <i />
-          {t.systemStatus}
-        </p>
+header {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 clamp(20px, 6vw, 92px);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    z-index: 2;
+}
 
-        <nav>
-          <a href="#projetos">
-            {t.nav.projects}
-          </a>
+.brand {
+    font: 700 30px/1 'DM Mono', monospace;
+    letter-spacing: -.14em;
+    color: var(--mint);
+    text-shadow: 0 0 18px rgba(139, 44, 255, .35);
+}
 
-          <a href="#sobre">
-            {t.nav.profile}
-          </a>
+.brand span {
+    color: var(--pink);
+}
 
-          <a href="#contato">
-            {t.nav.contact}
-          </a>
+.system-status {
+    margin: 0;
+    color: var(--muted);
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: .06em;
+}
 
-          <button
-            className="lang-toggle"
-            onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
-            aria-label="Alternar idioma"
-            type="button"
-          >
-            {t.langToggle}
-          </button>
-        </nav>
-      </header>
+.system-status i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: var(--acid);
+    box-shadow: 0 0 12px var(--acid);
+}
 
-      <main id="inicio">
-        <section className="hero">
-          <div className="fog" />
+nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+}
 
-          <div
-            className="purple-symbol"
-            aria-hidden="true"
-          >
-            ✦
-          </div>
+nav a {
+    transition: color .2s ease;
+}
 
-          <div className="hero-copy">
-            <DnaHelix />
+nav a:hover {
+    color: var(--mint);
+    text-shadow: 0 0 12px rgba(168, 92, 255, .55);
+}
 
-            <p className="eyebrow">
-              {t.hero.eyebrow}
-            </p>
+main {
+    position: relative;
+}
 
-            <h1>
-              {t.hero.title1}
-              <br />
-              <em>{t.hero.titleEm}</em>
-              <br />
-              {t.hero.title2}
-            </h1>
+/* HERO */
 
-            <p className="hero-text">
-              {t.hero.text}
-            </p>
+.hero {
+    position: relative;
+    z-index: 0;
+    min-height: 680px;
+    padding: 80px clamp(24px, 8vw, 120px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .72fr) minmax(280px, .7fr);
+    gap: clamp(24px, 3.5vw, 58px);
+    align-items: center;
+    overflow: hidden;
 
-            <div className="hero-actions">
-              <a
-                className="button primary"
-                href="#projetos"
-              >
-                {t.hero.exploreBtn} <b>↘</b>
-              </a>
+    background:
+        radial-gradient(
+            circle at 75% 40%,
+            rgba(139, 44, 255, .18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 20% 60%,
+            rgba(91, 22, 184, .12),
+            transparent 32%
+        ),
+        linear-gradient(
+            130deg,
+            #07050d 45%,
+            #100a19
+        );
+}
 
-              <a
-                className="button"
-                href="https://github.com/shamarafsouza"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {t.hero.githubBtn} <b>↗</b>
-              </a>
-            </div>
-          </div>
+/* GRANDE SÍMBOLO ROXO */
 
-          <img
-            className="shamara-clones"
-            src="/shamara-clones.png"
-            alt="Shamara Souza em múltiplas versões"
-          />
+.hero::before {
+    content: '✦';
+    position: absolute;
+    right: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(280px, 32vw, 560px);
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
+    text-shadow:
+        0 0 25px rgba(139, 44, 255, .18),
+        0 0 70px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .75;
+}
 
-          <div className="identity-card">
-            <div className="scan" />
+/* CÍRCULO HUD AO REDOR DO SÍMBOLO */
 
-            <p>
-              {t.identity.verified}
-            </p>
+.hero::after {
+    content: '';
+    position: absolute;
+    right: 5%;
+    top: 18%;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(139, 44, 255, .18);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 12px rgba(139, 44, 255, .025),
+        0 0 0 35px rgba(139, 44, 255, .018),
+        0 0 45px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
+}
 
-            <div className="portrait">
-              <span>SS</span>
-            </div>
+.hero::before {
+    display: none;
+}
 
-            <h2>
-              {t.identity.name1}
-              <br />
-              {t.identity.name2}
-            </h2>
+/* SÍMBOLO ROXO ANIMADO */
+.purple-symbol {
+    position: absolute;
+    right: 24%;
+    top: 50%;
+    transform: translate(50%, -50%);
+    font-size: clamp(180px, 20vw, 340px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(168, 92, 255, .16);
+    text-shadow:
+        0 0 25px rgba(139, 44, 255, .18),
+        0 0 70px rgba(139, 44, 255, .12);
+    pointer-events: none;
+    z-index: 0;
+    opacity: .65;
+    animation: purple-symbol-spin 18s linear infinite;
+}
 
-            <dl>
-              <div>
-                <dt>{t.identity.area}</dt>
-                <dd>{t.identity.areaVal}</dd>
-              </div>
+@keyframes purple-symbol-spin {
+    from {
+        transform: translate(50%, -50%) rotate(0deg);
+    }
 
-              <div>
-                <dt>{t.identity.focus}</dt>
-                <dd>{t.identity.focusVal}</dd>
-              </div>
+    to {
+        transform: translate(50%, -50%) rotate(360deg);
+    }
+}
 
-              <div>
-                <dt>{t.identity.status}</dt>
-                <dd>{t.identity.statusVal}</dd>
-              </div>
-            </dl>
+.shamara-clones {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1000px);
+    max-height: 900x;
+    object-fit: contain;
+    object-position: center;
+    justify-self: center;
+    align-self: center;
+    display: block;
+    filter:
+        drop-shadow(0 0 22px rgba(139, 44, 255, .18))
+        drop-shadow(0 0 45px rgba(139, 44, 255, .10));
+    animation: clones-float 6s ease-in-out infinite;
+}
 
-            <div className="barcode">
-              ||| || |||| | ||| || ||||
-            </div>
-          </div>
-        </section>
+@keyframes clones-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
 
-        <section
-          className="ticker"
-          aria-label="Tecnologias"
-        >
-          <div className="ticker-track">
-            {[...technologies, ...technologies].map((technology, index) => (
-              <div
-                className="tech-item"
-                key={`${technology.name}-${index}`}
-                aria-hidden={index >= technologies.length}
-              >
-                <span className="tech-icon" aria-hidden="true">
-                  <img
-                    src={technology.image}
-                    alt=""
-                    onError={event => {
-                      event.currentTarget.style.display = 'none'
-                      event.currentTarget.nextElementSibling?.classList.add('visible')
-                    }}
-                  />
+    50% {
+        transform: translateY(-8px);
+    }
+}
 
-                  <span className="tech-icon-fallback">
-                    {technology.fallback}
-                  </span>
-                </span>
+@media (prefers-reduced-motion: reduce) {
+    .purple-symbol,
+    .shamara-clones,
+    .ticker-track,
+    .dna-helix {
+        animation: none;
+    }
+}
 
-                <span className="tech-name">
-                  {technology.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </section>
+.eyebrow {
+    margin: 0 0 18px;
+    color: var(--mint);
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
 
-        <section
-          id="projetos"
-          className="projects"
-        >
-          <div className="section-label">
-            <p className="eyebrow">
-              {t.projectsSection.label}
-            </p>
+.hero h1,
+.projects h2,
+.about h2,
+.contact h2 {
+    margin: 0;
+    font-size: clamp(52px, 7.1vw, 110px);
+    line-height: .87;
+    letter-spacing: -.075em;
+    font-weight: 700;
+}
 
-            <p>
-              {t.projectsSection.count}
-            </p>
-          </div>
+.hero h1 em,
+.projects h2 em,
+.about h2 em,
+.contact h2 em {
+    font-style: normal;
+    color: var(--acid);
+    text-shadow:
+        3px 0 var(--pink),
+        0 0 25px rgba(139, 44, 255, .25);
+}
 
-          <h2>
-            {t.projectsSection.title1}
-            <br />
-            <em>{t.projectsSection.titleEm}</em>
-          </h2>
+.hero-copy {
+    position: relative;
+    z-index: 1;
+}
 
-          <div className="project-list">
-            {projectMeta.map((project, i) => (
-              <article
-                className="project reveal"
-                key={project.name}
-              >
-                <div className="project-code">
-                  {project.code}
-                </div>
+/* ASSINATURA DO SISTEMA */
 
-                <div>
-                  <p className="project-type">
-                    {t.projects[i].type}
-                  </p>
+.hero-copy::before {
+    content: '// SHAMARA.SYSTEM';
+    position: absolute;
+    top: -38px;
+    left: 0;
+    color: #ff8a3d;
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
 
-                  <h3>
-                    {project.name}
-                  </h3>
-                </div>
+.hero-copy::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -35px;
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        transparent
+    );
+    box-shadow: 0 0 10px var(--purple-glow);
+}
 
-                <div className="project-info">
-                  <p>
-                    {t.projects[i].text}
-                  </p>
+.hero-text {
+    max-width: 470px;
+    margin: 28px 0;
+    color: #d1c8dc;
+    font-size: 18px;
+    line-height: 1.55;
+}
 
-                  <div className="tags">
-                    {project.tags.map(tag => (
-                      <span key={tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 
-                  <div className="project-links">
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {t.projectsSection.open} ↗
-                      </a>
-                    )}
+.reveal {
+    opacity: 0;
+    transform: translateY(36px) scale(.97);
+    filter: blur(6px);
+    transition:
+        opacity .9s cubic-bezier(.16, 1, .3, 1),
+        transform .9s cubic-bezier(.16, 1, .3, 1),
+        filter .9s cubic-bezier(.16, 1, .3, 1);
+}
 
-                    {project.repo && (
-                      <a
-                        href={project.repo}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {t.projectsSection.code} ↗
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+}
 
-        <section
-          id="sobre"
-          className="about reveal"
-        >
-          <BlackSheepMark />
+.project-list .project:nth-child(1) {
+    transition-delay: 0s;
+}
 
-          <div>
-            <p className="eyebrow">
-              {t.about.eyebrow}
-            </p>
+.project-list .project:nth-child(2) {
+    transition-delay: .12s;
+}
 
-            <h2>
-              {t.about.title1}
-              <br />
-              <em>{t.about.titleEm}</em>
-            </h2>
-          </div>
+.project-list .project:nth-child(3) {
+    transition-delay: .24s;
+}
 
-          <div className="about-copy">
-            <p>
-              {t.about.p1}
-            </p>
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+    }
+}
 
-            <p>
-              {t.about.p2}
-            </p>
+.button {
+    border: 1px solid var(--line);
+    padding: 14px 16px;
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: .07em;
+    transition: .2s;
+}
 
-            <button
-              className="game-trigger"
-              onClick={() => setGameOpen(true)}
-              type="button"
-            >
-              <span>◉</span>
-              {t.about.game}
-            </button>
-          </div>
-        </section>
+.button b {
+    font-size: 16px;
+    margin-left: 8px;
+}
 
-        <section
-          id="contato"
-          className="contact"
-        >
-          <p className="eyebrow">
-            {t.contact.eyebrow}
-          </p>
+.button:hover {
+    border-color: var(--mint);
+    color: var(--mint);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgb(224, 121, 4);
+}
 
-          <h2>
-            {t.contact.title1}
-            <br />
-            <em>{t.contact.titleEm}</em>
-          </h2>
+.primary {
+    border: 1px solid #ff8a3d;
+    background: transparent;
+    color: var(--paper);
+    box-shadow: none;
+}
 
-          <div className="contact-links">
-            <a href="mailto:ferreiradesouzashamara@gmail.com">
-              ferreiradesouzashamara@gmail.com
-              <b>↗</b>
-            </a>
+.primary:hover {
+    color: #ffb27a;
+    background: rgba(255, 138, 61, .08);
+    border-color: #ffb27a;
+    box-shadow: 0 0 18px rgba(255, 138, 61, .22);
+}
 
-            <a
-              href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {t.contact.linkedin}
-              <b>↗</b>
-            </a>
+/* IDENTITY CARD */
 
-            <a
-              href="https://github.com/shamarafsouza"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-              <b>↗</b>
-            </a>
-          </div>
-        </section>
-      </main>
+.identity-card {
+    position: relative;
+    z-index: 1;
+    width: min(350px, 100%);
+    justify-self: end;
+    padding: 20px;
+    border: 1px solid var(--mint);
+    background: rgba(13, 9, 22, .9);
+    box-shadow:
+        16px 16px 0 rgba(217, 70, 239, .12),
+        0 0 45px rgba(139, 44, 255, .16),
+        inset 0 0 35px rgba(139, 44, 255, .025);
+}
 
-      <footer>
-        <span>
-          {t.footer.name}
-        </span>
+.identity-card:before,
+.identity-card:after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-color: var(--acid);
+    border-style: solid;
+}
 
-        <span>
-          {t.footer.stack}
-        </span>
-      </footer>
+.identity-card:before {
+    top: -5px;
+    left: -5px;
+    border-width: 2px 0 0 2px;
+}
 
-      {gameOpen && (
-        <DinoGame
-          onClose={() => setGameOpen(false)}
-        />
-      )}
-    </>
-  )
+.identity-card:after {
+    right: -5px;
+    bottom: -5px;
+    border-width: 0 2px 2px 0;
+}
+
+.identity-card > p {
+    position: relative;
+    margin: 0 0 12px;
+    color: var(--mint);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .09em;
+}
+
+.portrait {
+    height: 188px;
+    display: grid;
+    place-items: center;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(168, 92, 255, .08) 0 1px,
+            transparent 1px 8px
+        ),
+        linear-gradient(
+            135deg,
+            #160d24,
+            #35213a
+        );
+    border: 1px solid rgba(139, 44, 255, .15);
+}
+
+.portrait span {
+    font: 700 80px 'DM Mono', monospace;
+    color: var(--acid);
+    mix-blend-mode: screen;
+    text-shadow:
+        4px 0 var(--pink),
+        0 0 25px rgba(139, 44, 255, .45);
+}
+
+.identity-card h2 {
+    margin: 19px 0;
+    font-size: 34px;
+    line-height: .82;
+    letter-spacing: -.07em;
+}
+
+.identity-card dl {
+    margin: 0;
+    border-top: 1px solid var(--line);
+}
+
+.identity-card dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line);
+    font: 10px 'DM Mono', monospace;
+}
+
+.identity-card dt {
+    color: var(--muted);
+}
+
+.identity-card dd {
+    margin: 0;
+    color: var(--mint);
+    text-align: right;
+}
+
+.barcode {
+    padding-top: 15px;
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: 3px;
+    color: var(--paper);
+}
+
+.scan {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    top: 55px;
+    background: var(--acid);
+    box-shadow: 0 0 15px var(--acid);
+    opacity: .8;
+    animation: scan 4s ease-in-out infinite;
+}
+
+@keyframes scan {
+    50% {
+        transform: translateY(220px);
+    }
+}
+
+/* TICKER — TECNOLOGIAS */
+
+.ticker {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    /* laranja apenas como detalhe, sem brigar com o roxo */
+    border-top: 1px solid rgba(255, 138, 61, .28);
+    border-bottom: 1px solid rgba(255, 138, 61, .28);
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7, 5, 13, .96) 0%,
+            rgba(24, 11, 28, .96) 50%,
+            rgba(7, 5, 13, .96) 100%
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 138, 61, .05),
+        inset 0 -1px 0 rgba(139, 44, 255, .12),
+        0 0 28px rgba(139, 44, 255, .08);
+
+    color: var(--paper);
+}
+
+.ticker::before,
+.ticker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: clamp(35px, 8vw, 120px);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.ticker::before {
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        var(--ink),
+        transparent
+    );
+}
+
+.ticker::after {
+    right: 0;
+    background: linear-gradient(
+        270deg,
+        var(--ink),
+        transparent
+    );
+}
+
+.ticker-track {
+    display: flex;
+    align-items: center;
+
+    width: max-content;
+    min-width: max-content;
+
+    padding: 10px clamp(14px, 2.5vw, 32px);
+
+    gap: clamp(8px, 1vw, 14px);
+
+    will-change: transform;
+    animation: ticker-scroll 30s linear infinite;
+}
+
+@keyframes ticker-scroll {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.tech-item {
+    flex: 0 0 clamp(125px, 11vw, 170px);
+
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+    padding: 8px 12px;
+
+    border: 1px solid rgba(168, 92, 255, .20);
+    border-radius: 2px;
+
+    /*
+       Mantém o roxo predominante.
+       O laranja aparece só como reflexo.
+    */
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 44, 255, .045),
+            rgba(255, 138, 61, .025)
+        );
+
+    color: var(--paper);
+
+    font:
+        500 clamp(9px, .72vw, 12px)
+        'DM Mono',
+        monospace;
+
+    letter-spacing: .045em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.tech-item:hover {
+    border-color: rgba(255, 138, 61, .55);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 44, 255, .09),
+            rgba(255, 138, 61, .07)
+        );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 18px rgba(139, 44, 255, .12),
+        0 0 18px rgba(255, 138, 61, .06);
+}
+
+.tech-icon {
+    width: 28px;
+    height: 28px;
+
+    flex: 0 0 28px;
+
+    display: grid;
+    place-items: center;
+
+    position: relative;
+}
+
+.tech-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    display: block;
+}
+
+.tech-icon-fallback {
+    display: none;
+
+    width: 28px;
+    height: 28px;
+
+    place-items: center;
+
+    border: 1px solid rgba(168, 92, 255, .35);
+
+    color: var(--purple-light);
+
+    background: rgba(139, 44, 255, .06);
+
+    font:
+        700 9px
+        'DM Mono',
+        monospace;
+}
+
+.tech-icon-fallback.visible {
+    display: grid;
+}
+
+.tech-name {
+    min-width: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* notebooks / telas médias */
+@media (max-width: 1250px) {
+
+    .ticker-track {
+        animation-duration: 27s;
+    }
+
+    .tech-item {
+        flex-basis: 140px;
+    }
+}
+
+/* celular */
+@media (max-width: 720px) {
+
+    .ticker-track {
+        padding: 8px 12px;
+        gap: 8px;
+        animation-duration: 22s;
+    }
+
+    .tech-item {
+        flex-basis: 122px;
+        min-height: 48px;
+        padding: 7px 9px;
+        gap: 7px;
+    }
+
+    .tech-icon {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+    }
+
+    .tech-icon-fallback {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ticker-track {
+        animation: none;
+    }
+}
+
+/* PROJECTS */
+
+.projects {
+    padding: 115px clamp(20px, 10vw, 150px);
+}
+
+.section-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.section-label > p:last-child {
+    font: 11px 'DM Mono', monospace;
+    color: var(--muted);
+}
+
+.projects h2 {
+    max-width: 850px;
+    font-size: clamp(48px, 6.2vw, 92px);
+    line-height: .86;
+    margin-bottom: 55px;
+}
+
+.project-list {
+    border-top: 1px solid var(--line);
+}
+
+.project {
+    display: grid;
+    grid-template-columns: 70px minmax(240px, .8fr) minmax(320px, 1.2fr);
+    gap: 30px;
+    padding: 38px 0;
+    border-bottom: 1px solid var(--line);
+    transition:
+        padding .3s ease,
+        background .3s ease;
+}
+
+.project:hover {
+    padding-left: 18px;
+    padding-right: 18px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(139, 44, 255, .09),
+            rgba(139, 44, 255, .025),
+            transparent
+        );
+}
+
+.project-code {
+    color: var(--pink);
+    font: 16px 'DM Mono', monospace;
+}
+
+.project-type {
+    margin: 0 0 6px;
+    color: var(--mint);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.project h3 {
+    margin: 0;
+    font-size: 31px;
+    line-height: 1;
+    letter-spacing: -.06em;
+}
+
+.project-info > p {
+    margin: 0;
+    color: #c8bfce;
+    line-height: 1.55;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 17px 0;
+}
+
+.tags span {
+    padding: 4px 7px;
+    border: 1px solid var(--line);
+    color: var(--muted);
+    font: 10px 'DM Mono', monospace;
+    transition: .2s;
+}
+
+.tags span:hover {
+    border-color: var(--purple);
+    color: var(--purple-light);
+    box-shadow: 0 0 12px rgba(139, 44, 255, .15);
+}
+
+.project-links {
+    display: flex;
+    gap: 20px;
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .06em;
+}
+
+.project-links a {
+    color: var(--acid);
+    transition: color .2s ease;
+}
+
+.project-links a:hover {
+    color: var(--mint);
+}
+
+/* ABOUT */
+
+.about {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8vw;
+    min-height: 720px;
+    padding: 115px clamp(20px, 10vw, 150px);
+    background: #100b17;
+    color: var(--paper);
+    overflow: hidden;
+    align-items: center;
+}
+
+.about::before {
+    content: '// 02 / ABOUT.SH';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .4);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.about .eyebrow {
+    color: var(--purple-light);
+}
+
+.about h2 {
+    font-size: clamp(44px, 5.2vw, 77px);
+}
+
+.about h2 em {
+    color: var(--purple-light);
+    text-shadow:
+        3px 0 var(--pink),
+        0 0 20px rgba(139, 44, 255, .25);
+}
+
+.about-copy {
+    padding-top: 40px;
+}
+
+.about-copy > p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.game-trigger {
+    margin-top: 22px;
+    background: transparent;
+    border: 1px solid rgba(168, 92, 255, .35);
+    padding: 13px;
+    color: var(--paper);
+    font: 11px 'DM Mono', monospace;
+    letter-spacing: .05em;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.game-trigger span {
+    color: var(--pink);
+    margin-right: 7px;
+}
+
+.game-trigger:hover {
+    background: var(--purple);
+    color: #fff;
+    border-color: var(--purple);
+    box-shadow: 0 0 25px rgba(139, 44, 255, .3);
+}
+
+.sheep-mark {
+    position: absolute;
+    left: -20px;
+    bottom: -35px;
+    width: 240px;
+    height: 240px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: .9;
+    filter: drop-shadow(0 0 15px rgba(139, 44, 255, .25));
+}
+
+/* CONTACT */
+
+.contact {
+    padding: 115px clamp(20px, 10vw, 150px);
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            rgba(139, 44, 255, .18),
+            transparent 35%
+        ),
+        var(--panel);
+}
+
+.contact h2 {
+    font-size: clamp(49px, 7vw, 104px);
+    margin-bottom: 57px;
+}
+
+.contact-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.contact-links a {
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    font-size: clamp(16px, 1.9vw, 24px);
+    overflow-wrap: anywhere;
+    transition: color .2s ease;
+}
+
+.contact-links a:hover {
+    color: var(--mint);
+    text-shadow: 0 0 15px rgba(139, 44, 255, .3);
+}
+
+.contact-links b {
+    float: right;
+    color: var(--mint);
+}
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px clamp(20px, 6vw, 92px);
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .06em;
+}
+
+/* GAME */
+
+.game-modal {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(3, 5, 9, .84);
+    backdrop-filter: blur(7px);
+}
+
+.game-panel {
+    width: min(700px, 100%);
+    position: relative;
+    padding: 35px;
+    border: 1px solid var(--mint);
+    background: var(--panel);
+    box-shadow:
+        0 0 50px rgba(139, 44, 255, .2),
+        inset 0 0 35px rgba(139, 44, 255, .025);
+}
+
+.game-panel h2 {
+    margin: 0 0 8px;
+    font-size: 35px;
+    letter-spacing: -.06em;
+}
+
+.game-score {
+    position: absolute;
+    right: 34px;
+    top: 62px;
+    color: var(--muted);
+    font: 11px 'DM Mono', monospace;
+}
+
+.game-score b {
+    color: var(--acid);
+    font-size: 17px;
+}
+
+.game-panel canvas {
+    width: 100%;
+    margin-top: 20px;
+    border: 1px solid var(--line);
+    touch-action: none;
+}
+
+.game-hint {
+    margin: 10px 0 0;
+    color: var(--mint);
+    font: 11px 'DM Mono', monospace;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 18px;
+    top: 18px;
+    color: var(--paper);
+    background: transparent;
+    border: 0;
+    font: 11px 'DM Mono', monospace;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--pink);
+}
+
+/* INTRO */
+
+.intro-boot {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: clamp(24px, 8vw, 120px);
+    background: var(--ink);
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .55s ease;
+}
+
+.intro-boot.leaving {
+    opacity: 0;
+}
+
+.intro-boot-inner {
+    max-width: 640px;
+}
+
+.intro-line {
+    margin: 0 0 12px;
+    color: var(--mint);
+    font: 14px/1.5 'DM Mono', monospace;
+    letter-spacing: .02em;
+}
+
+.intro-line:last-child {
+    margin-bottom: 0;
+}
+
+.intro-prompt {
+    color: var(--acid);
+    margin-right: 8px;
+}
+
+.intro-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    margin-left: 3px;
+    background: var(--mint);
+    vertical-align: -2px;
+    animation: intro-blink 1s step-end infinite;
+}
+
+.intro-skip {
+    position: absolute;
+    right: clamp(20px, 6vw, 60px);
+    bottom: clamp(20px, 6vw, 60px);
+    margin: 0;
+    color: var(--muted);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .1em;
+}
+
+@keyframes intro-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* DNA — ONDA SERPENTEANTE
+   Usa a própria public/dna-helix.png em faixas.
+*/
+
+.dna-helix {
+    position: absolute;
+
+    right: clamp(18px, 5vw, 80px);
+    top: 50%;
+
+    width: clamp(90px, 8vw, 150px);
+    height: clamp(460px, 78vh, 720px);
+
+    transform: translateY(-50%);
+
+    opacity: .72;
+    pointer-events: none;
+    z-index: 0;
+
+    overflow: visible;
+    display: block;
+
+    --dna-height: clamp(460px, 78vh, 720px);
+    --dna-wave: 22px;
+}
+
+.dna-wave-row {
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: calc(100% / 30);
+
+    overflow: hidden;
+
+    background-image: url('/dna-helix.png');
+    background-repeat: no-repeat;
+
+    /* A imagem é sempre desenhada inteira.
+       Cada faixa mostra apenas a parte correspondente. */
+    background-size: 100% var(--dna-height);
+    background-position-x: center;
+    background-position-y: var(--dna-offset);
+
+    animation-duration: 1.6s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: var(--dna-delay);
+
+    will-change: transform;
+
+    filter:
+        drop-shadow(0 0 8px rgba(139, 44, 255, .55))
+        drop-shadow(0 0 25px rgba(139, 44, 255, .25));
+}
+
+.dna-wave-left {
+    animation-name: dna-wave-left;
+}
+
+.dna-wave-right {
+    animation-name: dna-wave-right;
+}
+
+@keyframes dna-wave-left {
+    0%,
+    100% {
+        transform: translateX(calc(var(--dna-wave) * -1));
+    }
+
+    50% {
+        transform: translateX(var(--dna-wave));
+    }
+}
+
+@keyframes dna-wave-right {
+    0%,
+    100% {
+        transform: translateX(var(--dna-wave));
+    }
+
+    50% {
+        transform: translateX(calc(var(--dna-wave) * -1));
+    }
+}
+
+@media (max-width: 900px) {
+    .dna-helix {
+        right: clamp(10px, 3vw, 35px);
+
+        width: clamp(65px, 8vw, 100px);
+        height: clamp(420px, 70vh, 600px);
+
+        --dna-height: clamp(420px, 70vh, 600px);
+        --dna-wave: 15px;
+
+        opacity: .55;
+    }
+}
+
+@media (max-width: 720px) {
+    .dna-helix {
+        right: -5px;
+        top: 50%;
+
+        width: 58px;
+        height: 80vh;
+
+        --dna-height: 80vh;
+        --dna-wave: 9px;
+
+        transform: translateY(-50%);
+        opacity: .28;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dna-wave-row {
+        animation: none !important;
+    }
+}
+
+/* LANGUAGE */
+
+.lang-toggle {
+    background: transparent;
+    border: 1px solid var(--mint);
+    color: var(--mint);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .1em;
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-left: 14px;
+    transition: .2s;
+}
+
+.lang-toggle:hover {
+    background: var(--mint);
+    color: var(--ink);
+    box-shadow: 0 0 20px rgba(139, 44, 255, .25);
+}
+
+/* FOG */
+
+.fog {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.fog::before,
+.fog::after {
+    content: '';
+    position: absolute;
+    width: 160%;
+    height: 160%;
+    top: -30%;
+    left: -30%;
+    filter: blur(60px);
+}
+
+.fog::before {
+    background:
+        radial-gradient(
+            circle at 30% 35%,
+            rgba(139, 44, 255, .16),
+            transparent 55%
+        ),
+        radial-gradient(
+            circle at 65% 60%,
+            rgba(15, 8, 25, .55),
+            transparent 60%
+        );
+    animation: fog-drift-1 34s ease-in-out infinite;
+}
+
+.fog::after {
+    background:
+        radial-gradient(
+            circle at 60% 30%,
+            rgba(168, 92, 255, .07),
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 25% 70%,
+            rgba(9, 5, 18, .6),
+            transparent 55%
+        );
+    animation: fog-drift-2 46s ease-in-out infinite;
+}
+
+@keyframes fog-drift-1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-5%, 4%) scale(1.12);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes fog-drift-2 {
+    0% {
+        transform: translate(0, 0) scale(1.05);
+    }
+
+    50% {
+        transform: translate(4%, -3%) scale(1);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1.05);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fog::before,
+    .fog::after {
+        animation: none;
+    }
+}
+
+/* DETALHES CYBER */
+
+.hero,
+.projects,
+.about,
+.contact {
+    isolation: isolate;
+}
+
+.hero,
+.projects,
+.contact {
+    position: relative;
+}
+
+.projects::before {
+    content: '// 03 / PROJECTS';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .35);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.projects::after {
+    content: '';
+    position: absolute;
+    top: 55px;
+    left: clamp(20px, 10vw, 150px);
+    width: 100px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        var(--purple),
+        transparent
+    );
+    box-shadow: 0 0 10px var(--purple-glow);
+    pointer-events: none;
+}
+
+.contact::before {
+    content: '// 04 / CONTACT.SYSTEM';
+    position: absolute;
+    top: 35px;
+    right: clamp(20px, 10vw, 150px);
+    color: rgba(168, 92, 255, .35);
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: .12em;
+}
+
+.contact {
+    position: relative;
+}
+
+/* PEQUENOS PONTOS TECNOLÓGICOS */
+
+.identity-card::before {
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px rgba(139, 44, 255, .3);
+}
+
+.identity-card::after {
+    box-shadow:
+        0 0 8px var(--purple),
+        0 0 18px rgba(139, 44, 255, .3);
+}
+
+
+/* HERO RESPONSIVO — não deixa a composição estourar em notebooks */
+
+.hero {
+    width: 100%;
+}
+
+.hero-copy,
+.shamara-clones,
+.identity-card {
+    min-width: 0;
+}
+
+@media (max-width: 1200px) {
+    .hero {
+        grid-template-columns:
+            minmax(0, 1.05fr)
+            minmax(240px, .72fr)
+            minmax(250px, .72fr);
+        gap: clamp(18px, 2.5vw, 38px);
+        padding-left: clamp(28px, 5vw, 70px);
+        padding-right: clamp(28px, 5vw, 70px);
+    }
+
+    .hero h1 {
+        font-size: clamp(50px, 6.4vw, 86px);
+    }
+
+    .hero-text {
+        max-width: 430px;
+        font-size: clamp(15px, 1.35vw, 18px);
+    }
+
+    .shamara-clones {
+        width: min(100%, 360px);
+    }
+
+    .identity-card {
+        width: min(310px, 100%);
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        padding-left: 28px;
+        padding-right: 28px;
+    }
+
+    .hero {
+        min-height: auto;
+        grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr);
+        grid-template-areas:
+            "copy image"
+            "card image";
+        align-items: center;
+        padding: 70px clamp(28px, 5vw, 55px) 80px;
+        gap: 34px;
+    }
+
+    .hero-copy {
+        grid-area: copy;
+    }
+
+    .shamara-clones {
+        grid-area: image;
+        width: min(100%, 390px);
+    }
+
+    .identity-card {
+        grid-area: card;
+        justify-self: start;
+        width: min(330px, 100%);
+    }
+
+    .hero h1 {
+        font-size: clamp(48px, 7.4vw, 72px);
+    }
+
+    .hero-text {
+        max-width: 520px;
+    }
+
+    .hero .dna-helix {
+        right: clamp(10px, 3vw, 35px);
+        width: clamp(65px, 8vw, 100px);
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 720px) {
+
+    header {
+        height: auto;
+        min-height: 65px;
+        padding: 15px 20px;
+    }
+
+    .system-status,
+    nav {
+        display: none;
+    }
+
+  .hero {
+    min-height: 0;
+    padding: 75px 24px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "copy"
+        "image"
+        "card";
+    gap: 38px;
+   }    
+
+    .hero::before {
+        right: -15%;
+        top: 30%;
+        font-size: 300px;
+        opacity: .45;
+    }
+
+    .hero::after {
+        right: -5%;
+        top: 18%;
+        width: 180px;
+        height: 180px;
+    }
+
+    .hero-copy::before {
+        top: -32px;
+    }
+
+    .shamara-clones {
+        width: min(100%, 430px);
+        max-height: none;
+        justify-self: center;
+    }
+
+    .purple-symbol {
+        right: 50%;
+        top: 48%;
+        font-size: 260px;
+        opacity: .35;
+    }
+
+    .identity-card {
+        justify-self: start;
+        width: min(350px, 92%);
+    }
+
+    .hero h1 {
+        font-size: clamp(51px, 16vw, 80px);
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .intro-boot {
+        padding: 24px;
+    }
+
+    .intro-line {
+        font-size: 12px;
+    }
+
+    .projects,
+    .about,
+    .contact {
+        padding: 76px 24px;
+    }
+
+    .projects h2 {
+        margin-bottom: 45px;
+    }
+
+    .projects::before,
+    .about::before,
+    .contact::before {
+        right: 24px;
+        top: 25px;
+    }
+
+    .project {
+        grid-template-columns: 44px 1fr;
+        gap: 12px;
+        padding: 28px 0;
+    }
+
+    .project:hover {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .project-info {
+        grid-column: 1 / -1;
+    }
+
+    .project h3 {
+        font-size: 27px;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-height: 0;
+        align-items: start;
+    }
+
+    .about-copy {
+        padding-top: 0;
+    }
+
+    .about-copy > p {
+        font-size: 16px;
+    }
+
+    .contact-links {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .game-panel {
+        padding: 27px 15px;
+    }
+
+    .game-score {
+        right: 16px;
+        top: 52px;
+    }
+
+    .game-panel h2 {
+        font-size: 27px;
+    }
+
+    .game-panel canvas {
+        margin-top: 26px;
+    }
+
+    .dna-helix {
+        display: block;
+
+        right: -10px;
+        top: 50%;
+
+        width: 58px;
+        height: 80vh;
+
+        transform: translateY(-50%);
+
+        opacity: .22;
+    }
+
+    .sheep-mark {
+        width: 190px;
+        height: 190px;
+        left: -35px;
+        bottom: -30px;
+    }
 }
