@@ -308,44 +308,295 @@ export default function App() {
         </section>
 
         <section
-          id="sobre"
-          className="about reveal"
+  id="sobre"
+  className="about reveal"
+>
+  <BlackSheepMark />
+
+  <TypingTerminal />
+
+  <div className="about-heading">
+    <p className="eyebrow">
+      {t.about.eyebrow}
+    </p>
+
+    <h2>
+      {t.about.title1}
+      <br />
+      <em>{t.about.titleEm}</em>
+    </h2>
+  </div>
+
+  <div className="about-copy">
+    <p>
+      {t.about.p1}
+    </p>
+
+    <p>
+      {t.about.p2}
+    </p>
+
+    <p>
+      {t.about.p3}
+    </p>
+
+    <button
+      className="game-trigger"
+      onClick={() => setGameOpen(true)}
+      type="button"
+    >
+      <span>◉</span>
+      {t.about.game}
+    </button>
+  </div>
+</section>
+
+<section className="trajectory reveal">
+
+  <div className="section-label">
+    <p className="eyebrow">
+      {t.trajectory.eyebrow}
+    </p>
+
+    <p>// 03 / JOURNEY.SYSTEM</p>
+  </div>
+
+  <h2>
+    {t.trajectory.title1}
+    <br />
+    <em>{t.trajectory.titleEm}</em>
+  </h2>
+
+  <div className="timeline">
+
+    <article className="timeline-item">
+      <span className="timeline-dot" />
+
+      <div>
+        <p className="timeline-label">
+          {t.trajectory.education.label}
+        </p>
+
+        <h3>
+          {t.trajectory.education.title}
+        </h3>
+
+        <p>
+          {t.trajectory.education.text}
+        </p>
+      </div>
+    </article>
+
+    <article className="timeline-item">
+      <span className="timeline-dot" />
+
+      <div>
+        <p className="timeline-label">
+          {t.trajectory.projects.label}
+        </p>
+
+        <h3>
+          {t.trajectory.projects.title}
+        </h3>
+
+        <p>
+          {t.trajectory.projects.text}
+        </p>
+      </div>
+    </article>
+
+    <article className="timeline-item">
+      <span className="timeline-dot" />
+
+      <div>
+        <p className="timeline-label">
+          {t.trajectory.professional.label}
+        </p>
+
+        <h3>
+          {t.trajectory.professional.title}
+        </h3>
+
+        <p>
+          {t.trajectory.professional.text}
+        </p>
+      </div>
+    </article>
+
+    <article className="timeline-item">
+      <span className="timeline-dot" />
+
+      <div>
+        <p className="timeline-label">
+          {t.trajectory.next.label}
+        </p>
+
+        <h3>
+          {t.trajectory.next.title}
+        </h3>
+
+        <p>
+          {t.trajectory.next.text}
+        </p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section className="experience reveal">
+
+  <div className="section-label">
+    <p className="eyebrow">
+      {t.experience.eyebrow}
+    </p>
+
+    <p>// 04 / EXPERIENCE</p>
+  </div>
+
+  <h2>
+    {t.experience.title1}
+    <br />
+    <em>{t.experience.titleEm}</em>
+  </h2>
+
+  <div className="experience-grid">
+
+    {t.experience.items.map((item, index) => (
+      <article
+        className="experience-card"
+        key={`${item.title}-${index}`}
+      >
+        <span className="experience-icon">
+          {item.icon}
+        </span>
+
+        <h3>
+          {item.title}
+        </h3>
+
+        <p>
+          {item.text}
+        </p>
+
+        <span className="experience-number">
+          0{index + 1}
+        </span>
+      </article>
+    ))}
+
+  </div>
+
+</section>
+
+<section className="self-awareness reveal">
+
+  <div className="section-label">
+    <p className="eyebrow">
+      {t.selfAwareness.eyebrow}
+    </p>
+
+    <p>// 05 / SELF.AWARENESS</p>
+  </div>
+
+  <h2>
+    {t.selfAwareness.title1}
+    <br />
+    <em>{t.selfAwareness.titleEm}</em>
+  </h2>
+
+  <div className="awareness-grid">
+
+    <div className="awareness-column strengths">
+      <p className="awareness-label">
+        ✦ {t.selfAwareness.strengthsTitle}
+      </p>
+
+      {t.selfAwareness.strengths.map((item, index) => (
+        <div
+          className="awareness-item"
+          key={item}
+          style={{
+            '--delay': `${index * 0.08}s`
+          } as React.CSSProperties}
         >
-          <BlackSheepMark />
+          {item}
+        </div>
+      ))}
+    </div>
 
-          <TypingTerminal />
+    <div className="awareness-column development">
+      <p className="awareness-label">
+        ↗ {t.selfAwareness.developmentTitle}
+      </p>
 
-          <div>
-            <p className="eyebrow">
-              {t.about.eyebrow}
-            </p>
+      {t.selfAwareness.development.map((item, index) => (
+        <div
+          className="awareness-item"
+          key={item}
+          style={{
+            '--delay': `${index * 0.08}s`
+          } as React.CSSProperties}
+        >
+          {item}
+        </div>
+      ))}
+    </div>
 
-            <h2>
-              {t.about.title1}
-              <br />
-              <em>{t.about.titleEm}</em>
-            </h2>
-          </div>
+  </div>
 
-          <div className="about-copy">
-            <p>
-              {t.about.p1}
-            </p>
+  <div className="development-quote">
+    “{t.selfAwareness.quote}”
+  </div>
 
-            <p>
-              {t.about.p2}
-            </p>
+  <div className="awareness-text">
+    <p>
+      {t.selfAwareness.text}
+    </p>
 
-            <button
-              className="game-trigger"
-              onClick={() => setGameOpen(true)}
-              type="button"
-            >
-              <span>◉</span>
-              {t.about.game}
-            </button>
-          </div>
-        </section>
+    <p>
+      {t.selfAwareness.evolution}
+    </p>
+  </div>
+
+</section>
+
+<section className="education reveal">
+
+  <div className="section-label">
+    <p className="eyebrow">
+      {t.education.eyebrow}
+    </p>
+  </div>
+
+  <div className="education-card">
+
+    <div>
+      <h2>
+        {t.education.title}
+      </h2>
+
+      <p className="education-institution">
+        {t.education.institution}
+      </p>
+
+      <p className="education-date">
+        {t.education.date}
+      </p>
+    </div>
+
+    <div className="education-list">
+      {t.education.items.map(item => (
+        <p key={item}>
+          <span>+</span>
+          {item}
+        </p>
+      ))}
+    </div>
+
+  </div>
+
+</section>
 
         <section
           id="contato"
