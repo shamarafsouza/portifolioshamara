@@ -2366,4 +2366,93 @@ footer {
         animation: none;
     }
 }
+/* =========================================================
+   RESPONSIVIDADE — NOVAS SEÇÕES
+   ========================================================= */
 
+@media (max-width: 900px) {
+
+    .experience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .awareness-grid {
+        gap: 20px;
+    }
+
+    .education-card {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+}
+
+@media (max-width: 720px) {
+
+    .trajectory,
+    .experience,
+    .self-awareness,
+    .education {
+        padding: 76px 24px;
+    }
+
+    .trajectory h2,
+    .experience h2,
+    .self-awareness h2 {
+        margin-bottom: 45px;
+    }
+
+    .timeline {
+        padding-left: 32px;
+    }
+
+    .timeline-dot {
+        left: -32px;
+        width: 13px;
+        height: 13px;
+    }
+
+    .timeline::before {
+        left: 5px;
+    }
+
+    .timeline-item {
+        padding-bottom: 45px;
+    }
+
+    .experience-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .experience-card {
+        min-height: 190px;
+        padding: 25px;
+    }
+
+    .awareness-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .development-quote {
+        margin-top: 65px;
+    }
+
+    .education-card {
+        padding: 28px 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .timeline-item,
+    .development-quote,
+    .experience-card,
+    .education-card::before {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .timeline::before {
+        transform: scaleY(1);
+    }
+}
