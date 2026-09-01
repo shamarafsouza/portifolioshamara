@@ -2475,6 +2475,14 @@ footer {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+.project-demo {
+  width: 100%;
+  max-width: 480px;
+  border: 1px solid var(--line);
+  margin: 14px 0;
+  display: block;
+}
 @media (prefers-reduced-motion: reduce) {
 
     .timeline-item,
