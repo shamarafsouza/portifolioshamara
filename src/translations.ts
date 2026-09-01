@@ -12,7 +12,8 @@ export const projectMeta = [
     code: '02',
     name: 'Credenciais de Estacionamento',
     tags: ['PHP', 'SQLite', 'FPDF', 'FPDI'],
-    repo: 'https://github.com/shamarafsouza/credenciais-estacionamento'
+    repo: 'https://github.com/shamarafsouza/credenciais-estacionamento',
+    demo: '/democredencial.gif'
   },
   {
     code: '03',
