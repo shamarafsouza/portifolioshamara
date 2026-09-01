@@ -373,6 +373,7 @@ export default function App() {
     </button>
   </div>
 </section>
+        <QuoteRotator />
 <section className="trajectory reveal">
 
   <div className="section-label">
