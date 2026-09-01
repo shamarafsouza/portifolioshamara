@@ -350,7 +350,26 @@ export default function App() {
     </button>
   </div>
 </section>
+const quotes = [
+  { text: "A IMPRESSÃO DIGITAL NUNCA MENTE. MAS A IDENTIDADE PODE SER REESCRITA.", author: "ORPHAN BLACK" },
+  { text: "SOMOS TODAS VARIAÇÕES DO MESMO TEMA.", author: "ORPHAN BLACK" },
+  // ...
+];
 
+function QuoteRotator() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI(prev => (prev + 1) % quotes.length), 6000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="quote-block">
+      <span className="quote-mark">“</span>
+      <p key={i} className="quote-text fade-in">{quotes[i].text}</p>
+      <span className="quote-author">— {quotes[i].author}</span>
+    </div>
+  );
+}
 <section className="trajectory reveal">
 
   <div className="section-label">
