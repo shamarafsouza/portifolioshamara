@@ -2441,7 +2441,38 @@ footer {
         padding: 28px 22px;
     }
 }
-
+.quote-block {
+  background: #0d0714;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.quote-mark {
+  font-size: 4rem;
+  color: #7c3aed44;
+  position: absolute;
+  top: 1rem; left: 2rem;
+}
+.quote-text {
+  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.1rem;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+}
+.quote-author {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
 
     .timeline-item,
