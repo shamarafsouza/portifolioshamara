@@ -394,231 +394,47 @@ export default function App() {
 
     <article className="timeline-item">
       <span className="timeline-dot" />
-
       <div>
-        <p className="timeline-label">
-          {t.trajectory.education.label}
-        </p>
-
-        <h3>
-          {t.trajectory.education.title}
-        </h3>
-
-        <p>
-          {t.trajectory.education.text}
-        </p>
+        <p className="timeline-label">{t.trajectory.education.label}</p>
+        <h3>{t.trajectory.education.title}</h3>
+        <p>{t.trajectory.education.text}</p>
       </div>
     </article>
 
     <article className="timeline-item">
       <span className="timeline-dot" />
-
       <div>
-        <p className="timeline-label">
-          {t.trajectory.projects.label}
-        </p>
-
-        <h3>
-          {t.trajectory.projects.title}
-        </h3>
-
-        <p>
-          {t.trajectory.projects.text}
-        </p>
+        <p className="timeline-label">{t.trajectory.projects.label}</p>
+        <h3>{t.trajectory.projects.title}</h3>
+        <p>{t.trajectory.projects.text}</p>
       </div>
     </article>
 
     <article className="timeline-item">
       <span className="timeline-dot" />
-
       <div>
-        <p className="timeline-label">
-          {t.trajectory.professional.label}
-        </p>
+        <p className="timeline-label">{t.trajectory.professional.label}</p>
+        <h3>{t.trajectory.professional.title}</h3>
+        <p>{t.trajectory.professional.text}</p>
 
-        <h3>
-          {t.trajectory.professional.title}
-        </h3>
-
-        <p>
-          {t.trajectory.professional.text}
-        </p>
-      </div>
-    </article>
-
-    <article className="timeline-item">
-      <span className="timeline-dot" />
-
-      <div>
-        <p className="timeline-label">
-          {t.trajectory.next.label}
-        </p>
-
-        <h3>
-          {t.trajectory.next.title}
-        </h3>
-
-        <p>
-          {t.trajectory.next.text}
-        </p>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<section className="experience reveal">
-
-  <div className="section-label">
-    <p className="eyebrow">
-      {t.experience.eyebrow}
-    </p>
-
-    <p>// 04 / EXPERIENCE</p>
-  </div>
-
-  <h2>
-    {t.experience.title1}
-    <br />
-    <em>{t.experience.titleEm}</em>
-  </h2>
-
-  <div className="experience-grid">
-
-    {t.experience.items.map((item, index) => (
-      <article
-        className="experience-card"
-        key={`${item.title}-${index}`}
-      >
-        <span className="experience-icon">
-          {item.icon}
-        </span>
-
-        <h3>
-          {item.title}
-        </h3>
-
-        <p>
-          {item.text}
-        </p>
-
-        <span className="experience-number">
-          0{index + 1}
-        </span>
-      </article>
-    ))}
-
-  </div>
-
-</section>
-
-<section className="self-awareness reveal">
-
-  <div className="section-label">
-    <p className="eyebrow">
-      {t.selfAwareness.eyebrow}
-    </p>
-
-    <p>// 05 / SELF.AWARENESS</p>
-  </div>
-
-  <h2>
-    {t.selfAwareness.title1}
-    <br />
-    <em>{t.selfAwareness.titleEm}</em>
-  </h2>
-
-  <div className="awareness-grid">
-
-    <div className="awareness-column strengths">
-      <p className="awareness-label">
-        ✦ {t.selfAwareness.strengthsTitle}
-      </p>
-
-      {t.selfAwareness.strengths.map((item, index) => (
-        <div
-          className="awareness-item"
-          key={item}
-          style={{
-            '--delay': `${index * 0.08}s`
-          } as React.CSSProperties}
-        >
-          {item}
+        <div className="tags">
+          {t.experience.items.map(item => (
+            <span key={item.title}>{item.title}</span>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </article>
 
-    <div className="awareness-column development">
-      <p className="awareness-label">
-        ↗ {t.selfAwareness.developmentTitle}
-      </p>
-
-      {t.selfAwareness.development.map((item, index) => (
-        <div
-          className="awareness-item"
-          key={item}
-          style={{
-            '--delay': `${index * 0.08}s`
-          } as React.CSSProperties}
-        >
-          {item}
-        </div>
-      ))}
-    </div>
+    <article className="timeline-item">
+      <span className="timeline-dot" />
+      <div>
+        <p className="timeline-label">{t.trajectory.next.label}</p>
+        <h3>{t.trajectory.next.title}</h3>
+        <p>{t.trajectory.next.text}</p>
+      </div>
+    </article>
 
   </div>
-
-  <div className="development-quote">
-    “{t.selfAwareness.quote}”
-  </div>
-
-  <div className="awareness-text">
-    <p>
-      {t.selfAwareness.text}
-    </p>
-
-    <p>
-      {t.selfAwareness.evolution}
-    </p>
-  </div>
-
-</section>
-
-<section className="education reveal">
-
-  <div className="section-label">
-    <p className="eyebrow">
-      {t.education.eyebrow}
-    </p>
-  </div>
-
-  <div className="education-card">
-
-    <div>
-      <h2>
-        {t.education.title}
-      </h2>
-
-      <p className="education-institution">
-        {t.education.institution}
-      </p>
-
-      <p className="education-date">
-        {t.education.date}
-      </p>
-    </div>
-
-    <div className="education-list">
-      {t.education.items.map(item => (
-        <p key={item}>
-          <span>+</span>
-          {item}
-        </p>
-      ))}
-    </div>
-
-  </div>
-
 </section>
 
         <section
