@@ -292,6 +292,18 @@ export default function App() {
 
                 <div className="project-info">
                   <p>
+                    <div className="project-info">
+                <p>{t.projects[i].text}</p>
+
+                  {project.demo && (
+                    <img
+                      src={project.demo}
+                      alt={`Demonstração do projeto ${project.name}`}
+                      className="project-demo"
+                    />
+                  )}
+
+  <div className="tags">
                     {t.projects[i].text}
                   </p>
 
