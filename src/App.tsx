@@ -131,7 +131,6 @@ export default function App() {
           >
             ✦
           </div>
-          
 
           <div className="hero-copy">
             <DnaHelix />
@@ -281,27 +280,35 @@ export default function App() {
                 </div>
 
                 <div className="project-info">
-                 <p>
+                  <p className="project-type">
+                    {t.projects[i].type}
+                  </p>
+
+                  <h3>
+                    {project.name}
+                  </h3>
+
+                  <p>
                     {t.projects[i].text}
                   </p>
 
                   {project.demo && (
                     <img
-                        src={project.demo}
-                        alt={`Demonstração do projeto ${project.name}`}
-                        className="project-demo"
+                      src={project.demo}
+                      alt={`Demonstração do projeto ${project.name}`}
+                      className="project-demo"
                     />
-                )}
+                  )}
 
-  <div className="tags">
-    {project.tags.map(tag => (
-      <span key={tag}>
-        {tag}
-      </span>
-    ))}
-  </div>
+                  <div className="tags">
+                    {project.tags.map(tag => (
+                      <span key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
 
-  <div className="project-links">
+                  <div className="project-links">
                     {project.live && (
                       <a
                         href={project.live}
@@ -329,111 +336,150 @@ export default function App() {
         </section>
 
         <section
-  id="sobre"
-  className="about reveal"
->
-  <BlackSheepMark />
+          id="sobre"
+          className="about reveal"
+        >
+          <BlackSheepMark />
 
-  <TypingTerminal />
+          <TypingTerminal />
 
-  <div className="about-heading">
-    <p className="eyebrow">
-      {t.about.eyebrow}
-    </p>
+          <div className="about-heading">
+            <p className="eyebrow">
+              {t.about.eyebrow}
+            </p>
 
-    <h2>
-      {t.about.title1}
-      <br />
-      <em>{t.about.titleEm}</em>
-    </h2>
-  </div>
+            <h2>
+              {t.about.title1}
+              <br />
+              <em>{t.about.titleEm}</em>
+            </h2>
+          </div>
 
-  <div className="about-copy">
-    <p>
-      {t.about.p1}
-    </p>
+          <div className="about-copy">
+            <p>
+              {t.about.p1}
+            </p>
 
-    <p>
-      {t.about.p2}
-    </p>
+            <p>
+              {t.about.p2}
+            </p>
 
-    <p>
-      {t.about.p3}
-    </p>
+            <p>
+              {t.about.p3}
+            </p>
 
-    <button
-      className="game-trigger"
-      onClick={() => setGameOpen(true)}
-      type="button"
-    >
-      <span>◉</span>
-      {t.about.game}
-    </button>
-  </div>
-</section>
+            <button
+              className="game-trigger"
+              onClick={() => setGameOpen(true)}
+              type="button"
+            >
+              <span>◉</span>
+              {t.about.game}
+            </button>
+          </div>
+        </section>
+
         <QuoteRotator />
-<section className="trajectory reveal">
 
-  <div className="section-label">
-    <p className="eyebrow">
-      {t.trajectory.eyebrow}
-    </p>
+        <section className="trajectory reveal">
+          <div className="section-label">
+            <p className="eyebrow">
+              {t.trajectory.eyebrow}
+            </p>
 
-    <p>// 03 / JOURNEY.SYSTEM</p>
-  </div>
+            <p>// 03 / JOURNEY.SYSTEM</p>
+          </div>
 
-  <h2>
-    {t.trajectory.title1}
-    <br />
-    <em>{t.trajectory.titleEm}</em>
-  </h2>
+          <h2>
+            {t.trajectory.title1}
+            <br />
+            <em>{t.trajectory.titleEm}</em>
+          </h2>
 
-  <div className="timeline">
+          <div className="timeline">
 
-    <article className="timeline-item">
-      <span className="timeline-dot" />
-      <div>
-        <p className="timeline-label">{t.trajectory.education.label}</p>
-        <h3>{t.trajectory.education.title}</h3>
-        <p>{t.trajectory.education.text}</p>
-      </div>
-    </article>
+            <article className="timeline-item">
+              <span className="timeline-dot" />
 
-    <article className="timeline-item">
-      <span className="timeline-dot" />
-      <div>
-        <p className="timeline-label">{t.trajectory.projects.label}</p>
-        <h3>{t.trajectory.projects.title}</h3>
-        <p>{t.trajectory.projects.text}</p>
-      </div>
-    </article>
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.education.label}
+                </p>
 
-    <article className="timeline-item">
-      <span className="timeline-dot" />
-      <div>
-        <p className="timeline-label">{t.trajectory.professional.label}</p>
-        <h3>{t.trajectory.professional.title}</h3>
-        <p>{t.trajectory.professional.text}</p>
+                <h3>
+                  {t.trajectory.education.title}
+                </h3>
 
-        <div className="tags">
-          {t.experience.items.map(item => (
-            <span key={item.title}>{item.title}</span>
-          ))}
-        </div>
-      </div>
-    </article>
+                <p>
+                  {t.trajectory.education.text}
+                </p>
+              </div>
+            </article>
 
-    <article className="timeline-item">
-      <span className="timeline-dot" />
-      <div>
-        <p className="timeline-label">{t.trajectory.next.label}</p>
-        <h3>{t.trajectory.next.title}</h3>
-        <p>{t.trajectory.next.text}</p>
-      </div>
-    </article>
+            <article className="timeline-item">
+              <span className="timeline-dot" />
 
-  </div>
-</section>
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.projects.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.projects.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.projects.text}
+                </p>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.professional.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.professional.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.professional.text}
+                </p>
+
+                <div className="tags">
+                  {t.experience.items.map(item => (
+                    <span key={item.title}>
+                      {item.title}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.next.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.next.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.next.text}
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </section>
 
         <section
           id="contato"
