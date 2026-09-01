@@ -280,42 +280,28 @@ export default function App() {
                   {project.code}
                 </div>
 
-                <div>
-                  <p className="project-type">
-                    {t.projects[i].type}
-                  </p>
-
-                  <h3>
-                    {project.name}
-                  </h3>
-                </div>
-
                 <div className="project-info">
-                  <p>
-                    <div className="project-info">
-                <p>{t.projects[i].text}</p>
-
-                  {project.demo && (
-                    <img
-                      src={project.demo}
-                      alt={`Demonstração do projeto ${project.name}`}
-                      className="project-demo"
-                    />
-                  )}
-
-  <div className="tags">
+                 <p>
                     {t.projects[i].text}
                   </p>
 
-                  <div className="tags">
-                    {project.tags.map(tag => (
-                      <span key={tag}>
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {project.demo && (
+                    <img
+                        src={project.demo}
+                        alt={`Demonstração do projeto ${project.name}`}
+                        className="project-demo"
+                    />
+                )}
 
-                  <div className="project-links">
+  <div className="tags">
+    {project.tags.map(tag => (
+      <span key={tag}>
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  <div className="project-links">
                     {project.live && (
                       <a
                         href={project.live}
