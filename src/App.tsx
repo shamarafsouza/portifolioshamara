@@ -1,0 +1,556 @@
+import { useEffect, useState } from 'react'
+import IntroBoot from './components/IntroBoot'
+import DinoGame from './components/DinoGame'
+import DnaHelix from './components/DnaHelix'
+import BlackSheepMark from './components/BlackSheepMark'
+import { translations, projectMeta, type Lang } from './translations'
+import TypingTerminal from './components/TypingTerminal'
+
+const technologies = [
+  { name: 'React', image: 'https://cdn.simpleicons.org/react/61DAFB', fallback: '⚛' },
+  { name: 'TypeScript', image: 'https://cdn.simpleicons.org/typescript/3178C6', fallback: 'TS' },
+  { name: 'Node.js', image: 'https://cdn.simpleicons.org/nodedotjs/5FA04E', fallback: 'JS' },
+  { name: 'Python', image: 'https://cdn.simpleicons.org/python/3776AB', fallback: 'PY' },
+  { name: 'C#', image: 'https://cdn.simpleicons.org/csharp', fallback: 'C#' },
+  { name: '.NET', image: 'https://cdn.simpleicons.org/dotnet', fallback: '.N' },
+  { name: 'HTML5', image: 'https://cdn.simpleicons.org/html5/E34F26', fallback: '5' },
+  { name: 'CSS3', image: 'https://cdn.simpleicons.org/css3', fallback: '3' },
+  { name: 'MySQL', image: 'https://cdn.simpleicons.org/mysql/4479A1', fallback: 'SQL' },
+  { name: 'PHP', image: 'https://cdn.simpleicons.org/php/777BB4', fallback: 'PHP' }
+]
+
+const quotes = [
+  { text: 'A IMPRESSÃO DIGITAL NUNCA MENTE. MAS A IDENTIDADE PODE SER REESCRITA.', author: 'ORPHAN BLACK' },
+  { text: 'SOMOS TODAS VARIAÇÕES DO MESMO TEMA.', author: 'ORPHAN BLACK' }
+  // adicione mais frases aqui
+]
+
+function QuoteRotator() {
+  const [i, setI] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setI(prev => (prev + 1) % quotes.length), 6000)
+    return () => clearInterval(id)
+  }, [])
+
+  return (
+    <div className="quote-block">
+      <span className="quote-mark">“</span>
+      <p key={i} className="quote-text fade-in">{quotes[i].text}</p>
+      <span className="quote-author">— {quotes[i].author}</span>
+    </div>
+  )
+}
+
+export default function App() {
+  const [lang, setLang] = useState<Lang>('pt')
+  const [introDone, setIntroDone] = useState(false)
+  const [gameOpen, setGameOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const t = translations[lang]
+
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal')
+
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in')
+            io.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.15
+      }
+    )
+
+    els.forEach(el => io.observe(el))
+
+    return () => io.disconnect()
+  }, [lang])
+
+  return (
+    <>
+      {!introDone && (
+        <IntroBoot
+          lines={t.intro}
+          skipLabel={t.introSkip}
+          onDone={() => setIntroDone(true)}
+        />
+      )}
+
+      <div className="noise" />
+
+      <header className={menuOpen ? 'menu-open' : ''}>
+        <a
+          className="brand"
+          href="#inicio"
+          aria-label="Shamara Souza — início"
+        >
+          S<span>_</span>S
+        </a>
+
+        <p className="system-status">
+          <i />
+          {t.systemStatus}
+        </p>
+
+        <button
+          className="menu-trigger"
+          onClick={() => setMenuOpen(open => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="site-navigation"
+          aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+          type="button"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav id="site-navigation" aria-label="Navegação principal">
+          <a href="#projetos" onClick={() => setMenuOpen(false)}>
+            {t.nav.projects}
+          </a>
+
+          <a href="#sobre" onClick={() => setMenuOpen(false)}>
+            {t.nav.profile}
+          </a>
+
+          <a href="#contato" onClick={() => setMenuOpen(false)}>
+            {t.nav.contact}
+          </a>
+        </nav>
+
+        <button
+          className="lang-toggle"
+          onClick={() => setLang(lang === 'pt' ? 'en' : 'pt')}
+          aria-label={lang === 'pt' ? 'Mudar idioma para inglês' : 'Change language to Portuguese'}
+          type="button"
+        >
+          {t.langToggle}
+        </button>
+      </header>
+
+      <main id="inicio">
+        <section className="hero">
+          <div className="fog" />
+
+          <div
+            className="purple-symbol"
+            aria-hidden="true"
+          >
+            ✦
+          </div>
+
+          <div className="hero-copy">
+            <DnaHelix />
+
+            <p className="eyebrow">
+              {t.hero.eyebrow}
+            </p>
+
+            <h1>
+              {t.hero.title1}
+              <br />
+              <em>{t.hero.titleEm}</em>
+              <br />
+              {t.hero.title2}
+            </h1>
+
+            <p className="hero-text">
+              {t.hero.text}
+            </p>
+
+            <div className="hero-actions">
+              <a
+                className="button primary"
+                href="#projetos"
+              >
+                {t.hero.exploreBtn} <b>↘</b>
+              </a>
+
+              <a
+                className="button"
+                href="https://github.com/shamarafsouza"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {t.hero.githubBtn} <b>↗</b>
+              </a>
+            </div>
+          </div>
+
+          <img
+            className="shamara-clones"
+            src="/shamara-clones.png"
+            alt="Shamara Souza em múltiplas versões"
+          />
+
+          <div className="identity-card">
+            <div className="scan" />
+
+            <p>
+              {t.identity.verified}
+            </p>
+
+            <div className="portrait">
+              <span>SS</span>
+            </div>
+
+            <h2>
+              {t.identity.name1}
+              <br />
+              {t.identity.name2}
+            </h2>
+
+            <dl>
+              <div>
+                <dt>{t.identity.area}</dt>
+                <dd>{t.identity.areaVal}</dd>
+              </div>
+
+              <div>
+                <dt>{t.identity.focus}</dt>
+                <dd>{t.identity.focusVal}</dd>
+              </div>
+
+              <div>
+                <dt>{t.identity.status}</dt>
+                <dd>{t.identity.statusVal}</dd>
+              </div>
+            </dl>
+
+            <div className="barcode">
+              ||| || |||| | ||| || ||||
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="ticker"
+          aria-label="Tecnologias"
+        >
+          <div className="ticker-track">
+            {[...technologies, ...technologies].map((technology, index) => (
+              <div
+                className="tech-item"
+                key={`${technology.name}-${index}`}
+                aria-hidden={index >= technologies.length}
+              >
+                <span className="tech-icon" aria-hidden="true">
+                  <img
+                    src={technology.image}
+                    alt=""
+                    onError={event => {
+                      event.currentTarget.style.display = 'none'
+                      event.currentTarget.nextElementSibling?.classList.add('visible')
+                    }}
+                  />
+                  <span className="tech-icon-fallback">
+                    {technology.fallback}
+                  </span>
+                </span>
+
+                <span className="tech-name">
+                  {technology.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="projetos"
+          className="projects"
+        >
+          <div className="section-label">
+            <p className="eyebrow">
+              {t.projectsSection.label}
+            </p>
+
+            <p>
+              {t.projectsSection.count}
+            </p>
+          </div>
+
+          <h2>
+            {t.projectsSection.title1}
+            <br />
+            <em>{t.projectsSection.titleEm}</em>
+          </h2>
+
+          <div className="project-list">
+            {projectMeta.map((project, i) => (
+              <article
+                className="project reveal"
+                key={project.name}
+              >
+                <div className="project-code">
+                  {project.code}
+                </div>
+
+                <div className="project-info">
+                  <p className="project-type">
+                    {t.projects[i].type}
+                  </p>
+
+                  <h3>
+                    {project.name}
+                  </h3>
+
+                  <p>
+                    {t.projects[i].text}
+                  </p>
+
+                  {project.demo && (
+                    <img
+                      src={project.demo}
+                      alt={`Demonstração do projeto ${project.name}`}
+                      className="project-demo"
+                    />
+                  )}
+
+                  <div className="tags">
+                    {project.tags.map(tag => (
+                      <span key={tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t.projectsSection.open} ↗
+                      </a>
+                    )}
+
+                    {project.repo && (
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {t.projectsSection.code} ↗
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          id="sobre"
+          className="about reveal"
+        >
+          <BlackSheepMark />
+
+          <TypingTerminal />
+
+          <div className="about-heading">
+            <p className="eyebrow">
+              {t.about.eyebrow}
+            </p>
+
+            <h2>
+              {t.about.title1}
+              <br />
+              <em>{t.about.titleEm}</em>
+            </h2>
+          </div>
+
+          <div className="about-copy">
+            <p>
+              {t.about.p1}
+            </p>
+
+            <p>
+              {t.about.p2}
+            </p>
+
+            <p>
+              {t.about.p3}
+            </p>
+
+            <button
+              className="game-trigger"
+              onClick={() => setGameOpen(true)}
+              type="button"
+            >
+              <span>◉</span>
+              {t.about.game}
+            </button>
+          </div>
+        </section>
+
+        <QuoteRotator />
+
+        <section className="trajectory reveal">
+          <div className="section-label">
+            <p className="eyebrow">
+              {t.trajectory.eyebrow}
+            </p>
+
+            <p>// 03 / JOURNEY.SYSTEM</p>
+          </div>
+
+          <h2>
+            {t.trajectory.title1}
+            <br />
+            <em>{t.trajectory.titleEm}</em>
+          </h2>
+
+          <div className="timeline">
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.education.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.education.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.education.text}
+                </p>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.projects.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.projects.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.projects.text}
+                </p>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.professional.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.professional.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.professional.text}
+                </p>
+
+                <div className="tags">
+                  {t.experience.items.map(item => (
+                    <span key={item.title}>
+                      {item.title}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </article>
+
+            <article className="timeline-item">
+              <span className="timeline-dot" />
+
+              <div>
+                <p className="timeline-label">
+                  {t.trajectory.next.label}
+                </p>
+
+                <h3>
+                  {t.trajectory.next.title}
+                </h3>
+
+                <p>
+                  {t.trajectory.next.text}
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <section
+          id="contato"
+          className="contact"
+        >
+          <p className="eyebrow">
+            {t.contact.eyebrow}
+          </p>
+
+          <h2>
+            {t.contact.title1}
+            <br />
+            <em>{t.contact.titleEm}</em>
+          </h2>
+
+          <div className="contact-links">
+            <a href="mailto:ferreiradesouzashamara@gmail.com">
+              ferreiradesouzashamara@gmail.com
+              <b>↗</b>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/shamara-ferreira-de-souza-b44aa7227/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t.contact.linkedin}
+              <b>↗</b>
+            </a>
+
+            <a
+              href="https://github.com/shamarafsouza"
+              target="_blank"
+              rel="noreferrer"
+            >
+              GitHub
+              <b>↗</b>
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>
+          {t.footer.name}
+        </span>
+
+        <span>
+          {t.footer.stack}
+        </span>
+      </footer>
+
+      {gameOpen && (
+        <DinoGame
+          onClose={() => setGameOpen(false)}
+        />
+      )}
+    </>
+  )
+}
