@@ -60,7 +60,9 @@ export const translations = {
 
       exploreBtn: 'EXPLORAR PROJETOS',
 
-      githubBtn: 'GITHUB'
+      githubBtn: 'GITHUB',
+
+      emailBtn: 'FALE COMIGO'
     },
 
     identity: {
@@ -260,7 +262,21 @@ education: {
 
       titleEm: 'ALGO NOVO?',
 
-      linkedin: 'LinkedIn'
+      linkedin: 'LinkedIn',
+
+      resume: 'VER CURRÍCULO',
+
+      form: {
+        label: 'ENVIE UMA MENSAGEM DIRETA',
+        required: '* CAMPOS OBRIGATÓRIOS',
+        name: 'SEU NOME',
+        email: 'SEU E-MAIL',
+        message: 'SUA MENSAGEM',
+        submit: 'ENVIAR MENSAGEM',
+        sending: 'ENVIANDO...',
+        success: 'Mensagem enviada. Obrigada pelo contato!',
+        error: 'Não foi possível enviar agora. Tente novamente em instantes.'
+      }
     },
 
     footer: {
@@ -306,7 +322,9 @@ education: {
 
       exploreBtn: 'EXPLORE PROJECTS',
 
-      githubBtn: 'GITHUB'
+      githubBtn: 'GITHUB',
+
+      emailBtn: 'EMAIL ME'
     },
 
     identity: {
@@ -506,7 +524,21 @@ education: {
 
       titleEm: 'SOMETHING NEW?',
 
-      linkedin: 'LinkedIn'
+      linkedin: 'LinkedIn',
+
+      resume: 'VIEW RÉSUMÉ',
+
+      form: {
+        label: 'SEND A DIRECT MESSAGE',
+        required: '* REQUIRED FIELDS',
+        name: 'YOUR NAME',
+        email: 'YOUR EMAIL',
+        message: 'YOUR MESSAGE',
+        submit: 'SEND MESSAGE',
+        sending: 'SENDING...',
+        success: 'Message sent. Thank you for getting in touch!',
+        error: 'Unable to send right now. Please try again shortly.'
+      }
     },
 
     footer: {

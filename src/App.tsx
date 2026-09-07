@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import IntroBoot from './components/IntroBoot'
 import DinoGame from './components/DinoGame'
-import DnaHelix from './components/DnaHelix'
 import BlackSheepMark from './components/BlackSheepMark'
 import { translations, projectMeta, type Lang } from './translations'
 import TypingTerminal from './components/TypingTerminal'
@@ -47,6 +46,7 @@ export default function App() {
   const [introDone, setIntroDone] = useState(false)
   const [gameOpen, setGameOpen] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const t = translations[lang]
 
@@ -71,6 +71,37 @@ export default function App() {
 
     return () => io.disconnect()
   }, [lang])
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    setFormStatus('sending')
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/ferreiradesouzashamara@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+          _subject: 'Novo contato pelo portfólio de Shamara Souza'
+        })
+      })
+
+      if (!response.ok) throw new Error('Form submission failed')
+
+      form.reset()
+      setFormStatus('success')
+    } catch {
+      setFormStatus('error')
+    }
+  }
 
   return (
     <>
@@ -147,8 +178,6 @@ export default function App() {
           </div>
 
           <div className="hero-copy">
-            <DnaHelix />
-
             <p className="eyebrow">
               {t.hero.eyebrow}
             </p>
@@ -180,6 +209,13 @@ export default function App() {
                 rel="noreferrer"
               >
                 {t.hero.githubBtn} <b>↗</b>
+              </a>
+
+              <a
+                className="button contact-cta"
+                href="mailto:ferreiradesouzashamara@gmail.com?subject=Contato%20pelo%20portfólio%20-%20Shamara%20Souza"
+              >
+                {t.hero.emailBtn} <b>↗</b>
               </a>
             </div>
           </div>
@@ -532,7 +568,51 @@ export default function App() {
               GitHub
               <b>↗</b>
             </a>
+
+            <a
+              href="/curriculo-shamara-ferreira-de-souza.pdf"
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t.contact.resume}
+              <b>↗</b>
+            </a>
           </div>
+
+          <form className="contact-form" onSubmit={handleContactSubmit}>
+            <div className="contact-form-heading">
+              <p>{t.contact.form.label}</p>
+              <span>{t.contact.form.required}</span>
+            </div>
+
+            <div className="contact-form-grid">
+              <label>
+                {t.contact.form.name}
+                <input name="name" type="text" autoComplete="name" required />
+              </label>
+
+              <label>
+                {t.contact.form.email}
+                <input name="email" type="email" autoComplete="email" required />
+              </label>
+            </div>
+
+            <label>
+              {t.contact.form.message}
+              <textarea name="message" rows={5} required />
+            </label>
+
+            <div className="contact-form-footer">
+              <button className="button primary" type="submit" disabled={formStatus === 'sending'}>
+                {formStatus === 'sending' ? t.contact.form.sending : t.contact.form.submit} <b>↗</b>
+              </button>
+
+              <p className={`form-status ${formStatus}`} aria-live="polite">
+                {formStatus === 'success' && t.contact.form.success}
+                {formStatus === 'error' && t.contact.form.error}
+              </p>
+            </div>
+          </form>
         </section>
       </main>
 
