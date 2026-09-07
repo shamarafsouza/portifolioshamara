@@ -50,11 +50,11 @@ export const translations = {
     hero: {
       eyebrow: 'ARQUIVO 0027, DESENVOLVEDORA',
 
-      title1: 'UMA MENTE,',
+      title1: 'DESENVOLVO',
 
-      titleEm: 'MÚLTIPLAS',
+      titleEm: 'SOLUÇÕES',
 
-      title2: 'SOLUÇÕES.',
+      title2: 'QUE FUNCIONAM.',
 
       text: 'Sou Shamara Ferreira de Souza, desenvolvedora fullstack formada em Sistemas de Informação. Transito entre front-end e back-end com React, Node.js, TypeScript, Python, PHP e C#, e gosto de resolver o problema de ponta a ponta, do design da interface à lógica por trás dela.',
 
@@ -87,9 +87,9 @@ export const translations = {
 
       count: '03 REGISTROS ATIVOS',
 
-      title1: 'IDEIAS',
+      title1: 'PROJETOS',
 
-      titleEm: 'EM FUNCIONAMENTO.',
+      titleEm: 'EM DESTAQUE.',
 
       open: 'ABRIR PROJETO',
 
@@ -119,9 +119,9 @@ export const translations = {
 about: {
   eyebrow: 'ARQUIVO PESSOAL, DESIGNAÇÃO ÚNICA',
 
-  title1: 'QUEM SOU',
+  title1: 'POR TRÁS',
 
-  titleEm: 'EU.',
+  titleEm: 'DO CÓDIGO.',
 
   p1: 'Sou Shamara Ferreira de Souza, formada em Sistemas de Informação. Minha trajetória profissional começou na gestão pública e, ao longo desse caminho, desenvolvi competências que hoje levo para a tecnologia: responsabilidade, organização, comunicação, adaptação e resolução de problemas.',
 
@@ -258,9 +258,9 @@ education: {
     contact: {
       eyebrow: 'CANAL DE CONTATO ABERTO',
 
-      title1: 'VAMOS CRIAR',
+      title1: 'VAMOS',
 
-      titleEm: 'ALGO NOVO?',
+      titleEm: 'CONVERSAR?',
 
       linkedin: 'LinkedIn',
 
@@ -312,11 +312,11 @@ education: {
     hero: {
       eyebrow: 'FILE 0027, DEVELOPER',
 
-      title1: 'ONE MIND,',
+      title1: 'I BUILD',
 
-      titleEm: 'MULTIPLE',
+      titleEm: 'SOLUTIONS',
 
-      title2: 'SOLUTIONS.',
+      title2: 'THAT WORK.',
 
       text: 'I\'m Shamara Ferreira de Souza, a fullstack developer with a degree in Information Systems. I move between front-end and back-end with React, Node.js, TypeScript, Python, PHP and C#, and I like solving the problem end to end — from interface design to the logic behind it.',
 
@@ -349,9 +349,9 @@ education: {
 
       count: '03 ACTIVE RECORDS',
 
-      title1: 'IDEAS',
+      title1: 'SELECTED',
 
-      titleEm: 'IN MOTION.',
+      titleEm: 'PROJECTS.',
 
       open: 'OPEN PROJECT',
 
@@ -381,9 +381,9 @@ education: {
 about: {
   eyebrow: 'PERSONAL FILE, UNIQUE DESIGNATION',
 
-  title1: 'WHO',
+  title1: 'BEHIND',
 
-  titleEm: 'I AM.',
+  titleEm: 'THE CODE.',
 
   p1: 'I\'m Shamara Ferreira de Souza, with a degree in Information Systems. My professional journey started in public administration, where I developed skills that I now bring into technology: responsibility, organization, communication, adaptability and problem solving.',
 
@@ -520,9 +520,9 @@ education: {
     contact: {
       eyebrow: 'OPEN CONTACT CHANNEL',
 
-      title1: 'LET\'S BUILD',
+      title1: 'LET\'S',
 
-      titleEm: 'SOMETHING NEW?',
+      titleEm: 'TALK?',
 
       linkedin: 'LinkedIn',
 

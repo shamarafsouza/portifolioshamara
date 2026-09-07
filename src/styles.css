@@ -281,6 +281,11 @@ main {
     font-weight: 700;
 }
 
+.hero h1 {
+    font-size: clamp(50px, 5.4vw, 88px);
+    line-height: .92;
+}
+
 .hero h1 em,
 .projects h2 em,
 .about h2 em,
@@ -2069,7 +2074,7 @@ footer {
     }
 
     .hero h1 {
-        font-size: clamp(50px, 6.4vw, 86px);
+        font-size: clamp(46px, 5.8vw, 76px);
     }
 
     .hero-text {
