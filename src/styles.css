@@ -131,8 +131,8 @@ main {
     min-height: 680px;
     padding: 80px clamp(24px, 8vw, 120px);
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(300px, .72fr) minmax(280px, .7fr);
-    gap: clamp(24px, 3.5vw, 58px);
+    grid-template-columns: minmax(0, 1.12fr) minmax(340px, .92fr) minmax(250px, .54fr);
+    gap: clamp(24px, 3vw, 46px);
     align-items: center;
     overflow: hidden;
 
@@ -231,8 +231,8 @@ main {
 .shamara-clones {
     position: relative;
     z-index: 1;
-    width: min(100%, 1000px);
-    max-height: 900x;
+    width: min(106%, 520px);
+    max-height: 900px;
     object-fit: contain;
     object-position: center;
     justify-self: center;
@@ -275,7 +275,7 @@ main {
 .about h2,
 .contact h2 {
     margin: 0;
-    font-size: clamp(52px, 7.1vw, 110px);
+    font-size: clamp(52px, 6.6vw, 104px);
     line-height: .87;
     letter-spacing: -.075em;
     font-weight: 700;
@@ -414,9 +414,9 @@ main {
 .identity-card {
     position: relative;
     z-index: 1;
-    width: min(350px, 100%);
+    width: min(292px, 100%);
     justify-self: end;
-    padding: 20px;
+    padding: 16px;
     border: 1px solid var(--mint);
     background: rgba(13, 9, 22, .9);
     box-shadow:
@@ -449,14 +449,14 @@ main {
 
 .identity-card > p {
     position: relative;
-    margin: 0 0 12px;
+    margin: 0 0 10px;
     color: var(--mint);
     font: 10px 'DM Mono', monospace;
     letter-spacing: .09em;
 }
 
 .portrait {
-    height: 188px;
+    height: 126px;
     display: grid;
     place-items: center;
     background:
@@ -474,7 +474,7 @@ main {
 }
 
 .portrait span {
-    font: 700 80px 'DM Mono', monospace;
+    font: 700 56px 'DM Mono', monospace;
     color: var(--acid);
     mix-blend-mode: screen;
     text-shadow:
@@ -483,8 +483,8 @@ main {
 }
 
 .identity-card h2 {
-    margin: 19px 0;
-    font-size: 34px;
+    margin: 14px 0;
+    font-size: 29px;
     line-height: .82;
     letter-spacing: -.07em;
 }
@@ -498,7 +498,7 @@ main {
     display: flex;
     justify-content: space-between;
     gap: 15px;
-    padding: 8px 0;
+    padding: 7px 0;
     border-bottom: 1px solid var(--line);
     font: 10px 'DM Mono', monospace;
 }
@@ -514,9 +514,9 @@ main {
 }
 
 .barcode {
-    padding-top: 15px;
-    font: 11px 'DM Mono', monospace;
-    letter-spacing: 3px;
+    padding-top: 12px;
+    font: 10px 'DM Mono', monospace;
+    letter-spacing: 2px;
     color: var(--paper);
 }
 
@@ -534,7 +534,7 @@ main {
 
 @keyframes scan {
     50% {
-        transform: translateY(220px);
+        transform: translateY(155px);
     }
 }
 
@@ -973,6 +973,7 @@ main {
     height: 240px;
     pointer-events: none;
     z-index: 0;
+    opacity: .62;
     opacity: .9;
     filter: drop-shadow(0 0 15px rgba(139, 44, 255, .25));
 }
@@ -1958,9 +1959,9 @@ footer {
 @media (max-width: 1200px) {
     .hero {
         grid-template-columns:
-            minmax(0, 1.05fr)
-            minmax(240px, .72fr)
-            minmax(250px, .72fr);
+            minmax(0, 1.08fr)
+            minmax(250px, .82fr)
+            minmax(225px, .54fr);
         gap: clamp(18px, 2.5vw, 38px);
         padding-left: clamp(28px, 5vw, 70px);
         padding-right: clamp(28px, 5vw, 70px);
@@ -1976,11 +1977,11 @@ footer {
     }
 
     .shamara-clones {
-        width: min(100%, 360px);
+        width: min(105%, 390px);
     }
 
     .identity-card {
-        width: min(310px, 100%);
+        width: min(285px, 100%);
     }
 }
 
