@@ -86,7 +86,7 @@ export const translations = {
     projectsSection: {
       label: 'SELEÇÃO DE PROJETOS',
 
-      count: '03 REGISTROS ATIVOS',
+      count: '02 REGISTROS ATIVOS',
 
       title1: 'PROJETOS',
 
@@ -348,7 +348,7 @@ education: {
     projectsSection: {
       label: 'SELECTED PROJECTS',
 
-      count: '03 ACTIVE RECORDS',
+      count: '02 ACTIVE RECORDS',
 
       title1: 'SELECTED',
 
