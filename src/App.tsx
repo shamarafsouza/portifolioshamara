@@ -549,7 +549,28 @@ export default function App() {
 
           </div>
         </section>
+            <section className="experience reveal">
+              <div className="section-label">
+                <p className="eyebrow">{t.experience.eyebrow}</p>
+              </div>
 
+                <h2>
+                {t.experience.title1}
+                  <br />
+                    <em>{t.experience.titleEm}</em>
+                </h2>
+
+                <div className="experience-grid">
+                  {t.experience.items.map((item, i) => (
+                  <div className="experience-card" key={item.title}>
+                  <span className="experience-icon">{item.icon}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                    <span className="experience-number">{String(i + 1).padStart(2, '0')}</span>
+                  </div>
+              ))}
+              </div>
+            </section>
         <section
           id="contato"
           className="contact"
