@@ -2695,13 +2695,6 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.project-demo {
-  width: 100%;
-  max-width: 480px;
-  border: 1px solid var(--line);
-  margin: 14px 0;
-  display: block;
-}
 .project-video-frame {
   position: relative;
   width: 100%;
@@ -2713,17 +2706,16 @@ footer {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;
   position: relative;
   z-index: 1;
 }
 
 .project-frame-overlay {
   position: absolute;
-  top: -7%;
-  left: -11%;
-  width: 122%;
-  height: 114%;
+  top: -8%;
+  left: -5%;
+  width: 110%;
+  height: 116%;
   object-fit: fill;
   z-index: 2;
   pointer-events: none;
