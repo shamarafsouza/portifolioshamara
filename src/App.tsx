@@ -345,30 +345,30 @@ export default function App() {
               {project.demo && (
                 <div className="project-video-frame">
                 {project.demo.endsWith('.mp4') ? (
-                  <video
-                    src={project.demo}
-                    className="project-demo"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                  />
+                    <video
+                      src={project.demo}
+                      className="project-demo"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    />
                   ) : (
-                <img
-                  src={project.demo}
-                  alt={`Demonstração do projeto ${project.name}`}
-                  className="project-demo"
-                />
-              )}
+                        <img
+                        src={project.demo}
+                        alt={`Demonstração do projeto ${project.name}`}
+                        className="project-demo"
+                        />
+                      )}
 
-    <img
-      src="/molduravideos.png"
-      alt=""
-      className="project-frame-overlay"
-      aria-hidden="true"
-    />
-  </div>
-)}      
+                    <img
+                      src="/molduravideos.png"
+                      alt=""
+                      className="project-frame-overlay"
+                      aria-hidden="true"
+                    />
+                </div>
+              )}      
                   <div className="tags">
                     {project.tags.map(tag => (
                       <span key={tag}>
