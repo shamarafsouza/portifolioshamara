@@ -343,11 +343,20 @@ export default function App() {
                   </p>
 
                   {project.demo && (
-                    <img
-                      src={project.demo}
-                      alt={`Demonstração do projeto ${project.name}`}
-                      className="project-demo"
-                    />
+                    <div className="project-video-frame">
+                        <img
+                          src={project.demo}
+                          alt={`Demonstração do projeto ${project.name}`}
+                          className="project-demo"
+                        />
+
+                        <img
+                          src="/molduravideos.png"
+                          alt=""
+                          className="project-frame-overlay"
+                          aria-hidden="true"
+                        />
+                      </div>
                   )}
 
                   <div className="tags">
