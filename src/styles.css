@@ -2698,28 +2698,31 @@ footer {
 .project-video-frame {
   position: relative;
   width: 100%;
+  aspect-ratio: 1781 / 883;   /* trava a proporção da moldura */
   margin-top: 2rem;
   overflow: visible;
 }
 
 .project-demo {
-  display: block;
-  width: 100%;
-  height: auto;
-  position: relative;
+  position: absolute;
+  top: 13.31%;
+  left: 17.66%;
+  width: 64.68%;
+  height: 73.38%;
+  object-fit: cover;
   z-index: 1;
 }
 
 .project-frame-overlay {
   position: absolute;
-  top: -8%;
-  left: -5%;
-  width: 110%;
-  height: 116%;
-  object-fit: fill;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;   /*  porque o container já tem exatamente a proporção da moldura entao não distorce nada */
   z-index: 2;
   pointer-events: none;
 }
+
 @media (prefers-reduced-motion: reduce) {
 
     .timeline-item,
