@@ -19,7 +19,8 @@ export const projectMeta = [
     code: '03',
     name: 'Painel Meteorológico',
     tags: ['JavaScript', 'REST API', 'Dados'],
-    live: '/previsao-tempo.html'
+    live: '/previsao-tempo.html',
+    demo: '/previsaovideo.mp4'
   }
 ]
 
