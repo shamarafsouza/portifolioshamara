@@ -22,7 +22,14 @@ export const projectMeta = [
     live: '/previsao-tempo.html',
     demo: '/previsaovideo.mp4'
   }
+  {
+  code: '04',
+  name: 'Avelune',
+  tags: ['React', 'TypeScript', 'Supabase', 'UX/UI'],
+  demo: '/avelune-projeto.mp4'
+}
 ]
+
 
 export const translations = {
   pt: {
@@ -114,6 +121,10 @@ export const translations = {
         type: 'API em tempo real',
 
         text: 'Aplicação de clima com busca de cidades, leitura de condições atuais e previsão de sete dias a partir da Open-Meteo.'
+      }
+      {
+          type: 'Plataforma literária',
+          text: 'Avelune é uma plataforma literária em desenvolvimento, criada para a comunidade de bookstans. O projeto reúne biblioteca pessoal, acompanhamento de leituras, comunidade, grupos e publicação de fanfics, com recursos pensados para personalizar a experiência dos leitores.'
       }
     ],
 
@@ -376,6 +387,11 @@ education: {
         type: 'Real-time API',
 
         text: 'Weather app with city search, current conditions and a seven-day forecast powered by Open-Meteo.'
+      }
+
+      {
+          type: 'Literary Platform',
+          text: 'Avelune is a literary platform currently in development, created for the bookstan community. The project brings together a personal library, reading progress, community features, groups and fanfiction publishing, with features designed to personalize the reading experience.'
       }
     ],
 
