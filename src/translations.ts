@@ -26,6 +26,7 @@ export const projectMeta = [
   code: '04',
   name: 'Avelune',
   tags: ['React', 'TypeScript', 'Supabase', 'UX/UI'],
+  live: 'https://avelune-xi.vercel.app/',
   demo: '/avelune-projeto.mp4'
 }
 ]
